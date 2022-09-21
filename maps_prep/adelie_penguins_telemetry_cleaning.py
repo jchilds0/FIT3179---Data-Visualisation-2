@@ -8,8 +8,8 @@ def format_csv(file):
 def split_into_penguins():
     with open("data/adelie_penguin_telemetry.csv", "r") as file:
         adelie_penguin_csv = format_csv(file)
-        print(adelie_penguin_csv[0])
-        print(adelie_penguin_csv[1])
+        
+        
 
 if __name__ == "__main__":
     split_into_penguins()
