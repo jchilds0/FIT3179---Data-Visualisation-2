@@ -9,6 +9,7 @@
       },
     "layer": [
       {
+        "name": "coastline",
         "data": {
           "url": "maps_prep/ne_10m_coastline_(-70,-70,-40,-60).json",
           "format": {
@@ -20,23 +21,16 @@
                 "type": "geoshape",
                 "fill": "lightgray",
                 "stroke": "white"
-            },
-            "encoding": {
-                "tooltip": {
-                    "field": "properties.NAME",
-                    "type": "nominal"
-                }
             }
         },
         {
+            "name": "penguins",
             "data": {
                 "url": "data/adelie_penguin_telemetry.csv"
             },
             "mark": {
-                "type": "point",
-                "tooltip": {
-                    "content": "data"
-                }
+                "type": "line",
+                "interpolate": "bundle"
             },
             "encoding": {
                 "longitude": {
@@ -46,6 +40,13 @@
                 "latitude": {
                     "field": "Latitude",
                     "type": "quantitative"
+                },
+                "color": {
+                    "field": "BirdId",
+                    "type": "nominal",
+                    "scale": {
+                        "range": ["blue"]
+                    }
                 }
             }
         }

@@ -1,100 +1,189 @@
 {
-    "$schema": "https://vega.github.io/schema/vega/v5.json",
-    "description": "An interactive world map supporting pan and zoom.",
-    "width": 900,
-    "height": 500,
-    "autosize": "none",
-  
-    "signals": [
-      { "name": "tx", "update": "width / 2" },
-      { "name": "ty", "update": "height / 2" },
-      {
-        "name": "scale",
-        "value": 150,
-        "on": [{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "An interactive world map supporting pan and zoom.",
+  "width": 1000,
+  "height": 800,
+  "autosize": "none",
+  "signals": [
+    {"name": "tx", "update": "width / 2"},
+    {"name": "ty", "update": "height / 2"},
+    {
+      "name": "scale",
+      "value": 4500,
+      "on": [
+        {
           "events": {"type": "wheel", "consume": true},
-          "update": "clamp(scale * pow(1.0005, -event.deltaY * pow(16, event.deltaMode)), 150, 3000)"
-        }]
-      },
-      {
-        "name": "angles",
-        "value": [0, 0],
-        "on": [{
-          "events": "mousedown",
-          "update": "[rotateX, centerY]"
-        }]
-      },
-      {
-        "name": "cloned",
-        "value": null,
-        "on": [{
-          "events": "mousedown",
-          "update": "copy('projection')"
-        }]
-      },
-      {
-        "name": "start",
-        "value": null,
-        "on": [{
-          "events": "mousedown",
-          "update": "invert(cloned, xy())"
-        }]
-      },
-      {
-        "name": "drag", "value": null,
-        "on": [{
+          "update": "clamp(scale * pow(1.002, -event.deltaY * pow(16, event.deltaMode)), 3000, 2000000)"
+        }
+      ]
+    },
+    {
+      "name": "angles",
+      "value": [0, 0],
+      "on": [{"events": "mousedown", "update": "[centerX, centerY]"}]
+    },
+    {
+      "name": "cloned",
+      "value": null,
+      "on": [{"events": "mousedown", "update": "copy('projection')"}]
+    },
+    {
+      "name": "start",
+      "value": null,
+      "on": [{"events": "mousedown", "update": "invert(cloned, xy())"}]
+    },
+    {
+      "name": "drag",
+      "value": null,
+      "on": [
+        {
           "events": "[mousedown, window:mouseup] > window:mousemove",
           "update": "invert(cloned, xy())"
-        }]
-      },
-      {
-        "name": "delta", "value": null,
-        "on": [{
-          "events": {"signal": "drag"},
-          "update": "[drag[0] - start[0], start[1] - drag[1]]"
-        }]
-      },
-      {
-        "name": "rotateX", "value": 0,
-        "on": [{
-          "events": {"signal": "delta"},
-          "update": "angles[0] + delta[0]"
-        }]
-      },
-      {
-        "name": "centerY", "value": 0,
-        "on": [{
-          "events": {"signal": "delta"},
-          "update": "clamp(angles[1] + delta[1], -60, 60)"
-        }]
-      }
-    ],
-  
-    "projections": [
-      {
-        "name": "projection",
-        "type": "mercator",
-        "scale": {"signal": "scale"},
-        "rotate": [{"signal": "rotateX"}, 0, 0],
-        "center": [0, {"signal": "centerY"}],
-        "translate": [{"signal": "tx"}, {"signal": "ty"}]
-      }
-    ],
-  
-    "data": [
-      {
-        "name": "world",
-        "url": "data/ne_10m_coastline.json",
-        "format": {
-          "type": "topojson",
-          "feature": "ne_10m_coastline"
         }
-      }
-    ],
-    "mark": {
-        "type": "geoshape",
-        "fill": "lightgray",
-        "stroke": "white"
+      ]
+    },
+    {
+      "name": "delta",
+      "value": null,
+      "on": [
+        {
+          "events": {"signal": "drag"},
+          "update": "[start[0] - drag[0], start[1] - drag[1]]"
+        }
+      ]
+    },
+    {
+      "name": "centerX",
+      "value": -2,
+      "on": [
+        {"events": {"signal": "delta"}, "update": "clamp((angles[0] + delta[0]/2), -7, 3)"}
+      ]
+    },
+    {
+      "name": "centerY",
+      "value": 24,
+      "on": [
+        {"events": {"signal": "delta"}, "update": "clamp((angles[1] + delta[1]/2), 19, 29)"}
+      ]
     }
-  }
-  
+  ],
+  "data": [
+    {
+      "name": "ocean",
+      "url": "maps_prep/ne_10m_ocean_ice_glaciated.json",
+      "format": {"type": "topojson", "feature": "ne_10m_ocean"}
+    },
+    {
+      "name": "ice",
+      "url": "maps_prep/ne_10m_ocean_ice_glaciated.json",
+      "format": {"type": "topojson", "feature": "ne_10m_antarctic_ice_shelves_polys"}
+    },
+    {
+      "name": "glaciated",
+      "url": "maps_prep/ne_10m_ocean_ice_glaciated.json",
+      "format": {"type": "topojson", "feature": "ne_10m_glaciated_areas"}
+    },
+    {
+      "name": "penguins",
+      "url": "data/adelie_penguin_telemetry.csv",
+      "format": {"type": "csv", "delimiter": ","},
+      "transform": [
+        {
+          "type": "geojson",
+          "fields": ["Longitude", "Latitude"],
+          "signal": "penguins_geojson_0"
+        },
+        {
+          "type": "geopoint",
+          "projection": "projection",
+          "fields": ["Longitude", "Latitude"],
+          "as": ["penguins_x", "penguins_y"]
+        }
+      ]
+    }
+  ],
+  "projections": [
+    {
+      "name": "projection",
+      "type": "albers",
+      "scale": {"signal": "scale"},
+      "rotate": [50, 90, 0],
+      "center": [{"signal": "centerX"}, {"signal": "centerY"}],
+      "translate": [{"signal": "tx"}, {"signal": "ty"}],
+      "extent": [[-70, -70], [-40, -60]]
+    }
+  ],
+  "marks": [
+    {
+      "type": "shape",
+      "from": {"data": "ocean"},
+      "encode": {
+        "update": {
+          "fill": {"value": "#b3cde3"}
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "ice"},
+      "encode": {
+        "update": {
+          "fill": {"value": "white"}
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "glaciated"},
+      "encode": {
+        "update": {
+          "fill": {"value": "lightgray"}
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "name": "penguins_pathgroup",
+      "type": "group",
+      "from": {
+        "facet": {
+          "name": "faceted_path_penguins_main",
+          "data": "penguins",
+          "groupby": ["BirdId"]
+        }
+      },
+      "encode": {
+        "update": {
+          "width": {"field": {"group": "width"}},
+          "height": {"field": {"group": "height"}}
+        }
+      },
+      "marks": [
+        {
+          "name": "penguins_marks",
+          "type": "line",
+          "style": ["line"],
+          "from": {"data": "faceted_path_penguins_main"},
+          "encode": {
+            "update": {
+              "interpolate": {"value": "bundle"},
+              "stroke": {"scale": "color", "field": "BirdId"},
+              "x": {"field": "penguins_x"},
+              "y": {"field": "penguins_y"}
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": {"data": "penguins", "field": "BirdId", "sort": true},
+      "range": ["#fb6a4a"]
+    }
+  ]
+}
