@@ -56,15 +56,36 @@
       "name": "centerX",
       "value": -2,
       "on": [
-        {"events": {"signal": "delta"}, "update": "clamp((angles[0] + delta[0]/2), -7, 3)"}
+        {
+          "events": {"signal": "delta"},
+          "update": "clamp((angles[0] + delta[0]/2), -7, 3)"
+        }
       ]
     },
     {
       "name": "centerY",
       "value": 24,
       "on": [
-        {"events": {"signal": "delta"}, "update": "clamp((angles[1] + delta[1]/2), 19, 29)"}
+        {
+          "events": {"signal": "delta"},
+          "update": "clamp((angles[1] + delta[1]/2), 19, 29)"
+        }
       ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "density",
+      "type": "linear",
+      "zero": true,
+      "domain": [0, 1],
+      "range": {"scheme": "viridis"}
+    },
+    {
+      "name": "color",
+      "type": "linear",
+      "domain": [-1, 1],
+      "range": {"scheme": "spectral"}
     }
   ],
   "data": [
@@ -76,7 +97,10 @@
     {
       "name": "ice",
       "url": "maps_prep/ne_10m_ocean_ice_glaciated.json",
-      "format": {"type": "topojson", "feature": "ne_10m_antarctic_ice_shelves_polys"}
+      "format": {
+        "type": "topojson",
+        "feature": "ne_10m_antarctic_ice_shelves_polys"
+      }
     },
     {
       "name": "glaciated",
@@ -100,6 +124,25 @@
           "as": ["penguins_x", "penguins_y"]
         }
       ]
+    },
+    {
+      "name": "density",
+      "source": "penguins",
+      "transform": [
+        {
+          "type": "kde2d",
+          "size": [{"signal": "width"}, {"signal": "height"}],
+          "bandwidth": [10, 10],
+          "x": "penguins_x",
+          "y": "penguins_y"
+        },
+        {
+          "type": "heatmap",
+          "field": "grid",
+          "color": {"expr": "scale('density', datum.$value / datum.$max)"},
+          "opacity": {"expr": "3*datum.$value / datum.$max"}
+        }
+      ]
     }
   ],
   "projections": [
@@ -117,73 +160,35 @@
     {
       "type": "shape",
       "from": {"data": "ocean"},
-      "encode": {
-        "update": {
-          "fill": {"value": "#b3cde3"}
-        }
-      },
+      "encode": {"update": {"fill": {"value": "#b3cde3"}}},
       "transform": [{"type": "geoshape", "projection": "projection"}]
     },
     {
       "type": "shape",
       "from": {"data": "ice"},
-      "encode": {
-        "update": {
-          "fill": {"value": "white"}
-        }
-      },
+      "encode": {"update": {"fill": {"value": "white"}}},
       "transform": [{"type": "geoshape", "projection": "projection"}]
     },
     {
       "type": "shape",
       "from": {"data": "glaciated"},
-      "encode": {
-        "update": {
-          "fill": {"value": "lightgray"}
-        }
-      },
+      "encode": {"update": {"fill": {"value": "lightgray"}}},
       "transform": [{"type": "geoshape", "projection": "projection"}]
     },
     {
-      "name": "penguins_pathgroup",
-      "type": "group",
-      "from": {
-        "facet": {
-          "name": "faceted_path_penguins_main",
-          "data": "penguins",
-          "groupby": ["BirdId"]
-        }
-      },
+      "type": "image",
+      "from": {"data": "density"},
       "encode": {
         "update": {
-          "width": {"field": {"group": "width"}},
-          "height": {"field": {"group": "height"}}
+          "x": {"value": 0},
+          "y": {"value": 0},
+          "image": {"field": "image"},
+          "width": {"signal": "width"},
+          "height": {"signal": "height"},
+          "aspect": {"value": false},
+          "smooth": {"value": true}
         }
-      },
-      "marks": [
-        {
-          "name": "penguins_marks",
-          "type": "line",
-          "style": ["line"],
-          "from": {"data": "faceted_path_penguins_main"},
-          "encode": {
-            "update": {
-              "interpolate": {"value": "bundle"},
-              "stroke": {"scale": "color", "field": "BirdId"},
-              "x": {"field": "penguins_x"},
-              "y": {"field": "penguins_y"}
-            }
-          }
-        }
-      ]
-    }
-  ],
-  "scales": [
-    {
-      "name": "color",
-      "type": "ordinal",
-      "domain": {"data": "penguins", "field": "BirdId", "sort": true},
-      "range": ["#fb6a4a"]
+      }
     }
   ]
 }
