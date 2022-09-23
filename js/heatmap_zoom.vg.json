@@ -68,14 +68,15 @@
       "on": [
         {
           "events": {"signal": "delta"},
-          "update": "clamp((angles[1] + delta[1]/2), 19, 29)"
+          "update": "clamp((angles[1] + delta[1]/2), 19, 28)"
         }
       ]
     },
     {
         "name": "year",
-        "value": 2013,
+        "value": "All",
         "bind": {
+          "name": "Year: ",
           "input": "range",
           "min": 1996,
           "max": 2013,
@@ -84,18 +85,21 @@
     },
     {
         "name": "sex",
-        "value": "female",
+        "value": "All",
         "bind": {
+          "name": "Sex: ",
           "input": "select",
-          "options": ["male", "female"]
+          "options": ["All", "male", "female"]
         }
     },
     {
         "name": "stage",
-        "value": "incubation",
+        "value": "All",
         "bind": {
+          "name": "Life Cycle Stage: ",
           "input": "select",
           "options": [
+            "All",
             "incubation",
             "creche",
             "brood-guard",
@@ -111,12 +115,6 @@
       "zero": true,
       "domain": [0, 1],
       "range": {"scheme": "viridis"}
-    },
-    {
-      "name": "color",
-      "type": "linear",
-      "domain": [-1, 1],
-      "range": {"scheme": "spectral"}
     }
   ],
   "data": [
@@ -128,15 +126,42 @@
     {
       "name": "ice",
       "url": "maps_prep/ne_10m_ocean_ice_glaciated.json",
-      "format": {
-        "type": "topojson",
-        "feature": "ne_10m_antarctic_ice_shelves_polys"
-      }
+      "format": {"type": "topojson", "feature": "ne_10m_antarctic_ice_shelves_polys"}
     },
     {
       "name": "glaciated",
       "url": "maps_prep/ne_10m_ocean_ice_glaciated.json",
       "format": {"type": "topojson", "feature": "ne_10m_glaciated_areas"}
+    },
+    {
+      "name": "levels_200",
+      "url": "maps_prep/ne_10m_bathymetry.json",
+      "format": {"type": "topojson", "feature": "ne_10m_bathymetry_K_200"}
+    },
+    {
+      "name": "levels_1000",
+      "url": "maps_prep/ne_10m_bathymetry.json",
+      "format": {"type": "topojson", "feature": "ne_10m_bathymetry_J_1000"}
+    },
+    {
+      "name": "levels_2000",
+      "url": "maps_prep/ne_10m_bathymetry.json",
+      "format": {"type": "topojson", "feature": "ne_10m_bathymetry_I_2000"}
+    },
+    {
+      "name": "levels_3000",
+      "url": "maps_prep/ne_10m_bathymetry.json",
+      "format": {"type": "topojson", "feature": "ne_10m_bathymetry_H_3000"}
+    },
+    {
+      "name": "levels_4000",
+      "url": "maps_prep/ne_10m_bathymetry.json",
+      "format": {"type": "topojson", "feature": "ne_10m_bathymetry_G_4000"}
+    },
+    {
+      "name": "levels_5000",
+      "url": "maps_prep/ne_10m_bathymetry.json",
+      "format": {"type": "topojson", "feature": "ne_10m_bathymetry_F_5000"}
     },
     {
       "name": "penguins",
@@ -156,15 +181,15 @@
         },
         {
             "type": "filter",
-            "expr": "datum.Year == year"
+            "expr": "year == 'All' || datum.Year == year"
         },
         {
             "type": "filter",
-            "expr": "datum.Sex == sex"
+            "expr": "sex == 'All' || datum.Sex == sex"
         },
         {
             "type": "filter",
-            "expr": "datum.BreedStage == stage"
+            "expr": "stage == 'All' || datum.BreedStage == stage"
         }
       ]
     },
@@ -183,7 +208,7 @@
           "type": "heatmap",
           "field": "grid",
           "color": {"expr": "scale('density', datum.$value / datum.$max)"},
-          "opacity": {"expr": "3*datum.$value / datum.$max"}
+          "opacity": {"expr": "3*(datum.$value / datum.$max)"}
         }
       ]
     }
@@ -202,8 +227,74 @@
   "marks": [
     {
       "type": "shape",
-      "from": {"data": "ocean"},
-      "encode": {"update": {"fill": {"value": "#b3cde3"}}},
+      "from": {"data": "levels_200"},
+      "encode": {
+        "update": {
+          "fill": {"value": "#C8EAFD"}, 
+          "stroke": {"value": "#ccc"}, 
+          "strokeWidth": {"value": 1}
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "levels_1000"},
+      "encode": {
+        "update": {
+          "fill": {"value": "#88D9F6"}, 
+          "stroke": {"value": "#ccc"}, 
+          "strokeWidth": {"value": 1}
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "levels_2000"},
+      "encode": {
+        "update": {
+          "fill": {"value": "#54B6E4"}, 
+          "stroke": {"value": "#ccc"}, 
+          "strokeWidth": {"value": 1}
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "levels_3000"},
+      "encode": {
+        "update": {
+          "fill": {"value": "#0492D0"}, 
+          "stroke": {"value": "#ccc"}, 
+          "strokeWidth": {"value": 1}
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "levels_4000"},
+      "encode": {
+        "update": {
+          "fill": {"value": "#285CB0"}, 
+          "stroke": {"value": "#ccc"}, 
+          "strokeWidth": {"value": 1}
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "levels_5000"},
+      "encode": {
+        "update": {
+          "fill": {"value": "#3C2E8C"}, 
+          "stroke": {"value": "#ccc"}, 
+          "strokeWidth": {"value": 1}
+        }
+      },
       "transform": [{"type": "geoshape", "projection": "projection"}]
     },
     {
@@ -232,6 +323,13 @@
           "smooth": {"value": true}
         }
       }
+    }
+  ],
+  "legends": [
+    {
+      "type": "gradient",
+      "fill": "density",
+      "title": "Penguin Density"
     }
   ]
 }
