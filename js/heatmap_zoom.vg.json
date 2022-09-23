@@ -71,6 +71,37 @@
           "update": "clamp((angles[1] + delta[1]/2), 19, 29)"
         }
       ]
+    },
+    {
+        "name": "year",
+        "value": 2013,
+        "bind": {
+          "input": "range",
+          "min": 1996,
+          "max": 2013,
+          "step": 1
+        }
+    },
+    {
+        "name": "sex",
+        "value": "female",
+        "bind": {
+          "input": "select",
+          "options": ["male", "female"]
+        }
+    },
+    {
+        "name": "stage",
+        "value": "incubation",
+        "bind": {
+          "input": "select",
+          "options": [
+            "incubation",
+            "creche",
+            "brood-guard",
+            "winter"
+          ]
+        }
     }
   ],
   "scales": [
@@ -122,6 +153,18 @@
           "projection": "projection",
           "fields": ["Longitude", "Latitude"],
           "as": ["penguins_x", "penguins_y"]
+        },
+        {
+            "type": "filter",
+            "expr": "datum.Year == year"
+        },
+        {
+            "type": "filter",
+            "expr": "datum.Sex == sex"
+        },
+        {
+            "type": "filter",
+            "expr": "datum.BreedStage == stage"
         }
       ]
     },
