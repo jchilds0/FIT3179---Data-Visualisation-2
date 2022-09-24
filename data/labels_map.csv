@@ -1,5 +1,2 @@
-text,x,y,rotation,dx,dy,align,fontsize
-Antarctica,-40,-50,0,0,0,left,12
-Ice Shelf,20,20,0,0,0,left,12
+text,x,y,rotation,delta_x,delta_y,align,fontsize
 Palmer Station,-65,-65,0,-10,-5,right,18
-200m,10,15,0,0,0,left,12

@@ -5,6 +5,17 @@
   "height": 800,
   "title": "Adelie Penguins",
   "autosize": "none",
+  "legends": [
+    {
+      "type": "gradient",
+      "fill": "color",
+      "orient": "top-right",
+      "title": "Penguin Density",
+      "titleFontSize": 12,
+      "titlePadding": 4,
+      "gradientLength": {"signal": "height / 2"}
+    }
+  ],
   "signals": [
     {"name": "tx", "update": "width / 2"},
     {"name": "ty", "update": "height / 2"},
@@ -111,7 +122,7 @@
   ],
   "scales": [
     {
-      "name": "density",
+      "name": "color",
       "type": "linear",
       "zero": true,
       "domain": [0, 1],
@@ -208,8 +219,8 @@
         {
           "type": "heatmap",
           "field": "grid",
-          "color": {"expr": "scale('density', datum.$value / datum.$max)"},
-          "opacity": {"expr": "3*(datum.$value / datum.$max)"}
+          "color": {"expr": "scale('color', 1.5*datum.$value / datum.$max)"},
+          "opacity": {"expr": "5*datum.$value / datum.$max"}
         }
       ]
     },
@@ -223,6 +234,16 @@
           "projection": "projection",
           "fields": ["x", "y"],
           "as": ["label_x", "label_y"]
+        },
+        {
+          "type": "formula",
+          "as": "dx",
+          "expr": "toNumber(datum.delta_x)"
+        },
+        {
+          "type": "formula",
+          "as": "dy",
+          "expr": "toNumber(datum.delta_y)"
         }
       ]
     }
@@ -363,13 +384,6 @@
           "fill": {"value": "black"}
         }
       }
-    }
-  ],
-  "legends": [
-    {
-      "type": "gradient",
-      "fill": "density",
-      "title": "Penguin Density"
     }
   ]
 }
