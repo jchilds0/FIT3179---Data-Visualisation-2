@@ -3,6 +3,7 @@
   "description": "An interactive world map supporting pan and zoom.",
   "width": 1000,
   "height": 800,
+  "title": "Adelie Penguins",
   "autosize": "none",
   "signals": [
     {"name": "tx", "update": "width / 2"},
@@ -74,7 +75,7 @@
     },
     {
         "name": "year",
-        "value": "All",
+        "value": 2002,
         "bind": {
           "name": "Year: ",
           "input": "range",
@@ -211,6 +212,19 @@
           "opacity": {"expr": "3*(datum.$value / datum.$max)"}
         }
       ]
+    },
+    {
+      "name": "label",
+      "url": "data/labels_map.csv",
+      "format": {"type": "csv", "delimiter": ","},
+      "transform": [
+        {
+          "type": "geopoint", 
+          "projection": "projection",
+          "fields": ["x", "y"],
+          "as": ["label_x", "label_y"]
+        }
+      ]
     }
   ],
   "projections": [
@@ -321,6 +335,32 @@
           "height": {"signal": "height"},
           "aspect": {"value": false},
           "smooth": {"value": true}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "label"},
+      "encode": {
+        "update": {
+          "x": {"field": "label_x"},
+          "y": {"field": "label_y"},
+          "text": {"field": "text"},
+          "fontSize": {"field": "fontsize"},
+          "dx": {"field": "dx"},
+          "dy": {"field": "dy"},
+          "align": {"field": "align"}
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {"data": "label"},
+      "encode": {
+        "update": {
+          "x": {"field": "label_x"},
+          "y": {"field": "label_y"},
+          "fill": {"value": "black"}
         }
       }
     }
