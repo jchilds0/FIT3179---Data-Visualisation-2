@@ -219,7 +219,7 @@
         {
           "type": "heatmap",
           "field": "grid",
-          "color": {"expr": "scale('color', 1.5*datum.$value / datum.$max)"},
+          "color": {"expr": "scale('color', datum.$value / datum.$max)"},
           "opacity": {"expr": "5*datum.$value / datum.$max"}
         }
       ]
