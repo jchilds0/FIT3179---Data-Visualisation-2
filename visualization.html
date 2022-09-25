@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.8"></script>
+</head>
+<body>
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "An interactive world map supporting pan and zoom.",
+  "width": 1900,
+  "height": 800,
+  "autosize": "none",
+  "title": "Adelie Penguins",
+  "signals": [
+    {"name": "tx", "update": "width / 2"},
+    {"name": "ty", "update": "height / 2"},
+    {
+      "name": "scale",
+      "value": 4500,
+      "on": [
+        {
+          "events": {"type": "wheel", "consume": true},
+          "update": "clamp(scale * pow(1.002, -event.deltaY * pow(16, event.deltaMode)), 3000, 2000000)"
+        }
+      ]
+    },
+    {
+      "name": "angles",
+      "value": [0, 0],
+      "on": [{"events": "mousedown", "update": "[centerX, centerY]"}]
+    },
+    {
+      "name": "cloned",
+      "value": null,
+      "on": [{"events": "mousedown", "update": "copy('projection')"}]
+    },
+    {
+      "name": "start",
+      "value": null,
+      "on": [{"events": "mousedown", "update": "invert(cloned, xy())"}]
+    },
+    {
+      "name": "drag",
+      "value": null,
+      "on": [
+        {
+          "events": "[mousedown, window:mouseup] > window:mousemove",
+          "update": "invert(cloned, xy())"
+        }
+      ]
+    },
+    {
+      "name": "delta",
+      "value": null,
+      "on": [
+        {
+          "events": {"signal": "drag"},
+          "update": "[start[0] - drag[0], start[1] - drag[1]]"
+        }
+      ]
+    },
+    {
+      "name": "centerX",
+      "value": -2,
+      "on": [
+        {
+          "events": {"signal": "delta"},
+          "update": "clamp((angles[0] + delta[0]/2), -7, 3)"
+        }
+      ]
+    },
+    {
+      "name": "centerY",
+      "value": 24,
+      "on": [
+        {
+          "events": {"signal": "delta"},
+          "update": "clamp((angles[1] + delta[1]/2), 19, 28)"
+        }
+      ]
+    },
+    {
+      "name": "year",
+      "value": 2002,
+      "bind": {
+        "name": "Year: ",
+        "input": "range",
+        "min": 1996,
+        "max": 2013,
+        "step": 1
+      }
+    },
+    {
+      "name": "sex",
+      "value": "All",
+      "bind": {
+        "name": "Sex: ",
+        "input": "select",
+        "options": ["All", "male", "female"]
+      }
+    },
+    {
+      "name": "stage",
+      "value": "All",
+      "bind": {
+        "name": "Life Cycle Stage: ",
+        "input": "select",
+        "options": ["All", "incubation", "creche", "brood-guard", "winter"]
+      }
+    }
+  ],
+  "scales": [
+    {
+      "name": "color",
+      "type": "linear",
+      "zero": true,
+      "domain": [0, 1],
+      "range": {"scheme": "viridis"}
+    },
+    {
+      "name": "levels",
+      "type": "ordinal",
+      "domain": [
+        "Antarctica",
+        "Ice Shelf",
+        "200m",
+        "1000m",
+        "2000m",
+        "3000m",
+        "4000m",
+        "5000m"
+      ],
+      "range": [
+        "lightgray",
+        "white",
+        "#C8EAFD",
+        "#88D9F6",
+        "#54B6E4",
+        "#0492D0",
+        "#285CB0",
+        "#3C2E8C"
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "ocean",
+      "url": "maps_prep/ne_10m_ocean_ice_glaciated.json",
+      "format": {"type": "topojson", "feature": "ne_10m_ocean"}
+    },
+    {
+      "name": "ice",
+      "url": "maps_prep/ne_10m_ocean_ice_glaciated.json",
+      "format": {
+        "type": "topojson",
+        "feature": "ne_10m_antarctic_ice_shelves_polys"
+      }
+    },
+    {
+      "name": "glaciated",
+      "url": "maps_prep/ne_10m_ocean_ice_glaciated.json",
+      "format": {"type": "topojson", "feature": "ne_10m_glaciated_areas"}
+    },
+    {
+      "name": "levels_200",
+      "url": "maps_prep/ne_10m_bathymetry.json",
+      "format": {"type": "topojson", "feature": "ne_10m_bathymetry_K_200"}
+    },
+    {
+      "name": "levels_1000",
+      "url": "maps_prep/ne_10m_bathymetry.json",
+      "format": {"type": "topojson", "feature": "ne_10m_bathymetry_J_1000"}
+    },
+    {
+      "name": "levels_2000",
+      "url": "maps_prep/ne_10m_bathymetry.json",
+      "format": {"type": "topojson", "feature": "ne_10m_bathymetry_I_2000"}
+    },
+    {
+      "name": "levels_3000",
+      "url": "maps_prep/ne_10m_bathymetry.json",
+      "format": {"type": "topojson", "feature": "ne_10m_bathymetry_H_3000"}
+    },
+    {
+      "name": "levels_4000",
+      "url": "maps_prep/ne_10m_bathymetry.json",
+      "format": {"type": "topojson", "feature": "ne_10m_bathymetry_G_4000"}
+    },
+    {
+      "name": "levels_5000",
+      "url": "maps_prep/ne_10m_bathymetry.json",
+      "format": {"type": "topojson", "feature": "ne_10m_bathymetry_F_5000"}
+    },
+    {
+      "name": "penguins",
+      "url": "data/adelie_penguin_telemetry.csv",
+      "format": {"type": "csv", "delimiter": ","},
+      "transform": [
+        {
+          "type": "geojson",
+          "fields": ["Longitude", "Latitude"],
+          "signal": "penguins_geojson_0"
+        },
+        {
+          "type": "geopoint",
+          "projection": "projection",
+          "fields": ["Longitude", "Latitude"],
+          "as": ["penguins_x", "penguins_y"]
+        },
+        {"type": "filter", "expr": "year == 'All' || datum.Year == year"},
+        {"type": "filter", "expr": "sex == 'All' || datum.Sex == sex"},
+        {
+          "type": "filter",
+          "expr": "stage == 'All' || datum.BreedStage == stage"
+        }
+      ]
+    },
+    {
+      "name": "density",
+      "source": "penguins",
+      "transform": [
+        {
+          "type": "kde2d",
+          "size": [{"signal": "width"}, {"signal": "height"}],
+          "bandwidth": [10, 10],
+          "x": "penguins_x",
+          "y": "penguins_y"
+        },
+        {
+          "type": "heatmap",
+          "field": "grid",
+          "color": {"expr": "scale('color', datum.$value / datum.$max)"},
+          "opacity": {"expr": "5*datum.$value / datum.$max"}
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "url": "data/labels_map.csv",
+      "format": {"type": "csv", "delimiter": ","},
+      "transform": [
+        {
+          "type": "geopoint",
+          "projection": "projection",
+          "fields": ["x", "y"],
+          "as": ["label_x", "label_y"]
+        },
+        {"type": "formula", "as": "dx", "expr": "toNumber(datum.delta_x)"},
+        {"type": "formula", "as": "dy", "expr": "toNumber(datum.delta_y)"}
+      ]
+    },
+    {
+      "name": "level_data",
+      "values": [
+        "Antarctica",
+        "Ice Shelf",
+        "200m",
+        "1000m",
+        "2000m",
+        "3000m",
+        "4000m",
+        "5000m"
+      ]
+    }
+  ],
+  "projections": [
+    {
+      "name": "projection",
+      "type": "albers",
+      "scale": {"signal": "scale"},
+      "rotate": [50, 90, 0],
+      "center": [{"signal": "centerX"}, {"signal": "centerY"}],
+      "translate": [{"signal": "tx"}, {"signal": "ty"}],
+      "extent": [[-70, -70], [-40, -60]]
+    }
+  ],
+  "marks": [
+    {
+      "type": "shape",
+      "from": {"data": "levels_200"},
+      "encode": {
+        "update": {
+          "fill": {"value": "#C8EAFD"},
+          "stroke": {"value": "#ccc"},
+          "strokeWidth": {"value": 1}
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "levels_1000"},
+      "encode": {
+        "update": {
+          "fill": {"value": "#88D9F6"},
+          "stroke": {"value": "#ccc"},
+          "strokeWidth": {"value": 1}
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "levels_2000"},
+      "encode": {
+        "update": {
+          "fill": {"value": "#54B6E4"},
+          "stroke": {"value": "#ccc"},
+          "strokeWidth": {"value": 1}
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "levels_3000"},
+      "encode": {
+        "update": {
+          "fill": {"value": "#0492D0"},
+          "stroke": {"value": "#ccc"},
+          "strokeWidth": {"value": 1}
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "levels_4000"},
+      "encode": {
+        "update": {
+          "fill": {"value": "#285CB0"},
+          "stroke": {"value": "#ccc"},
+          "strokeWidth": {"value": 1}
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "levels_5000"},
+      "encode": {
+        "update": {
+          "fill": {"value": "#3C2E8C"},
+          "stroke": {"value": "#ccc"},
+          "strokeWidth": {"value": 1}
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "ice"},
+      "encode": {"update": {"fill": {"value": "white"}}},
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "glaciated"},
+      "encode": {"update": {"fill": {"value": "lightgray"}}},
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "image",
+      "from": {"data": "density"},
+      "encode": {
+        "update": {
+          "x": {"value": 0},
+          "y": {"value": 0},
+          "image": {"field": "image"},
+          "width": {"signal": "width"},
+          "height": {"signal": "height"},
+          "aspect": {"value": false},
+          "smooth": {"value": true}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "label"},
+      "encode": {
+        "update": {
+          "x": {"field": "label_x"},
+          "y": {"field": "label_y"},
+          "text": {"field": "text"},
+          "fontSize": {"field": "fontsize"},
+          "dx": {"field": "dx"},
+          "dy": {"field": "dy"},
+          "align": {"field": "align"}
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {"data": "label"},
+      "encode": {
+        "update": {
+          "x": {"field": "label_x"},
+          "y": {"field": "label_y"},
+          "fill": {"value": "black"}
+        }
+      }
+    }
+  ],
+  "legends": [
+    {
+      "type": "gradient",
+      "fill": "color",
+      "orient": "top-right",
+      "title": "Penguin Density",
+      "titleFontSize": 18,
+      "titlePadding": 4,
+      "labelFontSize": 18,
+      "gradientLength": {"signal": "height / 2"}
+    },
+    {
+      "type": "symbol",
+      "fill": "levels",
+      "orient": "bottom-right",
+      "symbolSize": 1000,
+      "labelFontSize": 18
+    }
+  ],
+  "config": {}
+};
+    vegaEmbed("#vis", spec, {mode: "vega"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>

@@ -9,22 +9,47 @@
     <!-- CSS file -->
     <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
 
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Pure CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css" integrity="sha384-yHIFVG6ClnONEA5yB5DJXfW2/KC173DIQrYoZMEtBvGzmf0PKiGyNEqe9N6BNDBH" crossorigin="anonymous">
 
   </head>
 
   <body>
-
-    <div id="map">
-      <div id="heatmap_zoom"></div>
-      <div id="south_pole_clip">
-        <img src="maps_prep/south_pole_clip.png" style="width:250px;height:250px">
+    <div>
+      <div class="text-3xl font-semibold p-3">
+          <h1>Penguin Location Heatmap</h1>
       </div>
+
+      <div id="heatmap" class="font-sans w-1900 flex">
+        <div id="layer">
+          <div id="heatmap_zoom"></div>
+
+          <div id="south_pole_clip">
+            <img src="maps_prep/south_pole_clip.png" style="width:250px;height:250px">
+          </div>
+        </div>
+
+        <div id="heatmap_legend"></div>
+      </div>
+      
     </div>
 
+    
     <script type="text/javascript">
 
       var spec2 = "js/heatmap_zoom.vg.json";
-      vegaEmbed('#heatmap_zoom', spec2).then(function(result) {
+      vegaEmbed('#heatmap_zoom', spec2, {"actions": false}).then(function(result) {
+        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+      }).catch(console.error);
+    </script>
+
+    <script type="text/javascript">
+
+      var spec2 = "js/heatmap_legend.vg.json";
+      vegaEmbed('#heatmap_legend', spec2, {"actions": false}).then(function(result) {
         // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
       }).catch(console.error);
     </script>
