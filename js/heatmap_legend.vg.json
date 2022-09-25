@@ -3,8 +3,7 @@
     "description": "An interactive world map supporting pan and zoom.",
     "width": 200,
     "height": 800,
-    "autosize": "none",
-  
+    "autosize": "none",  
     "scales": [
       {
         "name": "color",

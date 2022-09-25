@@ -1,7 +1,3 @@
-body {
-    overflow-x: hidden;
-}
-
 #south_pole_clip {
     position: absolute;
     bottom: 0;
@@ -9,25 +5,14 @@ body {
     z-index: 1;
 }
 
-#layer {
+#heatmap {
     position: relative;
-    float: left;
     width: 1700px;
     height: 800px;
     z-index: 0;
 }
 
-#heatmap {
-    width: 1700px;
-}
-
-#heatmap_legend {
-    width: 200px;
-    float: left;
-}
-
 .vega-bindings {
-    width: 800px;
     columns: 3;
     padding: 10px;
   }
