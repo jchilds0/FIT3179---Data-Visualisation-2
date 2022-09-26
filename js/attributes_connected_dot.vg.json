@@ -1,0 +1,57 @@
+{
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "description": "A small multiples view of penguin attributes by island",
+
+    "signals": [
+        {"name": "offset", "value": 15},
+        {"name": "cellHeight", "value": 100},
+        {"name": "height", "update": "6 * (offset + cellHeight)"}
+    ],
+
+    "data": [
+        {
+            "name": "adelie_penguin_attr",
+            "url": "data/adelie_penguin_attr.csv"
+        },
+        {
+            "name": "chinstrap_penguin_attr",
+            "url": "data/chinstrap_penguin_attr.csv"
+        },
+        {
+            "name": "gentoo_penguin_attr",
+            "url": "data/gentoo_penguin_attr.csv"
+        }
+    ],
+
+    "scales": [
+        {
+          "name": "gscale",
+          "type": "band",
+          "range": [0, {"signal": "height"}],
+          "round": true,
+          "domain": {
+            "data": "barley",
+            "field": "site",
+            "sort": {
+              "field": "yield",
+              "op": "median",
+              "order": "descending"
+            }
+          }
+        },
+        {
+          "name": "xscale",
+          "type": "linear",
+          "nice": true,
+          "range": "width",
+          "round": true,
+          "domain": {"data": "barley", "field": "yield"}
+        },
+        {
+          "name": "cscale",
+          "type": "ordinal",
+          "range": "category",
+          "domain": {"data": "barley", "field": "year"}
+        }
+      ]
+}

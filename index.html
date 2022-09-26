@@ -18,7 +18,15 @@
   </head>
 
   <body>
+    <div id="title">
+      <h1>Adelie Penguins</h1>
+    </div>
+
     <div>
+      <div id="temp_heatmap"></div>
+    </div>
+
+    <div id="map">
       <div class="text-3xl font-semibold p-3">
           <h1>Penguin Location Heatmap</h1>
       </div>
@@ -34,10 +42,35 @@
 
         <div id="heatmap_legend"></div>
       </div>
-
     </div>
 
-    
+    <div id="diet">
+      <div id="diet_dotmap"></div>
+      <div id="diet_streamgraph"></div>
+    </div>
+
+    <div id="attributes">
+      <div id="attr_map"></div>
+      <div></div>
+      <div id="attr_connecteddot"></div>
+    </div>
+
+    <script type="text/javascript">
+
+      var spec2 = "js/temp_calendar_heatmap.vg.json";
+      vegaEmbed('#temp_heatmap', spec2, {"actions": true}).then(function(result) {
+        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+      }).catch(console.error);
+    </script>
+
+    <script type="text/javascript">
+
+      var spec2 = "js/attributes_connected_dot.vg.json";
+      vegaEmbed('#attr_connecteddot', spec2, {"actions": true}).then(function(result) {
+        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+      }).catch(console.error);
+    </script>
+
     <script type="text/javascript">
 
       var spec2 = "js/heatmap_zoom.vg.json";
