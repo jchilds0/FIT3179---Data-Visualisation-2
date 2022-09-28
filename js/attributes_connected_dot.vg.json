@@ -1,57 +1,363 @@
 {
     "$schema": "https://vega.github.io/schema/vega/v5.json",
     "description": "A small multiples view of penguin attributes by island",
-
+    "width": 500,
     "signals": [
-        {"name": "offset", "value": 15},
-        {"name": "cellHeight", "value": 100},
-        {"name": "height", "update": "6 * (offset + cellHeight)"}
+        {
+            "name": "offset",
+            "value": 15
+        },
+        {
+            "name": "cellHeight",
+            "value": 100
+        },
+        {
+            "name": "height",
+            "update": "6 * (offset + cellHeight)"
+        },
+        {
+            "name": "axis_offset",
+            "value": 170
+        }
     ],
-
     "data": [
         {
-            "name": "adelie_penguin_attr",
-            "url": "data/adelie_penguin_attr.csv"
-        },
-        {
-            "name": "chinstrap_penguin_attr",
-            "url": "data/chinstrap_penguin_attr.csv"
-        },
-        {
-            "name": "gentoo_penguin_attr",
-            "url": "data/gentoo_penguin_attr.csv"
+            "name": "penguin_attr",
+            "url": "data/penguin_attr.csv",
+            "format": {
+                "type": "csv",
+                "parse": {
+                    "culmenLength": "number",
+                    "culmenDepth": "number",
+                    "flipperLength": "number",
+                    "bodyMass": "number"
+                },
+                "delimiter": ","
+            },
+            "transform": [
+                {
+                    "type": "aggregate",
+                    "ops": [
+                        "mean",
+                        "mean",
+                        "mean",
+                        "mean"
+                    ],
+                    "fields": [
+                        "culmenLength",
+                        "culmenDepth",
+                        "flipperLength",
+                        "bodyMass"
+                    ],
+                    "groupby": [
+                        "species",
+                        "island"
+                    ],
+                    "as": [
+                        "Culmen Length",
+                        "Culmen Depth",
+                        "Flipper Length",
+                        "Body Mass"
+                    ]
+                },
+                {
+                    "type": "fold",
+                    "fields": [
+                        "Culmen Length",
+                        "Culmen Depth",
+                        "Flipper Length",
+                        "Body Mass"
+                    ],
+                    "as": [
+                        "attr",
+                        "value"
+                    ]
+                },
+                {
+                    "type": "formula",
+                    "expr": "datum.attr == 'Body Mass' ? 'g' : 'mm' ",
+                    "as": "units"
+                }
+            ]
         }
     ],
-
     "scales": [
         {
-          "name": "gscale",
-          "type": "band",
-          "range": [0, {"signal": "height"}],
-          "round": true,
-          "domain": {
-            "data": "barley",
-            "field": "site",
-            "sort": {
-              "field": "yield",
-              "op": "median",
-              "order": "descending"
+            "name": "gscale",
+            "type": "band",
+            "range": [
+                0,
+                {
+                    "signal": "height"
+                }
+            ],
+            "round": true,
+            "domain": {
+                "data": "penguin_attr",
+                "field": "attr"
             }
-          }
         },
         {
-          "name": "xscale",
-          "type": "linear",
-          "nice": true,
-          "range": "width",
-          "round": true,
-          "domain": {"data": "barley", "field": "yield"}
+            "name": "Culmen Length",
+            "type": "linear",
+            "nice": true,
+            "range": "width",
+            "round": true,
+            "domain": {
+                "data": "penguin_attr",
+                "field": "Culmen Length"
+            }
         },
         {
-          "name": "cscale",
-          "type": "ordinal",
-          "range": "category",
-          "domain": {"data": "barley", "field": "year"}
+            "name": "Culmen Depth",
+            "type": "linear",
+            "nice": true,
+            "range": "width",
+            "round": true,
+            "domain": {
+                "data": "penguin_attr",
+                "field": "Culmen Depth"
+            }
+        },
+        {
+            "name": "Flipper Length",
+            "type": "linear",
+            "nice": true,
+            "range": "width",
+            "round": true,
+            "domain": {
+                "data": "penguin_attr",
+                "field": "Flipper Length"
+            }
+        },
+        {
+            "name": "Body Mass",
+            "type": "linear",
+            "nice": true,
+            "range": "width",
+            "round": true,
+            "domain": {
+                "data": "penguin_attr",
+                "field": "Body Mass"
+            }
+        },
+        {
+            "name": "cscale",
+            "type": "ordinal",
+            "range": [
+                "#1b9e77",
+                "#d95f02",
+                "#7570b3"
+            ],
+            "domain": {
+                "data": "penguin_attr",
+                "field": "species"
+            }
         }
-      ]
+    ],
+    "axes": [
+        {
+            "orient": "bottom",
+            "scale": "Culmen Length",
+            "offset": {
+                "signal": "-(3*height + axis_offset) / 4"
+            },
+            "zindex": 1
+        },
+        {
+            "orient": "bottom",
+            "scale": "Culmen Depth",
+            "offset": {
+                "signal": "-(2*height + axis_offset) / 4"
+            },
+            "zindex": 1
+        },
+        {
+            "orient": "bottom",
+            "scale": "Flipper Length",
+            "offset": {
+                "signal": "-(height + axis_offset) / 4"
+            },
+            "zindex": 1
+        },
+        {
+            "orient": "bottom",
+            "scale": "Body Mass",
+            "offset": {
+                "signal": "-axis_offset / 4"
+            },
+            "zindex": 1
+        }
+    ],
+    "legends": [
+        {
+            "stroke": "cscale",
+            "title": "Penguin Species",
+            "orient": "top-left",
+            "padding": 4,
+            "encode": {
+                "symbols": {
+                    "enter": {
+                        "strokeWidth": {
+                            "value": 2
+                        },
+                        "size": {
+                            "value": 50
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "marks": [
+        {
+            "name": "attr",
+            "type": "group",
+            "from": {
+                "facet": {
+                    "name": "attrs",
+                    "data": "penguin_attr",
+                    "groupby": "attr"
+                }
+            },
+            "encode": {
+                "enter": {
+                    "y": {
+                        "scale": "gscale",
+                        "field": "attr",
+                        "offset": {
+                            "signal": "offset"
+                        }
+                    },
+                    "height": {
+                        "signal": "cellHeight"
+                    },
+                    "width": {
+                        "signal": "width"
+                    },
+                    "stroke": {
+                        "value": "#ccc"
+                    }
+                }
+            },
+            "scales": [
+                {
+                    "name": "yscale",
+                    "type": "point",
+                    "range": [
+                        0,
+                        {
+                            "signal": "cellHeight"
+                        }
+                    ],
+                    "padding": 1,
+                    "round": true,
+                    "domain": {
+                        "data": "penguin_attr",
+                        "field": "island"
+                    }
+                }
+            ],
+            "axes": [
+                {
+                    "orient": "left",
+                    "scale": "yscale",
+                    "tickSize": 0,
+                    "domain": false,
+                    "grid": true,
+                    "encode": {
+                        "grid": {
+                            "enter": {
+                                "strokeDash": {
+                                    "value": [
+                                        3,
+                                        3
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "orient": "right",
+                    "scale": "yscale",
+                    "tickSize": 0,
+                    "domain": false
+                }
+            ],
+            "marks": [
+                {
+                    "type": "symbol",
+                    "from": {
+                        "data": "attrs"
+                    },
+                    "encode": {
+                        "enter": {
+                            "x": {
+                                "scale": {
+                                    "parent": "attr"
+                                },
+                                "field": "value"
+                            },
+                            "y": {
+                                "scale": "yscale",
+                                "field": "island"
+                            },
+                            "stroke": {
+                                "scale": "cscale",
+                                "field": "species"
+                            },
+                            "strokeWidth": {
+                                "value": 2
+                            },
+                            "size": {
+                                "value": 100
+                            },
+                            "fill": {
+                                "value": "white"
+                            },
+                            "tooltip": {
+                                "signal": "datum.species + ', ' + datum.island + ', ' + round(datum.value) + ' ' + datum.units"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "from": {
+                "data": "attr"
+            },
+            "encode": {
+                "enter": {
+                    "x": {
+                        "field": "width",
+                        "mult": 0.5
+                    },
+                    "y": {
+                        "field": "y"
+                    },
+                    "fontSize": {
+                        "value": 11
+                    },
+                    "fontWeight": {
+                        "value": "bold"
+                    },
+                    "text": {
+                        "field": "datum.attr"
+                    },
+                    "align": {
+                        "value": "center"
+                    },
+                    "baseline": {
+                        "value": "bottom"
+                    },
+                    "fill": {
+                        "value": "#000"
+                    }
+                }
+            }
+        }
+    ]
 }
