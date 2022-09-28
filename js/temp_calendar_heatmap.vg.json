@@ -5,7 +5,7 @@
     "signals": [
         {
             "name": "step",
-            "value": 8
+            "value": 10
         },
         {
             "name": "offset",
@@ -231,7 +231,8 @@
                     "titleAlign": "right",
                     "titleX": -8,
                     "titleY": -2,
-                    "titleFontSize": 10
+                    "titleFontSize": 9,
+                    "labelFontSize": {"value": 8}
                 },
                 {
                     "orient": "top",
@@ -254,7 +255,8 @@
                                 },
                                 "opacity": {
                                     "signal": "date(datum.value) < 8 ? 1 : 0"
-                                }
+                                },
+                                "fontSize": {"value": 8}
                             }
                         }
                     }

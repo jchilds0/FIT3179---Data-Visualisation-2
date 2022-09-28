@@ -2,7 +2,7 @@
     "$schema": "https://vega.github.io/schema/vega/v5.json",
     "description": "Dot plot of Adelie Penguin diet",
     "width": 600,
-    "height": 1000,
+    "height": 800,
     "signals": [
         {
             "name": "offset",
@@ -10,7 +10,7 @@
         },
         {
             "name": "cellHeight",
-            "value": 100
+            "value": 125
         }
     ],
     "data": [
@@ -115,6 +115,24 @@
             "range": "width",
             "padding": 0.05,
             "round": true
+        },
+        {
+            "name": "island",
+            "type": "ordinal",
+            "domain": [
+                "CHR",
+                "COR",
+                "HUM",
+                "LIT",
+                "TOR"
+            ],
+            "range": [
+                "Charcot Island",
+                "Cormorant Island",
+                "Humble Island",
+                "Litchfield Island",
+                "Torgersen Island"
+            ]
         }
     ],
     "marks": [
@@ -233,6 +251,7 @@
                         "value": "bold"
                     },
                     "text": {
+                        "scale": "island",
                         "field": "datum.island_name"
                     },
                     "align": {

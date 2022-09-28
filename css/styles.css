@@ -1,3 +1,7 @@
+.html, body{
+    width: 1900px;
+}
+
 #south_pole_clip {
     position: absolute;
     bottom: 0;
