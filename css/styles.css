@@ -1,5 +1,29 @@
-.html, body{
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    max-width: 1900px;
+}
+
+.slideshow {
+    width: 100%;
+    height: 100%;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    scroll-snap-align: start;
+}
+
+.slide {
     width: 1900px;
+    height: 937px;
 }
 
 #south_pole_clip {
@@ -20,3 +44,14 @@
     columns: 3;
     padding: 10px;
   }
+
+#wind_radial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#diet_all_dotmap {
+    width: 950px;
+    height: 315px;
+}

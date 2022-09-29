@@ -5,7 +5,7 @@
     "signals": [
         {
             "name": "step",
-            "value": 10
+            "value": 9
         },
         {
             "name": "offset",
@@ -48,7 +48,7 @@
                 },
                 {
                     "type": "filter",
-                    "expr": "datum.year > 2000"
+                    "expr": "datum.year > 2008"
                 },
                 {
                     "type": "timeunit",

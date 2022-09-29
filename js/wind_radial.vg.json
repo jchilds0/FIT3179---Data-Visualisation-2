@@ -3,7 +3,7 @@
     "description": "Dot plot of Adelie Penguin diet",
     "width": 500,
     "height": 500,
-    "signals": [{"name": "zoom", "value": 5}],
+    "signals": [{"name": "zoom", "value": 6}],
     "data": [
       {
         "name": "wind",
@@ -82,7 +82,7 @@
         "type": "azimuthalEqualArea",
         "center": [0, 0],
         "rotate": [0, 90, 0],
-        "scale": 125,
+        "scale": 100,
         "translate": [{"signal": "width / 2"}, {"signal": "height / 2"}]
       }
     ],
