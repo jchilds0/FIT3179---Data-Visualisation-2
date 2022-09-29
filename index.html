@@ -28,7 +28,8 @@
     <div class="pure-u-2-3">
       <div class="pure-g">
         <div class="pure-u-1-2"></div>
-        <div class="pure-u-1-2"></div>
+
+        <div id="wind_radial" class="pure-u-1-2"></div>
       </div>
       <div></div>
     </div>
@@ -54,13 +55,20 @@
     </div>
   </div>
 
-  <div id="diet" class="pure-g">
-    <div id="diet_dotmap" class="pure-u-1-2"></div>
-    <div id="diet_streamgraph" class="pure-u-1-2"></div>
+  <div id="diet">
+    <div class="pure-g">
+      <div class="pure-u-1-2"></div>
+      <div id="diet_dotmap" class="pure-u-1-2"></div>
+    </div>
+    
+    <div class="pure-g">
+      <div id="diet_streamgraph" class="pure-u-2-3"></div>
+      <div class="pure-u-1-3"></div>
+    </div>
   </div>
 
   <div id="attributes" class="pure-g">
-    <div id="attr_map" class="pure-u-1-3"></div>
+    <div id="dotmap" class="pure-u-1-3"></div>
     <div class="pure-u-1-3"></div>
     <div id="attr_connecteddot" class="pure-u-1-3"></div>
   </div>
@@ -70,6 +78,22 @@
     <div class="pure-u-1-3"></div>
     <div id="pop_spark" class="pure-u-1-3"></div>
   </div>
+
+  <script type="text/javascript">
+
+    var spec2 = "js/dotmap_islands.vg.json";
+    vegaEmbed('#dotmap', spec2, { "actions": true }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+  </script>
+
+  <script type="text/javascript">
+
+    var spec2 = "js/wind_radial.vg.json";
+    vegaEmbed('#wind_radial', spec2, { "actions": true }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+  </script>
 
   <script type="text/javascript">
 

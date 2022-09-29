@@ -1,8 +1,9 @@
-﻿islands,latitude,longitude
-Cormorant Island,-64.48,-63.58
-Charcot Island,-69.45,-75.15
-Humble Island,-64.46,-64.06
-Litchfield Island,-64.46,-64.06
-Torgersen Island,-64.46,-64.05
-Biscoe Islands,-65.26,-65.3
-Dream Island,-64.44,-64.14
+﻿islands,d,m,s,x,d,m,s,y
+Cormorant Island,63,58,0,-63.96666667,64,48,0,-64.8
+Charcot Island,75,15,0,-75.25,69,45,0,-69.75
+Humble Island,64,6,0,-64.1,64,46,0,-64.76666667
+Litchfield Island,64,6,0,-64.1,64,46,0,-64.76666667
+Torgersen Island,64,5,0,-64.08333333,64,46,0,-64.76666667
+Biscoe Islands,65,30,0,-65.5,65,26,0,-65.43333333
+Dream Island,64,14,0,-64.23333333,64,44,0,-64.73333333
+Palmer Station,64,3,10,-64.05277778,64,46,27,-64.77416667
