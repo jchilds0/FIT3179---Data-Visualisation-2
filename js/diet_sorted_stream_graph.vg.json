@@ -2,7 +2,7 @@
     "$schema": "https://vega.github.io/schema/vega/v5.json",
     "description": "Krill abundance as a stacked area chart",
     "width": 1200,
-    "height": 800,
+    "height": 700,
     "padding": 5,
     "data": [
       {

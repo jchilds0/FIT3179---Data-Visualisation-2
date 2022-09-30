@@ -1,0 +1,79 @@
+{
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "description": "Dot plot of Adelie Penguin diet",
+    "width": 1150,
+    "height": 350,
+    "signals": [
+  
+    ],
+  
+    "data": [
+      {
+        "name": "ice",
+        "url": "data/palmer_station_weather_ice.csv",
+        "format": {"type": "csv", "time": "date"},
+        "transform": [
+          {
+            "type": "formula",
+            "expr": "timeParse(datum.time, '%d/%m/%Y')",
+            "as": "date"
+          },
+          {
+            "type": "formula",
+            "expr": "toNumber(datum.sea_ice)",
+            "as": "sea_ice"
+          },
+          {
+            "type": "filter",
+            "expr": "isNumber(datum.sea_ice) && !isNaN(datum.sea_ice)"
+          },
+          {
+            "type": "formula",
+            "expr": "year(datum.date)",
+            "as": "year"
+          },
+          {
+            "type": "filter",
+            "expr": "datum.year > 2009"
+          }
+        ]
+      }
+    ],
+  
+    "scales": [
+      {
+        "name": "x",
+        "type": "utc",
+        "nice": {"interval": "year", "step": 5},
+        "domain": {"data": "ice", "field": "date"},
+        "range": "width"
+      },
+      {
+        "name": "y",
+        "type": "linear",
+        "domain": {"data": "ice", "field": "sea_ice"},
+        "range": "height"
+      }
+    ],
+  
+    "axes": [
+      {
+        "orient": "bottom",
+        "scale": "x"
+      },
+      {"orient": "left", "scale": "y"}
+    ],
+  
+    "marks": [
+      {
+        "type": "line",
+        "from": {"data": "ice"},
+        "encode": {
+          "enter": {
+            "x": {"scale": "x", "field": "date"},
+            "y": {"scale": "y", "field": "sea_ice"}
+          }
+        }
+      }
+    ]
+  }
