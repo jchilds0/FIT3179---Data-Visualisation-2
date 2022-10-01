@@ -1,0 +1,142 @@
+{
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "description": "Dot plot of Adelie Penguin diet",
+    "width": 1150,
+    "height": 350,
+    "signals": [
+      {
+        "name": "scale",
+        "value": 1,
+        "on": [
+          {
+            "events": {"type": "wheel", "consume": true},
+            "update": "clamp(scale * pow(1.002, -event.deltaY * pow(16, event.deltaMode)), 1, 10000)"
+          }
+        ]
+      },
+      {
+        "name": "x_pos",
+        "value": 0,
+        "on": [
+          {
+            "events": "[mousedown, window:mouseup] > window:mousemove!",
+            "update": "x()"
+          }
+        ]
+      },
+      {"name": "x_anchor", "on": [{"events": "mousedown", "update": "x()"}]},
+      {
+        "name": "delta",
+        "value": 0,
+        "on": [{"events": {"signal": "x_pos"}, "update": "x_pos - x_anchor"}]
+      },
+      {
+        "name": "center",
+        "update": "width / 2",
+        "on": [
+          {
+            "events": {"signal": "brush_anchor"},
+            "update": "(brush_anchor[1] + brush_anchor[0]) / 2"
+          }
+        ]
+      },
+      {
+        "name": "brush",
+        "update": "brush_anchor",
+        "on": [
+          {
+            "events": [{"signal": "scale"}],
+            "update": "[center - width / (2 * scale), center + width / (2 * scale)]"
+          },
+          {
+            "events": [{"signal": "delta"}],
+            "update": "[clamp(brush_anchor[0] - delta / scale, -width / 2, width), clamp(brush_anchor[1] - delta / scale, 0, 3 * width / 2)]"
+          }
+        ]
+      },
+      {
+        "name": "brush_anchor",
+        "update": "[0, width]",
+        "on": [
+          {
+            "events": [{"type": "mousedown"}, {"type": "mouseup"}],
+            "update": "brush"
+          }
+        ]
+      },
+      {
+        "name": "detailDomain",
+        "update": "invert('x', brush)",
+        "on": [{"events": {"signal": "brush"}, "update": "invert('x', brush)"}]
+      }
+    ],
+    "data": [
+      {
+        "name": "ice",
+        "url": "data/palmer_station_weather_ice.csv",
+        "format": {"type": "csv", "time": "date", "delimiter": ","},
+        "transform": [
+          {
+            "type": "formula",
+            "expr": "timeParse(datum.time, '%d/%m/%Y')",
+            "as": "time"
+          },
+          {"type": "formula", "expr": "toNumber(datum.sea_ice)", "as": "sea_ice"},
+          {
+            "type": "filter",
+            "expr": "isNumber(datum.sea_ice) && !isNaN(datum.sea_ice)"
+          },
+          {"type": "formula", "expr": "year(datum.time)", "as": "year"},
+          {"type": "formula", "expr": "time(datum.time)", "as": "date"}
+        ]
+      },
+      {
+        "name": "filter_ice",
+        "source": "ice",
+        "transform": [
+          {"type": "filter", "expr": "datum.date > detailDomain[0]"},
+          {"type": "filter", "expr": "datum.date < detailDomain[1]"}
+        ]
+      }
+    ],
+    "scales": [
+      {
+        "name": "x",
+        "type": "time",
+        "domain": {"data": "ice", "field": "date"},
+        "range": "width"
+      },
+      {
+        "name": "xdetail",
+        "type": "time",
+        "domain": {"data": "ice", "field": "date"},
+        "range": "width",
+        "domainRaw": {"signal": "detailDomain"}
+      },
+      {
+        "name": "y",
+        "type": "linear",
+        "domain": {"data": "ice", "field": "sea_ice"},
+        "range": "height"
+      }
+    ],
+    "axes": [
+      {"orient": "bottom", "scale": "xdetail"},
+      {"orient": "left", "scale": "y"}
+    ],
+    "marks": [
+      {
+        "type": "line",
+        "from": {"data": "ice"},
+        "encode": {
+          "update": {
+            "x": {"scale": "xdetail", "field": "date"},
+            "y": {"scale": "y", "field": "sea_ice"},
+            "defined": {
+              "signal": "datum.date > detailDomain[0] && datum.date < detailDomain[1]"
+            }
+          }
+        }
+      }
+    ]
+  }

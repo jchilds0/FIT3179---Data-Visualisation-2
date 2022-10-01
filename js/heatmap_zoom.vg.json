@@ -120,48 +120,43 @@
   ],
   "data": [
     {
-      "name": "ocean",
-      "url": "maps_prep/ne_10m_ocean_ice_glaciated.json",
-      "format": {"type": "topojson", "feature": "ne_10m_ocean"}
-    },
-    {
       "name": "ice",
-      "url": "maps_prep/ne_10m_ocean_ice_glaciated.json",
+      "url": "maps_prep/heatmap/ne_10m_ice.json",
       "format": {"type": "topojson", "feature": "ne_10m_antarctic_ice_shelves_polys"}
     },
     {
       "name": "glaciated",
-      "url": "maps_prep/ne_10m_ocean_ice_glaciated.json",
+      "url": "maps_prep/heatmap/ne_10m_glaciated.json",
       "format": {"type": "topojson", "feature": "ne_10m_glaciated_areas"}
     },
     {
       "name": "levels_200",
-      "url": "maps_prep/ne_10m_bathymetry.json",
+      "url": "maps_prep/heatmap/ne_10m_bathymetry_200.json",
       "format": {"type": "topojson", "feature": "ne_10m_bathymetry_K_200"}
     },
     {
       "name": "levels_1000",
-      "url": "maps_prep/ne_10m_bathymetry.json",
+      "url": "maps_prep/heatmap/ne_10m_bathymetry_1000.json",
       "format": {"type": "topojson", "feature": "ne_10m_bathymetry_J_1000"}
     },
     {
       "name": "levels_2000",
-      "url": "maps_prep/ne_10m_bathymetry.json",
+      "url": "maps_prep/heatmap/ne_10m_bathymetry_2000.json",
       "format": {"type": "topojson", "feature": "ne_10m_bathymetry_I_2000"}
     },
     {
       "name": "levels_3000",
-      "url": "maps_prep/ne_10m_bathymetry.json",
+      "url": "maps_prep/heatmap/ne_10m_bathymetry_3000.json",
       "format": {"type": "topojson", "feature": "ne_10m_bathymetry_H_3000"}
     },
     {
       "name": "levels_4000",
-      "url": "maps_prep/ne_10m_bathymetry.json",
+      "url": "maps_prep/heatmap/ne_10m_bathymetry_4000.json",
       "format": {"type": "topojson", "feature": "ne_10m_bathymetry_G_4000"}
     },
     {
       "name": "levels_5000",
-      "url": "maps_prep/ne_10m_bathymetry.json",
+      "url": "maps_prep/heatmap/ne_10m_bathymetry_5000.json",
       "format": {"type": "topojson", "feature": "ne_10m_bathymetry_F_5000"}
     },
     {

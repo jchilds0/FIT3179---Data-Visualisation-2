@@ -63,7 +63,7 @@
               <div id="heatmap_zoom"></div>
 
               <div id="south_pole_clip">
-                <img src="maps_prep/south_pole_clip_shadow.png" style="width:250px;height:250px">
+                <img src="maps_prep/heatmap/south_pole_clip_shadow.png" style="width:250px;height:250px">
               </div>
             </div>
 
@@ -146,7 +146,7 @@
 
   <script type="text/javascript">
 
-    var spec2 = "js/weather_sea_ice.vg.json";
+    var spec2 = "js/weather_sea_ice_interactive.vg.json";
     vegaEmbed('#sea_ice', spec2, { "actions": true }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
