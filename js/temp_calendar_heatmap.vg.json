@@ -48,7 +48,7 @@
                 },
                 {
                     "type": "filter",
-                    "expr": "datum.year > 2009"
+                    "expr": "datum.year > 2010"
                 },
                 {
                     "type": "timeunit",
@@ -110,21 +110,6 @@
                 0,
                 10
             ]
-        }
-    ],
-    "legends": [
-        {
-            "fill": "color",
-            "title": "Average Temperature",
-            "titleFontSize": 12,
-            "titleOrient": "left",
-            "titlePadding": 20,
-            "offset": 15,
-            "orient": "top",
-            "type": "gradient",
-            "direction": "horizontal",
-            "gradientLength": 250,
-            "gradientThickness": 10
         }
     ],
     "layout": {

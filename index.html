@@ -31,9 +31,9 @@
     <!-- Palmer Station Slide -->
     <section>
       <div class="slide">
+        <p class="text-3xl font-serif p-3">Palmer Station Weather</p>
         <div class="pure-g flex">
           <div class="pure-u-2-3">
-            <p class="text-3xl font-serif p-3">Palmer Station Weather</p>
             <div class="pure-g">
               <div class="pure-u-1-2">
                 <p>Lorem Ipsum</p>
@@ -45,7 +45,17 @@
             </div>
             <div id="sea_ice"></div>
           </div>
-          <div id="temp_heatmap" class="pure-u-1-3"></div>
+          <div class="pure-u-1-3">
+            <p class="text-xl">Daily Average Temperature</p>
+            <div id="temp">
+              <div id="temp_overlay" class="pr-5">
+                <p class="text-right">Lorem Ipsum</p>
+                <div id="temp_legend"></div>
+              </div>
+              <div id="temp_heatmap"></div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -136,18 +146,18 @@
     </section>
   </div>
 
-  <script type="text/javascript">
+  <!-- --------------------- -->
 
-    var spec2 = "js/dotmap_islands.vg.json";
-    vegaEmbed('#dotmap', spec2, { "actions": true }).then(function (result) {
-      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-    }).catch(console.error);
-  </script>
+  <!-- Vega Embeds -->
+  
+  <!-- --------------------- -->
+
+  <!-- Palmer Station Slide -->
 
   <script type="text/javascript">
 
     var spec2 = "js/weather_sea_ice_interactive.vg.json";
-    vegaEmbed('#sea_ice', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#sea_ice', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
@@ -155,26 +165,47 @@
   <script type="text/javascript">
 
     var spec2 = "js/wind_radial.vg.json";
-    vegaEmbed('#wind_radial', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#wind_radial', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
 
   <script type="text/javascript">
 
-    var spec2 = "js/population_line.vg.json";
-    vegaEmbed('#pop_line', spec2, { "actions": true }).then(function (result) {
+    var spec2 = "js/temp_calendar_heatmap.vg.json";
+    vegaEmbed('#temp_heatmap', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
 
   <script type="text/javascript">
 
-    var spec2 = "js/population_sparkline.vg.json";
-    vegaEmbed('#pop_spark', spec2, { "actions": true }).then(function (result) {
+    var spec2 = "js/temp_calendar_legend.vg.json";
+    vegaEmbed('#temp_legend', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
+
+
+  <!-- Heatmap Slide -->
+
+  <script type="text/javascript">
+
+    var spec2 = "js/heatmap_zoom.vg.json";
+    vegaEmbed('#heatmap_zoom', spec2, { "actions": true }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+  </script>
+
+  <script type="text/javascript">
+
+    var spec2 = "js/heatmap_legend.vg.json";
+    vegaEmbed('#heatmap_legend', spec2, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+  </script>
+
+  <!-- Diet Slide 1 -->
 
   <script type="text/javascript">
 
@@ -192,6 +223,8 @@
     }).catch(console.error);
   </script>
 
+  <!-- Diet Slide 2 -->
+
   <script type="text/javascript">
 
     var spec2 = "js/diet_sorted_stream_graph.vg.json";
@@ -200,10 +233,12 @@
     }).catch(console.error);
   </script>
 
+  <!-- Attributes Slide -->
+
   <script type="text/javascript">
 
-    var spec2 = "js/temp_calendar_heatmap.vg.json";
-    vegaEmbed('#temp_heatmap', spec2, { "actions": true }).then(function (result) {
+    var spec2 = "js/dotmap_islands.vg.json";
+    vegaEmbed('#dotmap', spec2, { "actions": true }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
@@ -216,21 +251,25 @@
     }).catch(console.error);
   </script>
 
+
+  <!-- Population Slide -->
+
   <script type="text/javascript">
 
-    var spec2 = "js/heatmap_zoom.vg.json";
-    vegaEmbed('#heatmap_zoom', spec2, { "actions": true }).then(function (result) {
+    var spec2 = "js/population_line.vg.json";
+    vegaEmbed('#pop_line', spec2, { "actions": true }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
 
   <script type="text/javascript">
 
-    var spec2 = "js/heatmap_legend.vg.json";
-    vegaEmbed('#heatmap_legend', spec2, { "actions": false }).then(function (result) {
+    var spec2 = "js/population_sparkline.vg.json";
+    vegaEmbed('#pop_spark', spec2, { "actions": true }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
+
 </body>
 
 </html>

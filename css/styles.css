@@ -7,7 +7,7 @@ body {
 .slideshow {
     width: 100%;
     height: 100%;
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: y proximity;
     overflow-y: scroll;
 }
 
@@ -27,13 +27,40 @@ section {
     display: flex;
     align-items: center;
     width: 100vw;
-    height: 100vh;
+    height: 937px;
     scroll-snap-align: start;
 }
 
 .slide {
     width: 1900px;
     height: 937px;
+}
+
+#temp {
+    position: relative;
+    z-index: 0;
+}
+
+#temp_overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+
+#wind {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 0;
+}
+
+#wind_title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
 
 #south_pole_clip {
@@ -54,21 +81,6 @@ section {
     columns: 3;
     padding: 10px;
   }
-
-#wind {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    z-index: 0;
-}
-
-#wind_title {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
 
 #diet_all_dotmap {
     height: 256px;
