@@ -26,14 +26,23 @@ body {
 section {
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 100vw;
-    height: 937px;
+    min-width: 1900px;
+    height: 100vh;
+    min-height: 937px;
     scroll-snap-align: start;
 }
 
 .slide {
     width: 1900px;
     height: 937px;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #temp {
@@ -84,4 +93,14 @@ section {
 
 #diet_all_dotmap {
     height: 256px;
+}
+
+#diet_image {
+    width: 110px;
+    height: 550px;
+}
+
+#diet_dotmap {
+    width: 1266px;
+    height: 937px;
 }

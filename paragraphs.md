@@ -1,0 +1,74 @@
+# Palmer Weather Station
+
+[1] - https://www.nsf.gov/geo/opp/support/palmerst.jsp#:~:text=Palmer%20is%20the%20only%20U.S.,C%20to%209%C2%B0C.
+
+Palmer Station is located at 64°46' S, 64°03' W, on a protected harbor on the southwestern coast of Anvers Island off the Antarctica Peninsula. Palmer is the only U.S. Antarctic station north of the Antarctic Circle. The temperature is mild, with monthly averages ranging from minus 10°C in July and August to 2°C in January and February. The annual mean is minus 3°C. The extreme range is minus 31°C to 9°C. It has rained every month at Palmer.
+
+The station, built on solid rock, consists of two major buildings and three small ones, plus two large fuel tanks, a helicopter pad, and a dock. Construction was completed in 1968, replacing a prefabricated wood structure ("Old Palmer," established in 1965) two kilometers away across Arthur Harbor. Old Palmer has been disassembled and removed from Antarctica. Somewhat over 40 people can occupy Palmer in the summer. Wintering population is about 10, although Palmer does not have a long period of winter isolation as do McMurdo and South Pole.
+
+Palmer Station is superbly located for biological studies of birds, seals, and other components of the marine ecosystem. It has a large and extensively equipped laboratory and sea water aquaria. In 1990 it was designated by the National Science Foundation as a long term ecological research (LTER) site. Ocean and climate systems, aeronomy and astrophysics, glaciology, organisms and ecosystems also have been pursued at and around Palmer. The station operates in conjunction , with a research ship, the R/V Laurence M.Gould
+
+[2] - https://pallter.marine.rutgers.edu/about/overview/
+
+Seasonal sea ice-influenced marine ecosystems at both poles are regions of high productivity concentrated in space and time by local, regional, and remote physical forcing. These polar ecosystems are among the most rapidly changing on Earth. The PALmer (PAL) LTER seeks to build on three decades of long-term research along the western side of the Antarctic Peninsula (WAP) to gain new mechanistic and predictive understanding of ecosystem changes in response to disturbances spanning long-term, decadal, and higher-frequency “pulse” changes driven by a range of processes, including natural climate variability, long-term climate warming, resiliency/recovery in the face of press versus pulse forcing, transformed spatial landscapes, and food-web alterations. We will contribute to fundamental understanding of population and biogeochemical responses for a marine ecosystem experiencing profound change.
+
+[3] - https://pallter.marine.rutgers.edu/catalog/erddap/dataset.php?dataset=PalmerStationWeatherDailyAverages
+
+Daily averaged weather timeseries (air temperature, pressure, wind speed, wind direction, precipitation, sky cover) at Palmer Station, Antarctica combining manual observations (1989 - Dec 12, 2003) and PALMOS automatic weather station measurements (Dec 13, 2003 - March 2019). Weather data acquisition was originally by manual observation and continued with an automated system installed in Nov 2001. Measurements began shifting from manual to automated observations in June 2003 until the manual observations were ended on December 12, 2003.
+
+[4] - https://pallter.marine.rutgers.edu/catalog/erddap/dataset.php?dataset=AdeliePenguinDietFish
+
+The fundamental long-term objective of the seabird component of the Palmer LTER (PAL) has been to identify and understand the mechanistic processes that regulate the mean fitness (population growth rate) of regional penguin populations. Two hypotheses have guided this research, with one suggesting that population mean fitness is best explained by changes in regional krill biomass, and the other proposing that long-term changes in sea ice affects mean fitness by tipping the balance in favor of one species over another in accordance with species-specific evolved life history affinities to sea ice. Although these hypotheses are not mutually exclusive, current evidence in the PAL region tends to favor the latter over the former. Since the inception of PAL, Adelie penguin populations have effectively collapsed, while those of gentoo and chinstrap penguins have increased dramatically, trends that are spatially and temporally coherent with decreasing regional sea ice duration. Adelie penguins are an ice-obligate polar species whose life history is intimately linked to the presence of sea ice, while chinstrap and gentoo penguins are ice-intolerant species whose life histories evolved in the sub-Antarctic, where sea ice is a less permanent feature of the marine ecosystem.
+
+## Palmer Weather Station
+
+Palmer Station is located at 64°46' S, 64°03' W, on a protected harbor on the southwestern coast of Anvers Island off the Antarctica Peninsula [1]. The annual average temperature is a cold -3°C with the warmer summer months from December to February averaging 2°C and the colder winter months from July to August averaging -10°C. The Palmer Weather Station was constructed in 1968 and consists of two major buildings, three smaller buildings, two large fuel tanks, a helicopter pad and a dock [1]. The location of the station was choosen for its proximity to birds, seals and other components of the marine ecosystem, including Adelie Penguins. In 1990 it was designated by the National Science Foundation as a long term ecological research (LTER) site [1]. From the about section of PAL LTER's website 'The PALmer (PAL) LTER seeks to build on three decades of long-term research along the western side of the Antarctic Peninsula (WAP) to gain new mechanistic and predictive understanding of ecosystem changes in response to disturbances spanning long-term, decadal, and higher-frequency “pulse” changes driven by a range of processes, including natural climate variability, long-term climate warming, resiliency/recovery in the face of press versus pulse forcing, transformed spatial landscapes, and food-web alterations.' [2]. 
+
+## Sea Ice Extent
+
+The fundamental long-term objective of the seabird component of the Palmer LTER has been to identify and understand the processes that influence the average population growth rate of various penguin populations. Two proposed mechanisms are changes in the regional krill biomass, and the long term changes in sea ice extent as it affects the balance of species due to the affitinty to sea ice that different species have developed over time [4]. Later we will investigate krill abundance.
+
+# Penguin Diet - Diet Composition
+
+[5] - https://pallter.marine.rutgers.edu/catalog/erddap/dataset.php?dataset=AdeliePenguinDietFish
+
+The fundamental long-term objective of the seabird component of the Palmer LTER (PAL) has been to identify and understand the mechanistic processes that regulate the mean fitness (population growth rate) of regional penguin populations. Two hypotheses have guided this research, with one suggesting that population mean fitness is best explained by changes in regional krill biomass, and the other proposing that long-term changes in sea ice affects mean fitness by tipping the balance in favor of one species over another in accordance with species-specific evolved life history affinities to sea ice. Although these hypotheses are not mutually exclusive, current evidence in the PAL region tends to favor the latter over the former. Since the inception of PAL, Adelie penguin populations have effectively collapsed, while those of gentoo and chinstrap penguins have increased dramatically, trends that are spatially and temporally coherent with decreasing regional sea ice duration. Adelie penguins are an ice-obligate polar species whose life history is intimately linked to the presence of sea ice, while chinstrap and gentoo penguins are ice-intolerant species whose life histories evolved in the sub-Antarctic, where sea ice is a less permanent feature of the marine ecosystem. 
+
+[6] - https://pallter.marine.rutgers.edu/catalog/erddap/dataset.php?dataset=AdeliePenguinDiet
+
+Adelie penguins are an ice-obligate polar species whose life history is intimately linked to the presence of sea ice, while chinstrap and gentoo penguins are ice-intolerant species whose life histories evolved in the sub-Antarctic, where sea ice is a less permanent feature of the marine ecosystem. In contrast, although krill constitute the most important component of the summer diets by mass of these three penguin species, changes in PAL krill abundances have exhibited no long-term trends, and thus fail to explain the divergent patterns in penguin populations evident in our time series. Adelie penguin diet samples obtained in the field are initially drained and weighed and returned to laboratories for further processing. This includes resuspension of the samples in fresh water to release fish otoliths, squid beaks and other prey hard parts, and then draining to a consistency that facilitates separating the diet samples into subsamples of primary and secondary prey components. Primary prey components include krill and fish, and secondary prey components include octopus, squid amphipods, mysid shrimp, limpets and small clams. Each prey component is weighed (total weight) and, if possible, sorted according to species for further analyses. 
+
+[8] - https://pallter.marine.rutgers.edu/catalog/erddap/dataset.php?dataset=AdeliePenguinDietEuphausiasuberba
+
+Three species of krill occur in Adelie penguin diet samples, Antarctic krill (Euphausia superba), crystal krill (E. crystallorophias) and Thysanoessa macrura (no common name), but beyond obtaining whole subsample weights following sorting (see DIET), only E. superba is subjected to further analysis. In this case, the original subsample from each individual penguin is searched with the objective of obtaining a minimum of 50 whole krill that when measured (in millimeters) provide an index of within and between season variability in population size-frequency distributions. These data have provided critical insights into a number of ecological processes, including in particular how sea ice affects krill recruitment and, in turn, how krill recruitment impacts Adelie penguin foraging efforts. 
+
+## Diet Composition
+
+The fundamental long-term objective of the seabird component of the Palmer LTER has been to identify and understand the processes that influence the average population growth rate of various penguin populations. Two proposed mechanisms are changes in the regional krill biomass, and the long term changes in sea ice extent as it affects the balance of species due to the affitinty to sea ice that different species have developed over time [5]. Previously we saw the changes in sea ice extent over time, now we investigate krill abundance. Adelie Penguins have a varied diet, consisting of primary prey, including krill and fish, and secondary prey, including octopus, squid amphipods, mysid shrip, limpets and small clams. Krill makes up the bulk of the diet for each of the three penguin species, Adelie, Gentoo and Chinstrap, during the summer months. The process for collecting samples is outlined on the PAL LTER website 'Adelie penguin diet samples obtained in the field are initially drained and weighed and returned to laboratories for further processing. This includes resuspension of the samples in fresh water to release fish otoliths, squid beaks and other prey hard parts, and then draining to a consistency that facilitates separating the diet samples into componenets. Each prey component is weighed (total weight) and, if possible, sorted according to species for further analyses.' [6].
+
+## Krill Abundance
+
+A proposed factor of penguin population health, measuered as the population growth rate, is the abundance of krill, the main component of their diet. This hypothesis is favoured less by researches due to the large decline in Adelie Penguin population while the krill abundance has remained relatively constant. There are three main species of krill in the diet of Adelie Penguins, Antarctic krill (Euphausia superba), crystal krill (E. crystallorophias) and Thysanoessa macrura [8]. The process for collecting krill samples is outlined on the PAL LTER website 'The original subsample from each individual penguin is searched with the objective of obtaining a minimum of 50 whole krill that when measured (in millimeters) provide an index of within and between season variability in population size-frequency distributions.' [8] 
+
+# Penguin Measurements
+
+[9] - https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-pal.219.5
+[10] - https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-pal&identifier=221&revision=8
+[11] - https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-pal&identifier=220&revision=7
+
+Structural size measurements and isotopic signatures of foraging among adult male and female Adelie, Chinstrap and Gentoo Penguins nesting along the Palmer Archipelago near Palmer Station, 2007-2009.
+
+Sexual segregation in vertebrate foraging niche is often associated with sexual size dimorphism (SSD), i.e., ecological sexual dimorphism. We examined ecological sexual dimorphism among sympatric nesting Pygoscelis penguins near Palmer Station, Antarctica, asking whether environmental variability in the form of winter sea ice is associated with differences in male and female pre-breeding foraging niche. Each season, study nests, where pairs of adults were present, were individually marked and chosen before the onset of egg-laying, and consistently monitored. When study nests were found at the one-egg stage, both adults were captured to obtain blood samples used for molecular sexing and stable isotope analyses, and measurements of structural size and body mass. At the time of capture, each adult penguin was quickly blood sampled (~1 ml) from the brachial vein. After handling, individuals at study nests were further monitored to ensure the pair reached clutch completion, i.e., two eggs. Molecular analyses were conducted at Simon Fraser University following standard PCR protocols, and stable isotope analyses were conducted at the Stable Isotope Facility at the University of California, Davis using an elemental analyzer interfaced with an isotope ratio mass spectrometer.
+
+## Penguin Measurements
+
+
+
+# Penguin Population
+
+[12] - https://www.fisheries.noaa.gov/inport/item/55435
+
+Data were collected from two penguin monitoring sites in the Antarctic peninsula region between 1977 and 2015 using traditional census methods. Seabirds observed in this study are Adélie (Pygoscelis adeliae), chinstrap (P. antarctica), and gentoo (P. papua) penguins. The two study sites are the US AMLR Program sites at Cape Shirreff (Livingston Island) and Copacabana (King George Island).
+
+## Penguin Populations
+

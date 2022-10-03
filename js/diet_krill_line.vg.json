@@ -1,0 +1,108 @@
+{
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "description": "Krill abundance as a stacked area chart",
+    "width": 500,
+    "height": 300,
+    "padding": 5,
+    "data": [
+      {
+        "name": "krill",
+        "url": "data/adelie_krill_abundance.csv",
+        "format": {"type": "csv", "parse": "auto", "delimiter": ","},
+        "transform": [
+          {
+            "type": "formula",
+            "expr": "timeParse(datum.date, '%d/%m/%Y')",
+            "as": "date"
+          },
+          {"type": "formula", "expr": "year(datum.date)", "as": "year"},
+          {
+            "type": "aggregate",
+            "fields": [
+              "16-20mm",
+              "21-25mm",
+              "26-30mm",
+              "31-35mm",
+              "36-40mm",
+              "41-45mm",
+              "46-50mm",
+              "51-55mm",
+              "56-60mm",
+              "61-65mm"
+            ],
+            "ops": [
+              "sum",
+              "sum",
+              "sum",
+              "sum",
+              "sum",
+              "sum",
+              "sum",
+              "sum",
+              "sum",
+              "sum"
+            ],
+            "groupby": ["year"],
+            "as": [
+              "16-20mm",
+              "21-25mm",
+              "26-30mm",
+              "31-35mm",
+              "36-40mm",
+              "41-45mm",
+              "46-50mm",
+              "51-55mm",
+              "56-60mm",
+              "61-65mm"
+            ]
+          },
+          {
+            "type": "formula",
+            "expr": "datum['16-20mm'] + datum['21-25mm'] + datum['26-30mm'] + datum['31-35mm'] + datum['36-40mm'] + datum['41-45mm'] + datum['46-50mm'] + datum['51-55mm'] + datum['56-60mm'] + datum['61-65mm']",
+            "as": "sum"
+          }
+        ]
+      }
+    ],
+    "scales": [
+      {
+        "name": "x",
+        "type": "point",
+        "range": "width",
+        "domain": {"data": "krill", "field": "year"}
+      },
+      {
+        "name": "y",
+        "type": "linear",
+        "range": "height",
+        "nice": true,
+        "zero": true,
+        "domain": {"data": "krill", "field": "sum"}
+      }
+    ],
+    "axes": [
+      {
+        "orient": "bottom",
+        "scale": "x",
+        "values": [1992, 1997, 2002, 2007, 2012, 2017],
+        "offset": 30
+      },
+      {
+        "orient": "left",
+        "scale": "y",
+        "offset": 30
+      }
+    ],
+    "marks": [
+      {
+        "type": "line",
+        "from": {"data": "krill"},
+        "encode": {
+          "enter": {
+            "x": {"scale": "x", "field": "year"},
+            "y": {"scale": "y", "field": "sum"}
+          }
+        }
+      }
+    ]
+  }

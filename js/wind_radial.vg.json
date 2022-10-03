@@ -1,127 +1,151 @@
 {
-    "$schema": "https://vega.github.io/schema/vega/v5.json",
-    "description": "Dot plot of Adelie Penguin diet",
-    "width": 450,
-    "height": 450,
-    "signals": [{"name": "zoom", "value": 6}],
-    "data": [
-      {
-        "name": "wind",
-        "url": "data/palmer_station_weather_wind.csv",
-        "format": {"type": "csv", "parse": "auto", "delimiter": ","},
-        "transform": [
-          {
-            "type": "formula",
-            "expr": "if(datum.wind_dir_1 == 'NaN', if(datum.wind_dir_2 == 'NaN', if(datum.wind_dir_3 == 'NaN', datum.wind_dir_4, datum.wind_dir_3), datum.wind_dir_2), datum.wind_dir_1)",
-            "as": "wind_dir"
-          },
-          {
-            "type": "filter",
-            "expr": "datum.avg_windspeed != 'NaN' && datum.wind_dir != 'NaN'"
-          },
-          {
-            "type": "formula",
-            "expr": "toNumber(datum.wind_dir)",
-            "as": "wind_dir"
-          },
-          {
-            "type": "bin",
-            "field": "wind_dir",
-            "extent": [0, 360],
-            "step": 10,
-            "as": ["bin_wind_dir_1", "bin_wind_dir_2"]
-          },
-          {
-            "type": "bin",
-            "field": "avg_windspeed",
-            "extent": [0, 45],
-            "maxbins": 8,
-            "as": ["bin_avg_wind_1", "bin_avg_wind_2"]
-          },
-          {"type": "formula", "expr": "1", "as": "index"}
-        ]
-      },
-      {
-        "name": "angles",
-        "transform": [
-          {"type": "sequence", "start": 0, "stop": 360, "step": 10},
-          {"type": "pie"}
-        ]
-      },
-      {
-        "name": "stack",
-        "source": "wind",
-        "transform": [
-          {
-            "type": "stack",
-            "groupby": ["bin_wind_dir_1"],
-            "sort": {"field": "bin_avg_wind_1", "order": "ascending"},
-            "field": "index"
-          },
-          {
-            "type": "lookup",
-            "from": "angles",
-            "key": "data",
-            "fields": ["bin_wind_dir_1"],
-            "as": ["obj"]
-          },
-          {"type": "formula", "expr": "datum.obj.startAngle", "as": "startAngle"},
-          {"type": "formula", "expr": "datum.obj.endAngle", "as": "endAngle"},
-          {"type": "formula", "expr": "datum.y0 / zoom", "as": "y0"},
-          {"type": "formula", "expr": "datum.y1 / zoom", "as": "y1"}
-        ]
-      },
-      {
-        "name": "axis",
-        "transform": [{"type": "graticule", "stepMinor": [20, 20]}]
-      }
-    ],
-    "projections": [
-      {
-        "name": "coords",
-        "type": "azimuthalEqualArea",
-        "center": [0, 0],
-        "rotate": [0, 90, 0],
-        "scale": 100,
-        "translate": [{"signal": "width / 2"}, {"signal": "height / 2"}]
-      }
-    ],
-    "scales": [
-      {
-        "name": "color",
-        "type": "linear",
-        "domain": {"data": "wind", "field": "bin_avg_wind_1"},
-        "range": {"scheme": "reds"}
-      },
-      {"name": "x", "type": "linear", "domain": [0, 1], "range": "width"},
-      {"name": "y", "type": "linear", "domain": [0, 1], "range": "height"}
-    ],
-    "marks": [
-      {
-        "type": "shape",
-        "from": {"data": "axis"},
-        "encode": {
-          "enter": {"stroke": {"value": "#ccc"}, "zindex": {"value": 0}}
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Dot plot of Adelie Penguin diet",
+  "width": 450,
+  "height": 450,
+  "signals": [{"name": "zoom", "value": 6}],
+  "data": [
+    {
+      "name": "wind",
+      "url": "data/palmer_station_weather_wind.csv",
+      "format": {"type": "csv", "parse": "auto", "delimiter": ","},
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "if(datum.wind_dir_1 == 'NaN', if(datum.wind_dir_2 == 'NaN', if(datum.wind_dir_3 == 'NaN', datum.wind_dir_4, datum.wind_dir_3), datum.wind_dir_2), datum.wind_dir_1)",
+          "as": "wind_dir"
         },
-        "transform": [{"type": "geoshape", "projection": "coords"}]
-      },
-      {
-        "type": "arc",
-        "from": {"data": "stack"},
-        "encode": {
+        {
+          "type": "filter",
+          "expr": "datum.avg_windspeed != 'NaN' && datum.wind_dir != 'NaN'"
+        },
+        {
+          "type": "formula",
+          "expr": "toNumber(datum.wind_dir)",
+          "as": "wind_dir"
+        },
+        {
+          "type": "bin",
+          "field": "wind_dir",
+          "extent": [0, 360],
+          "step": 10,
+          "as": ["bin_wind_dir_1", "bin_wind_dir_2"]
+        },
+        {
+          "type": "bin",
+          "field": "avg_windspeed",
+          "extent": [0, 46],
+          "maxbins": 10,
+          "as": ["bin_avg_wind_1", "bin_avg_wind_2"]
+        },
+        {"type": "formula", "expr": "1", "as": "index"},
+        {
+          "type": "formula",
+          "expr": "datum.bin_avg_wind_1 + '-' + datum.bin_avg_wind_2 + ' m/s'",
+          "as": "speed_label"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.bin_wind_dir_1 + '-' + datum.bin_wind_dir_2 + '°'",
+          "as": "dir_label"
+        }
+      ]
+    },
+    {
+      "name": "angles",
+      "transform": [
+        {"type": "sequence", "start": 0, "stop": 360, "step": 10},
+        {"type": "pie"}
+      ]
+    },
+    {
+      "name": "stack",
+      "source": "wind",
+      "transform": [
+        {
+          "type": "stack",
+          "groupby": ["bin_wind_dir_1"],
+          "sort": {"field": "bin_avg_wind_1", "order": "ascending"},
+          "field": "index"
+        },
+        {
+          "type": "lookup",
+          "from": "angles",
+          "key": "data",
+          "fields": ["bin_wind_dir_1"],
+          "as": ["obj"]
+        },
+        {"type": "formula", "expr": "datum.obj.startAngle", "as": "startAngle"},
+        {"type": "formula", "expr": "datum.obj.endAngle", "as": "endAngle"},
+        {"type": "formula", "expr": "datum.y0 / zoom", "as": "y0"},
+        {"type": "formula", "expr": "datum.y1 / zoom", "as": "y1"}
+      ]
+    },
+    {
+      "name": "axis",
+      "transform": [{"type": "graticule", "stepMinor": [20, 20]}]
+    }
+  ],
+  "projections": [
+    {
+      "name": "coords",
+      "type": "azimuthalEqualArea",
+      "center": [0, 0],
+      "rotate": [0, 90, 0],
+      "scale": 100,
+      "translate": [{"signal": "width / 2"}, {"signal": "height / 2"}]
+    }
+  ],
+  "scales": [
+    {
+      "name": "color",
+      "type": "linear",
+      "domain": {"data": "wind", "field": "bin_avg_wind_1"},
+      "range": {"scheme": "yellowgreenblue"},
+      "bins": {"start": 0, "stop": 45, "step": 5}
+    },
+    {"name": "x", "type": "linear", "domain": [0, 1], "range": "width"},
+    {"name": "y", "type": "linear", "domain": [0, 1], "range": "height"}
+  ],
+  "legends": [
+    {
+      "type": "symbol",
+      "title": "Wind Speed (m/s)",
+      "fill": "color",
+      "encode": {
+        "symbols": {
           "enter": {
-            "x": {"scale": "x", "value": 0.5},
-            "y": {"scale": "y", "value": 0.5},
-            "startAngle": {"data": "stack", "field": "startAngle"},
-            "endAngle": {"data": "stack", "field": "endAngle"},
-            "innerRadius": {"field": "y0"},
-            "outerRadius": {"field": "y1"},
-            "strokeOpacity": {"value": 0},
-            "zindex": {"value": 1}
-          },
-          "update": {"fill": {"scale": "color", "field": "bin_avg_wind_1"}},
-          "hover": {"fill": {"value": "red"}}
+            "shape": [{"value": "square"}]
+            }
         }
       }
-    ]
-  }
+    }
+  ],
+  "marks": [
+    {
+      "type": "shape",
+      "from": {"data": "axis"},
+      "encode": {
+        "enter": {"stroke": {"value": "#ccc"}, "zindex": {"value": 0}}
+      },
+      "transform": [{"type": "geoshape", "projection": "coords"}]
+    },
+    {
+      "type": "arc",
+      "from": {"data": "stack"},
+      "encode": {
+        "enter": {
+          "fill": {"scale": "color", "field": "bin_avg_wind_1"},
+          "x": {"scale": "x", "value": 0.5},
+          "y": {"scale": "y", "value": 0.5},
+          "startAngle": {"data": "stack", "field": "startAngle"},
+          "endAngle": {"data": "stack", "field": "endAngle"},
+          "innerRadius": {"field": "y0"},
+          "outerRadius": {"field": "y1"},
+          "zindex": {"value": 1},
+          "tooltip": {"signal": "{'Wind Speed': datum.speed_label, 'Direction': datum.dir_label}"}
+        }
+      }
+    }
+  ]
+}

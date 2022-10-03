@@ -95,9 +95,20 @@
 
           </div>
           <div class="pure-u-2-3 font-serif text-l">
-            <div id="diet_all_dotmap"></div>
-            <div id="diet_other_dotmap"></div>
+            <div id="diet_dotmap" class="center">
+              <div>
+                <div id="diet_all_dotmap"></div>
+                <div class="flex">
+                  <div class="center">
+                    <img src="images/krill/other.png" id="diet_image">
+                  </div>
+                  <div id="diet_other_dotmap"></div>
+                </div>
+              </div>
+            </div>
+
           </div>
+
 
         </div>
       </div>
@@ -112,8 +123,10 @@
         </div>
         <div class="pure-g">
           <div id="diet_streamgraph" class="pure-u-2-3"></div>
-
-          <div class="pure-u-1-3"></div>
+          <div class="pure-u-1-3">
+            <div style="height:400px"></div>
+            <div id="diet_krill"></div>
+          </div>
         </div>
       </div>
 
@@ -149,7 +162,7 @@
   <!-- --------------------- -->
 
   <!-- Vega Embeds -->
-  
+
   <!-- --------------------- -->
 
   <!-- Palmer Station Slide -->
@@ -192,7 +205,7 @@
   <script type="text/javascript">
 
     var spec2 = "js/heatmap_zoom.vg.json";
-    vegaEmbed('#heatmap_zoom', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#heatmap_zoom', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
@@ -210,7 +223,7 @@
   <script type="text/javascript">
 
     var spec2 = "js/diet_all_dotmap.vg.json";
-    vegaEmbed('#diet_all_dotmap', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#diet_all_dotmap', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
@@ -218,7 +231,7 @@
   <script type="text/javascript">
 
     var spec2 = "js/diet_other_dotmap.vg.json";
-    vegaEmbed('#diet_other_dotmap', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#diet_other_dotmap', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
@@ -228,7 +241,15 @@
   <script type="text/javascript">
 
     var spec2 = "js/diet_sorted_stream_graph.vg.json";
-    vegaEmbed('#diet_streamgraph', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#diet_streamgraph', spec2, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+  </script>
+
+  <script type="text/javascript">
+
+    var spec2 = "js/diet_krill_line.vg.json";
+    vegaEmbed('#diet_krill', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>

@@ -1,31 +1,30 @@
 {
-    "$schema": "https://vega.github.io/schema/vega/v5.json",
-    "description": "A calendar visualization of daily changes to the S&P 500 since 2000.",
-    "padding": 5,
-    "signals": [
-      {"name": "scheme", "value": "redblue"}
-    ],
-    "scales": [
-      {
-        "name": "color",
-        "type": "linear",
-        "clamp": true,
-        "range": {"scheme": {"signal": "scheme"}},
-        "domain": [-10, 0, 10]
-      }
-    ],
-    "legends": [
-      {
-        "fill": "color",
-        "title": "Average Temperature",
-        "titleFontSize": 12,
-        "titleOrient": "left",
-        "titlePadding": 10,
-        "orient": "top",
-        "type": "gradient",
-        "direction": "horizontal",
-        "gradientLength": 250,
-        "gradientThickness": 10
-      }
-    ]
-  }
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "A calendar visualization of daily changes to the S&P 500 since 2000.",
+  "padding": 5,
+  "signals": [{"name": "scheme", "value": "redblue"}],
+  "scales": [
+    {
+      "name": "color",
+      "type": "linear",
+      "clamp": true,
+      "range": {"scheme": {"signal": "scheme"}},
+      "domain": [-10, 0, 10],
+      "reverse": true
+    }
+  ],
+  "legends": [
+    {
+      "fill": "color",
+      "title": "Average Temperature (°C)",
+      "titleFontSize": 12,
+      "titleOrient": "left",
+      "titlePadding": 10,
+      "orient": "top",
+      "type": "gradient",
+      "direction": "horizontal",
+      "gradientLength": 250,
+      "gradientThickness": 10
+    }
+  ]
+}
