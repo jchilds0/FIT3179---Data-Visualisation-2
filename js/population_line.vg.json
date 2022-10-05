@@ -1,0 +1,82 @@
+{
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "description": "Dot plot of Adelie Penguin diet",
+    "width": 475,
+    "height": 600,
+    "signals": [
+      {"name": "offset", "value": 15},
+      {"name": "cellHeight", "value": 125}
+    ],
+    "data": [
+      {
+        "name": "pop",
+        "url": "data/annual_penguin_census.csv",
+        "format": {"type": "csv", "parse": "auto"},
+        "transform": [
+          {"type": "fold", "fields": ["adelie", "gentoo", "chinstrap"]},
+          {"type": "filter", "expr": "datum.value != null"},
+          {
+            "type": "formula",
+            "expr": "utcParse(datum.year, '%Y')",
+            "as": "date"
+          },
+          {"type": "formula", "expr": "year(datum.date)", "as": "year"}
+        ]
+      }
+    ],
+    "scales": [
+      {
+        "name": "x",
+        "type": "time",
+        "domain": {"data": "pop", "field": "date"},
+        "range": "width"
+      },
+      {
+        "name": "y",
+        "domain": {"data": "pop", "field": "value"},
+        "range": "height"
+      },
+      {
+        "name": "color",
+        "type": "ordinal",
+        "range": ["#1b9e77", "#d95f02", "#7570b3"],
+        "domain": {"data": "pop", "field": "key"}
+      }
+    ],
+    "legends": [
+      {
+        "stroke": "color",
+        "title": "Penguin Species",
+        "orient": "top-right",
+        "padding": 4,
+        "encode": {
+          "symbols": {
+            "enter": {"strokeWidth": {"value": 2}, "size": {"value": 50}}
+          }
+        }
+      }
+    ],
+    "axes": [
+      {"orient": "bottom", "scale": "x", "tickMinStep": 5, "offset": 30},
+      {"orient": "left", "scale": "y", "offset": 30}
+    ],
+    "marks": [
+      {
+        "type": "group",
+        "from": {"facet": {"name": "species", "data": "pop", "groupby": ["key"]}},
+        "marks": [
+          {
+            "type": "line",
+            "from": {"data": "species"},
+            "encode": {
+              "enter": {
+                "x": {"scale": "x", "field": "date"},
+                "y": {"scale": "y", "field": "value"},
+                "stroke": {"scale": "color", "field": "key"}
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }

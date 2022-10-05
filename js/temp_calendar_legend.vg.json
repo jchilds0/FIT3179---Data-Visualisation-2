@@ -18,7 +18,6 @@
       "fill": "color",
       "title": "Average Temperature (°C)",
       "titleFontSize": 12,
-      "titleOrient": "left",
       "titlePadding": 10,
       "orient": "top",
       "type": "gradient",

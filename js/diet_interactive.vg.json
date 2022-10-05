@@ -1,189 +1,272 @@
 {
-    "$schema": "https://vega.github.io/schema/vega/v5.json",
-    "description": "Krill abundance as a stacked area chart",
-    "width": 1200,
-    "height": 700,
-    "padding": 5,
-    "signals": [{"name": "idiom", "value": "stack"}],
-    "data": [
-      {
-        "name": "krill",
-        "url": "data/adelie_krill_abundance.csv",
-        "format": {"type": "csv", "parse": "auto", "delimiter": ","},
-        "transform": [
-          {
-            "type": "formula",
-            "expr": "timeParse(datum.date, '%d/%m/%Y')",
-            "as": "date"
-          },
-          {"type": "formula", "expr": "year(datum.date)", "as": "year"},
-          {
-            "type": "aggregate",
-            "fields": [
-              "16-20mm",
-              "21-25mm",
-              "26-30mm",
-              "31-35mm",
-              "36-40mm",
-              "41-45mm",
-              "46-50mm",
-              "51-55mm",
-              "56-60mm",
-              "61-65mm"
-            ],
-            "ops": [
-              "sum",
-              "sum",
-              "sum",
-              "sum",
-              "sum",
-              "sum",
-              "sum",
-              "sum",
-              "sum",
-              "sum"
-            ],
-            "groupby": ["year"],
-            "as": [
-              "16-20mm",
-              "21-25mm",
-              "26-30mm",
-              "31-35mm",
-              "36-40mm",
-              "41-45mm",
-              "46-50mm",
-              "51-55mm",
-              "56-60mm",
-              "61-65mm"
-            ]
-          },
-          {
-            "type": "fold",
-            "fields": [
-              "16-20mm",
-              "21-25mm",
-              "26-30mm",
-              "31-35mm",
-              "36-40mm",
-              "41-45mm",
-              "46-50mm",
-              "51-55mm",
-              "56-60mm",
-              "61-65mm"
-            ],
-            "as": ["size", "count"]
-          },
-          {"type": "formula", "expr": "1", "as": "index"},
-          {
-            "type": "stack",
-            "groupby": ["year"],
-            "sort": {"field": "count"},
-            "field": "index",
-            "as": ["sorted0", "sorted1"]
-          },
-          {
-            "type": "formula",
-            "expr": "6*log(datum.count + 1)",
-            "as": "count_norm"
-          },
-          {
-            "type": "stack",
-            "groupby": ["year"],
-            "sort": {"field": "size"},
-            "field": "count",
-            "as": ["stack0", "stack1"]
-          }
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Krill abundance as a stacked area chart",
+  "width": 1200,
+  "height": 700,
+  "padding": 5,
+  "signals": [
+    {
+      "name": "idiom",
+      "value": "stack",
+      "bind": {
+        "input": "select",
+        "name": "Chart Type: ",
+        "options": [
+          "stack",
+          "sort"
         ]
       }
-    ],
-    "scales": [
-      {
-        "name": "x",
-        "type": "point",
-        "range": "width",
-        "domain": {"data": "krill", "field": "year"}
-      },
-      {
-        "name": "y",
-        "type": "linear",
-        "range": "height",
-        "nice": true,
-        "zero": true,
-        "domain": {"data": "krill", "field": {"signal": "idiom + '1'"}}
-      },
-      {
-        "name": "color",
-        "type": "ordinal",
-        "range": {"scheme": "lighttealblue"},
-        "domain": {"data": "krill", "field": "size"}
-      },
-      {
-        "name": "y_labels",
-        "type": "ordinal",
-        "domain": [9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
-        "range": [
-          "41-45mm",
-          "46-50mm",
-          "51-55mm",
-          "36-40mm",
-          "56-60mm",
-          "31-35mm",
-          "26-30mm",
-          "21-25mm",
-          "61-65mm",
-          "16-20mm"
-        ]
-      }
-    ],
-    "axes": [
-      {
-        "orient": "bottom",
-        "scale": "x",
-        "values": [1992, 1997, 2002, 2007, 2012, 2017],
-        "offset": 30
-      },
-      {
-        "orient": "left",
-        "scale": "y",
-        "ticks": false,
-        "offset": 10,
-        "domain": false,
-        "labelFontSize": 10,
-        "encode": {
-          "labels": {"update": {"text": {"scale": "y_labels", "field": "value"}}}
+    }
+  ],
+  "data": [
+    {
+      "name": "krill",
+      "url": "data/adelie_krill_abundance.csv",
+      "format": {"type": "csv", "parse": "auto", "delimiter": ","},
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "timeParse(datum.date, '%d/%m/%Y')",
+          "as": "date"
+        },
+        {"type": "formula", "expr": "year(datum.date)", "as": "year"},
+        {
+          "type": "aggregate",
+          "fields": [
+            "16-20mm",
+            "21-25mm",
+            "26-30mm",
+            "31-35mm",
+            "36-40mm",
+            "41-45mm",
+            "46-50mm",
+            "51-55mm",
+            "56-60mm",
+            "61-65mm"
+          ],
+          "ops": [
+            "sum",
+            "sum",
+            "sum",
+            "sum",
+            "sum",
+            "sum",
+            "sum",
+            "sum",
+            "sum",
+            "sum"
+          ],
+          "groupby": ["year"],
+          "as": [
+            "16-20mm",
+            "21-25mm",
+            "26-30mm",
+            "31-35mm",
+            "36-40mm",
+            "41-45mm",
+            "46-50mm",
+            "51-55mm",
+            "56-60mm",
+            "61-65mm"
+          ]
+        },
+        {
+          "type": "fold",
+          "fields": [
+            "16-20mm",
+            "21-25mm",
+            "26-30mm",
+            "31-35mm",
+            "36-40mm",
+            "41-45mm",
+            "46-50mm",
+            "51-55mm",
+            "56-60mm",
+            "61-65mm"
+          ],
+          "as": ["size", "count"]
+        },
+        {"type": "formula", "expr": "1", "as": "index"},
+        {
+          "type": "stack",
+          "groupby": ["year"],
+          "sort": {"field": "count"},
+          "field": "index",
+          "as": ["sort0", "sort1"]
+        },
+        {
+          "type": "formula",
+          "expr": "6*log(datum.count + 1)",
+          "as": "count_norm"
+        },
+        {
+          "type": "stack",
+          "groupby": ["year"],
+          "sort": {"field": "size"},
+          "field": "count",
+          "as": ["stack0", "stack1"]
         }
-      }
-    ],
-    "marks": [
-      {
-        "type": "group",
-        "from": {"facet": {"name": "series", "data": "krill", "groupby": "size"}},
-        "marks": [
-          {
-            "type": "area",
-            "from": {"data": "series"},
-            "encode": {
-              "enter": {
-                "interpolate": {"value": "monotone"},
-                "x": {"scale": "x", "field": "year"},
-                "y": [
-                  {"test": "idiom == 'stack'", "scale": "y", "field": "stack0"}
-                ],
-                "y2": [
-                  {"test": "idiom == 'stack'", "scale": "y", "field": "stack1"}
-                
-                ],
-                "height": {"field": "count_norm"},
-                "fill": {"scale": "color", "field": "size"},
-                "tooltip": {
-                  "signal": "'Krill ' + datum.size + ': ' + datum.count"
-                }
-              },
-              "update": {"fillOpacity": {"value": 1}},
-              "hover": {"fillOpacity": {"value": 0.5}}
+      ]
+    },
+    {"name": "idioms", "values": ["stack", "sort"]}
+  ],
+  "scales": [
+    {
+      "name": "x",
+      "type": "point",
+      "range": "width",
+      "domain": {"data": "krill", "field": "year"}
+    },
+    {
+      "name": "y",
+      "type": "linear",
+      "range": "height",
+      "nice": true,
+      "zero": true,
+      "domain": {"data": "krill", "field": {"signal": "idiom + '1'"}}
+    },
+    {
+      "name": "color",
+      "type": "ordinal",
+      "range": {"scheme": "lighttealblue"},
+      "domain": {"data": "krill", "field": "size"}
+    },
+    {
+      "name": "y_labels",
+      "type": "ordinal",
+      "domain": [9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
+      "range": [
+        "41-45mm",
+        "46-50mm",
+        "51-55mm",
+        "36-40mm",
+        "56-60mm",
+        "31-35mm",
+        "26-30mm",
+        "21-25mm",
+        "61-65mm",
+        "16-20mm"
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "orient": "bottom",
+      "scale": "x",
+      "values": [1992, 1997, 2002, 2007, 2012, 2017],
+      "offset": 30
+    }
+  ],
+  "marks": [
+    {
+      "type": "group",
+      "scales": [
+        {
+          "name": "y",
+          "type": "linear",
+          "range": "height",
+          "nice": true,
+          "zero": true,
+          "domain": {"data": "krill", "field": {"signal": "idiom + '1'"}}
+        }
+      ],
+      "axes": [
+        {
+          "orient": "left",
+          "scale": "y",
+          "ticks": false,
+          "offset": 10,
+          "domain": false,
+          "labelFontSize": 10,
+          "encode": {
+            "labels": {
+              "update": {
+                "text": {"scale": "y_labels", "field": "value"},
+                "opacity": [
+                  {
+                    "test": "idiom == 'sort'",
+                    "value": 1
+                  },
+                  {"value": 0}
+                ]
+              }
             }
           }
-        ]
-      }
-    ]
-  }
+        },
+        {
+          "orient": "left", 
+          "scale": "y",
+          "encode": {
+            "labels": {
+              "update": {
+                "opacity": [
+                  {
+                    "test": "idiom == 'stack'",
+                    "value": 1
+                  },
+                  {"value": 0}
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "marks": [
+        {
+          "type": "group",
+          "from": {
+            "facet": {"name": "series", "data": "krill", "groupby": "size"}
+          },
+          "marks": [
+            {
+              "type": "area",
+              "from": {"data": "series"},
+              "encode": {
+                "update": {
+                  "interpolate": {"value": "monotone"},
+                  "x": {"scale": "x", "field": "year"},
+                  "yc": {"scale": "y", "field": "sort0"},
+                  "defined": [{"signal": "idiom == 'sort'"}],
+                  "height": {"field": "count_norm"},
+                  "fill": {"scale": "color", "field": "size"},
+                  "tooltip": {
+                    "signal": "'Krill ' + datum.size + ': ' + datum.count"
+                  },
+                  "fillOpacity": {"value": 1}
+                },
+                "hover": {"fillOpacity": {"value": 0.5}}
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "from": {
+            "facet": {"name": "series", "data": "krill", "groupby": "size"}
+          },
+          "marks": [
+            {
+              "type": "area",
+              "from": {"data": "series"},
+              "encode": {
+                "update": {
+                  "interpolate": {"value": "monotone"},
+                  "x": {"scale": "x", "field": "year"},
+                  "y": {"scale": "y", "field": "stack0"},
+                  "y2": {"scale": "y", "field": "stack1"},
+                  "defined": [{"signal": "idiom == 'stack'"}],
+                  "fill": {"scale": "color", "field": "size"},
+                  "tooltip": {
+                    "signal": "'Krill ' + datum.size + ': ' + datum.count"
+                  },
+                  "fillOpacity": {"value": 1}
+                },
+                "hover": {"fillOpacity": {"value": 0.5}}
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

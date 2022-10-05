@@ -1,270 +1,153 @@
 {
-    "$schema": "https://vega.github.io/schema/vega/v5.json",
-    "description": "Dot plot of Adelie Penguin diet",
-    "width": 600,
-    "height": 800,
-    "signals": [
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Dot plot of Adelie Penguin diet",
+  "width": 475,
+  "height": 625,
+  "signals": [
+    {"name": "offset", "value": 15},
+    {"name": "cellHeight", "value": 95}
+  ],
+  "data": [
+    {
+      "name": "chicks",
+      "url": "data/adelie_penguin_chicks.csv",
+      "format": {"type": "csv", "parse": "auto", "delimiter": ","},
+      "transform": [
         {
-            "name": "offset",
-            "value": 15
+          "type": "formula",
+          "expr": "timeParse(datum.time, '%d/%m/%Y')",
+          "as": "date"
         },
+        {"type": "formula", "expr": "year(datum.date)", "as": "year"},
         {
-            "name": "cellHeight",
-            "value": 125
+          "type": "aggregate",
+          "groupby": ["year", "island_name"],
+          "fields": ["num_breeding_pairs", "num_chicks"],
+          "ops": ["sum", "sum"],
+          "as": ["breeding_pairs", "chicks"]
         }
-    ],
-    "data": [
-        {
-            "name": "chicks",
-            "url": "data/adelie_penguin_chicks.csv",
-            "format": {
-                "type": "csv",
-                "parse": "auto",
-                "delimiter": ","
-            },
-            "transform": [
-                {
-                    "type": "formula",
-                    "expr": "timeParse(datum.time, '%d/%m/%Y')",
-                    "as": "date"
-                },
-                {
-                    "type": "formula",
-                    "expr": "year(datum.date)",
-                    "as": "year"
-                },
-                {
-                    "type": "aggregate",
-                    "groupby": [
-                        "year",
-                        "island_name"
-                    ],
-                    "fields": [
-                        "num_breeding_pairs",
-                        "num_chicks"
-                    ],
-                    "ops": [
-                        "sum",
-                        "sum"
-                    ],
-                    "as": [
-                        "breeding_pairs",
-                        "chicks"
-                    ]
-                }
-            ]
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "orient": "bottom",
+      "scale": "x",
+      "values": [1992, 1997, 2002, 2007, 2012, 2017]
+    }
+  ],
+  "scales": [
+    {
+      "name": "gscale",
+      "type": "band",
+      "range": [0, {"signal": "height"}],
+      "round": true,
+      "domain": {"data": "chicks", "field": "island_name"}
+    },
+    {
+      "name": "cscale",
+      "type": "ordinal",
+      "range": {"scheme": "pastel2"},
+      "domain": {"data": "chicks", "field": "island_name"}
+    },
+    {
+      "name": "x",
+      "type": "point",
+      "domain": {"data": "chicks", "field": "year"},
+      "range": "width"
+    },
+    {
+      "name": "xscale",
+      "type": "band",
+      "domain": {"data": "chicks", "field": "year"},
+      "range": "width",
+      "padding": 0.05,
+      "round": true
+    },
+    {
+      "name": "island",
+      "type": "ordinal",
+      "domain": ["CHR", "COR", "HUM", "LIT", "TOR"],
+      "range": [
+        "Charcot Island",
+        "Cormorant Island",
+        "Humble Island",
+        "Litchfield Island",
+        "Torgersen Island"
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "name": "group",
+      "type": "group",
+      "from": {
+        "facet": {"name": "chick", "data": "chicks", "groupby": "island_name"}
+      },
+      "encode": {
+        "enter": {
+          "y": {
+            "scale": "gscale",
+            "field": "island_name",
+            "offset": {"signal": "offset"}
+          },
+          "height": {"signal": "cellHeight"},
+          "width": {"signal": "width"},
+          "stroke": {"value": "#ccc"}
         }
-    ],
-    "axes": [
+      },
+      "scales": [
         {
-            "orient": "bottom",
-            "scale": "x",
-            "values": [
-                1992,
-                1997,
-                2002,
-                2007,
-                2012,
-                2017
-            ]
+          "name": "yscale",
+          "range": [0, {"signal": "cellHeight"}],
+          "nice": true,
+          "domain": {"data": "chick", "field": "chicks"},
+          "reverse": true
         }
-    ],
-    "scales": [
+      ],
+      "axes": [
         {
-            "name": "gscale",
-            "type": "band",
-            "range": [
-                0,
-                {
-                    "signal": "height"
-                }
-            ],
-            "round": true,
-            "domain": {
-                "data": "chicks",
-                "field": "island_name"
+          "orient": "left",
+          "scale": "yscale",
+          "tickSize": 0,
+          "domain": false,
+          "grid": true,
+          "tickMinStep": 100,
+          "tickCount": 5
+        }
+      ],
+      "marks": [
+        {
+          "type": "rect",
+          "from": {"data": "chick"},
+          "encode": {
+            "enter": {
+              "x": {"scale": "xscale", "field": "year"},
+              "width": {"scale": "xscale", "band": 1},
+              "y": {"scale": "yscale", "field": "chicks"},
+              "y2": {"scale": "yscale", "value": 0},
+              "fill": {"scale": "cscale", "field": "island_name"},
+              "tooltip": {"signal": "datum.chicks"}
             }
-        },
-        {
-            "name": "cscale",
-            "type": "ordinal",
-            "range": {
-                "scheme": "pastel2"
-            },
-            "domain": {
-                "data": "chicks",
-                "field": "island_name"
-            }
-        },
-        {
-            "name": "x",
-            "type": "point",
-            "domain": {
-                "data": "chicks",
-                "field": "year"
-            },
-            "range": "width"
-        },
-        {
-            "name": "xscale",
-            "type": "band",
-            "domain": {
-                "data": "chicks",
-                "field": "year"
-            },
-            "range": "width",
-            "padding": 0.05,
-            "round": true
-        },
-        {
-            "name": "island",
-            "type": "ordinal",
-            "domain": [
-                "CHR",
-                "COR",
-                "HUM",
-                "LIT",
-                "TOR"
-            ],
-            "range": [
-                "Charcot Island",
-                "Cormorant Island",
-                "Humble Island",
-                "Litchfield Island",
-                "Torgersen Island"
-            ]
+          }
         }
-    ],
-    "marks": [
-        {
-            "name": "group",
-            "type": "group",
-            "from": {
-                "facet": {
-                    "name": "chick",
-                    "data": "chicks",
-                    "groupby": "island_name"
-                }
-            },
-            "encode": {
-                "enter": {
-                    "y": {
-                        "scale": "gscale",
-                        "field": "island_name",
-                        "offset": {
-                            "signal": "offset"
-                        }
-                    },
-                    "height": {
-                        "signal": "cellHeight"
-                    },
-                    "width": {
-                        "signal": "width"
-                    },
-                    "stroke": {
-                        "value": "#ccc"
-                    }
-                }
-            },
-            "scales": [
-                {
-                    "name": "yscale",
-                    "range": [
-                        0,
-                        {
-                            "signal": "cellHeight"
-                        }
-                    ],
-                    "nice": true,
-                    "domain": {
-                        "data": "chick",
-                        "field": "chicks"
-                    },
-                    "reverse": true
-                }
-            ],
-            "axes": [
-                {
-                    "orient": "left",
-                    "scale": "yscale",
-                    "tickSize": 0,
-                    "domain": false,
-                    "grid": true,
-                    "tickMinStep": 100,
-                    "tickCount": 5
-                }
-            ],
-            "marks": [
-                {
-                    "type": "rect",
-                    "from": {
-                        "data": "chick"
-                    },
-                    "encode": {
-                        "enter": {
-                            "x": {
-                                "scale": "xscale",
-                                "field": "year"
-                            },
-                            "width": {
-                                "scale": "xscale",
-                                "band": 1
-                            },
-                            "y": {
-                                "scale": "yscale",
-                                "field": "chicks"
-                            },
-                            "y2": {
-                                "scale": "yscale",
-                                "value": 0
-                            },
-                            "fill": {
-                                "scale": "cscale",
-                                "field": "island_name"
-                            },
-                            "tooltip": {
-                                "signal": "datum.chicks"
-                            }
-                        }
-                    }
-                }
-            ]
-        },
-        {
-            "type": "text",
-            "from": {
-                "data": "group"
-            },
-            "encode": {
-                "enter": {
-                    "x": {
-                        "field": "width",
-                        "mult": 0.5
-                    },
-                    "y": {
-                        "field": "y"
-                    },
-                    "fontSize": {
-                        "value": 11
-                    },
-                    "fontWeight": {
-                        "value": "bold"
-                    },
-                    "text": {
-                        "scale": "island",
-                        "field": "datum.island_name"
-                    },
-                    "align": {
-                        "value": "center"
-                    },
-                    "baseline": {
-                        "value": "bottom"
-                    },
-                    "fill": {
-                        "value": "#000"
-                    }
-                }
-            }
+      ]
+    },
+    {
+      "type": "text",
+      "from": {"data": "group"},
+      "encode": {
+        "enter": {
+          "x": {"field": "width", "mult": 0.5},
+          "y": {"field": "y"},
+          "fontSize": {"value": 11},
+          "fontWeight": {"value": "bold"},
+          "text": {"scale": "island", "field": "datum.island_name"},
+          "align": {"value": "center"},
+          "baseline": {"value": "bottom"},
+          "fill": {"value": "#000"}
         }
-    ]
+      }
+    }
+  ]
 }

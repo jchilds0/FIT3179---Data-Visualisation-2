@@ -1,8 +1,8 @@
 {
     "$schema": "https://vega.github.io/schema/vega/v5.json",
     "description": "Dot plot of Adelie Penguin diet",
-    "width": 1150,
-    "height": 350,
+    "width": 1400,
+    "height": 500,
     "signals": [
       {
         "name": "scale",

@@ -3,296 +3,232 @@
     "description": "A calendar visualization of daily changes to the S&P 500 since 2000.",
     "padding": 5,
     "signals": [
-        {
-            "name": "step",
-            "value": 10
-        },
-        {
-            "name": "offset",
-            "value": 5
-        },
-        {
-            "name": "width",
-            "update": "step * 52 + offset * 11"
-        },
-        {
-            "name": "height",
-            "update": "step * 5"
-        },
-        {
-            "name": "scheme",
-            "value": "redblue"
-        }
+      {"name": "step", "value": 12},
+      {"name": "offset", "value": 5},
+      {"name": "width", "update": "step * 52 + offset * 11"},
+      {"name": "height", "update": "step * 5"},
+      {"name": "scheme", "value": "redblue"},
+      {"name": "year", "value": 2010}
     ],
     "data": [
-        {
-            "name": "weather",
-            "url": "data/palmer_station_weather_temp.csv",
-            "format": {
-                "type": "csv",
-                "parse": {
-                    "avg_temp": "number",
-                    "date": "date"
-                }
-            },
-            "transform": [
-                {
-                    "type": "formula",
-                    "expr": "datum.avg_temp",
-                    "as": "value"
-                },
-                {
-                    "type": "formula",
-                    "expr": "year(datum.date)",
-                    "as": "year"
-                },
-                {
-                    "type": "filter",
-                    "expr": "datum.year > 2010"
-                },
-                {
-                    "type": "timeunit",
-                    "field": "date",
-                    "units": [
-                        "year",
-                        "week"
-                    ],
-                    "as": [
-                        "w0",
-                        "w1"
-                    ]
-                },
-                {
-                    "type": "formula",
-                    "expr": "timeOffset('day', datum.w0)",
-                    "as": "w0"
-                },
-                {
-                    "type": "timeunit",
-                    "field": "date",
-                    "units": [
-                        "day"
-                    ],
-                    "as": [
-                        "d0",
-                        "d1"
-                    ]
-                }
-            ]
-        }
+      {
+        "name": "weather",
+        "url": "data/palmer_station_weather_temp.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "avg_temp": "number",
+            "high_temperature": "number",
+            "low_temperature": "number"
+          },
+          "delimiter": ","
+        },
+        "transform": [
+          {"type": "formula", "expr": "datum.avg_temp", "as": "value"},
+          {
+            "type": "formula",
+            "expr": "timeParse(datum.date, '%d/%m/%Y')",
+            "as": "dateParse"
+          }
+        ]
+      },
+      {
+        "name": "weather_closure",
+        "url": "data/palmer_date_blank.csv",
+        "format": {"type": "csv", "delimiter": ","},
+        "transform": [
+          {
+            "type": "formula",
+            "expr": "timeParse(datum.date, '%d/%m/%Y')",
+            "as": "date"
+          },
+          {"type": "formula", "expr": "year(datum.date)", "as": "year"},
+          {"type": "filter", "expr": "datum.year > year"},
+          {
+            "type": "lookup",
+            "from": "weather",
+            "key": "dateParse",
+            "fields": ["date"],
+            "as": ["obj"]
+          },
+          {
+            "type": "formula",
+            "expr": "if(datum.obj == null, null, datum.obj.avg_temp)",
+            "as": "avg_temp"
+          },
+          {
+            "type": "formula",
+            "expr": "if(datum.obj == null, null, datum.obj.high_temperature)",
+            "as": "high_temp"
+          },
+          {
+            "type": "formula",
+            "expr": "if(datum.obj == null, null, datum.obj.low_temperature)",
+            "as": "low_temp"
+          },
+          {
+            "type": "timeunit",
+            "field": "date",
+            "units": ["year", "week"],
+            "as": ["w0", "w1"]
+          },
+          {"type": "formula", "expr": "timeOffset('day', datum.w0)", "as": "w0"},
+          {
+            "type": "timeunit",
+            "field": "date",
+            "units": ["day"],
+            "as": ["d0", "d1"]
+          }
+        ]
+      }
     ],
     "scales": [
-        {
-            "name": "y",
-            "type": "band",
-            "domain": {
-                "data": "weather",
-                "field": "d0",
-                "sort": true
-            },
-            "range": {
-                "step": {
-                    "signal": "step"
-                }
-            }
-        },
-        {
-            "name": "color",
-            "type": "linear",
-            "clamp": true,
-            "range": {
-                "scheme": {
-                    "signal": "scheme"
-                }
-            },
-            "domain": [
-                -10,
-                0,
-                10
-            ],
-            "reverse": true
-        }
+      {
+        "name": "y",
+        "type": "band",
+        "domain": {"data": "weather_closure", "field": "d0", "sort": true},
+        "range": {"step": {"signal": "step"}}
+      },
+      {
+        "name": "color",
+        "type": "linear",
+        "clamp": true,
+        "range": {"scheme": {"signal": "scheme"}},
+        "domain": [-10, 0, 10],
+        "reverse": true
+      }
     ],
-    "layout": {
-        "columns": 1,
-        "padding": 5
-    },
+    "layout": {"columns": 1, "padding": 5},
     "marks": [
-        {
-            "type": "group",
-            "from": {
-                "facet": {
-                    "data": "weather",
-                    "name": "values",
-                    "groupby": "year"
-                }
-            },
-            "sort": {
-                "field": "datum.year",
-                "order": "descending"
-            },
-            "data": [
-                {
-                    "name": "max",
-                    "source": "values",
-                    "transform": [
-                        {
-                            "type": "aggregate",
-                            "ops": [
-                                "max"
-                            ],
-                            "fields": [
-                                "date"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "name": "weeks",
-                    "transform": [
-                        {
-                            "type": "sequence",
-                            "start": 0,
-                            "stop": 53,
-                            "as": "weeknum"
-                        },
-                        {
-                            "type": "formula",
-                            "expr": "datetime(parent.year, 0, 1 + datum.weeknum * 7)",
-                            "as": "date"
-                        },
-                        {
-                            "type": "timeunit",
-                            "units": [
-                                "year",
-                                "week"
-                            ],
-                            "field": "date",
-                            "as": [
-                                "w0",
-                                "w1"
-                            ]
-                        },
-                        {
-                            "type": "formula",
-                            "expr": "timeOffset('day', datum.w0)",
-                            "as": "w0"
-                        },
-                        {
-                            "type": "filter",
-                            "expr": "datum.date < data('max')[0].max_date"
-                        }
-                    ]
-                }
-            ],
-            "scales": [
-                {
-                    "name": "x",
-                    "type": "band",
-                    "domain": {
-                        "data": "weeks",
-                        "field": "w0",
-                        "sort": true
-                    },
-                    "range": {
-                        "step": {
-                            "signal": "step"
-                        }
-                    }
-                }
-            ],
-            "axes": [
-                {
-                    "orient": "left",
-                    "scale": "y",
-                    "ticks": false,
-                    "domain": false,
-                    "labelPadding": 8,
-                    "format": "%a",
-                    "formatType": "time",
-                    "title": {
-                        "signal": "parent.year"
-                    },
-                    "titleAngle": 0,
-                    "titleAlign": "right",
-                    "titleX": -8,
-                    "titleY": -2,
-                    "titleFontSize": 9,
-                    "labelFontSize": {"value": 8}
-                },
-                {
-                    "orient": "top",
-                    "scale": "x",
-                    "ticks": false,
-                    "domain": false,
-                    "format": "%b",
-                    "formatType": "time",
-                    "labelAlign": "left",
-                    "encode": {
-                        "labels": {
-                            "update": {
-                                "x": {
-                                    "scale": "x",
-                                    "field": "value",
-                                    "band": 0,
-                                    "offset": {
-                                        "signal": "month(datum.value) * offset"
-                                    }
-                                },
-                                "opacity": {
-                                    "signal": "date(datum.value) < 8 ? 1 : 0"
-                                },
-                                "fontSize": {"value": 8}
-                            }
-                        }
-                    }
-                }
-            ],
-            "marks": [
-                {
-                    "type": "rect",
-                    "from": {
-                        "data": "values"
-                    },
-                    "encode": {
-                        "enter": {
-                            "x": {
-                                "scale": "x",
-                                "field": "w0",
-                                "offset": {
-                                    "signal": "month(datum.date) * offset"
-                                }
-                            },
-                            "width": {
-                                "scale": "x",
-                                "band": 1,
-                                "offset": -1
-                            },
-                            "y": {
-                                "scale": "y",
-                                "field": "d0"
-                            },
-                            "height": {
-                                "scale": "y",
-                                "band": 1,
-                                "offset": -1
-                            },
-                            "cornerRadius": {
-                                "value": 2
-                            },
-                            "tooltip": {
-                                "signal": "timeFormat(datum.date, '%a %b %d, %Y') + '\\n' + datum.value"
-                            }
-                        },
-                        "update": {
-                            "fill": {
-                                "scale": "color",
-                                "field": "value"
-                            }
-                        }
-                    }
-                }
+      {
+        "type": "group",
+        "from": {
+          "facet": {
+            "data": "weather_closure",
+            "name": "values",
+            "groupby": "year"
+          }
+        },
+        "sort": {"field": "datum.year", "order": "descending"},
+        "data": [
+          {
+            "name": "max",
+            "source": "values",
+            "transform": [
+              {"type": "aggregate", "ops": ["max"], "fields": ["date"]}
             ]
-        }
+          },
+          {
+            "name": "weeks",
+            "transform": [
+              {"type": "sequence", "start": 0, "stop": 53, "as": "weeknum"},
+              {
+                "type": "formula",
+                "expr": "datetime(parent.year, 0, 1 + datum.weeknum * 7)",
+                "as": "date"
+              },
+              {
+                "type": "timeunit",
+                "units": ["year", "week"],
+                "field": "date",
+                "as": ["w0", "w1"]
+              },
+              {
+                "type": "formula",
+                "expr": "timeOffset('day', datum.w0)",
+                "as": "w0"
+              },
+              {"type": "filter", "expr": "datum.date < data('max')[0].max_date"}
+            ]
+          }
+        ],
+        "scales": [
+          {
+            "name": "x",
+            "type": "band",
+            "domain": {"data": "weeks", "field": "w0", "sort": true},
+            "range": {"step": {"signal": "step"}}
+          }
+        ],
+        "axes": [
+          {
+            "orient": "left",
+            "scale": "y",
+            "ticks": false,
+            "domain": false,
+            "labelPadding": 8,
+            "format": "%a",
+            "formatType": "time",
+            "title": {"signal": "parent.year"},
+            "titleAngle": 0,
+            "titleAlign": "right",
+            "titleX": -8,
+            "titleY": -2,
+            "titleFontSize": 9,
+            "labelFontSize": {"value": 8}
+          },
+          {
+            "orient": "top",
+            "scale": "x",
+            "ticks": false,
+            "domain": false,
+            "format": "%b",
+            "formatType": "time",
+            "labelAlign": "left",
+            "encode": {
+              "labels": {
+                "update": {
+                  "x": {
+                    "scale": "x",
+                    "field": "value",
+                    "band": 0,
+                    "offset": {"signal": "month(datum.value) * offset"}
+                  },
+                  "opacity": {"signal": "date(datum.value) < 8 ? 1 : 0"},
+                  "fontSize": {"value": 8}
+                }
+              }
+            }
+          }
+        ],
+        "marks": [
+          {
+            "type": "rect",
+            "from": {"data": "values"},
+            "encode": {
+              "enter": {
+                "x": {
+                  "scale": "x",
+                  "field": "w0",
+                  "offset": {"signal": "month(datum.date) * offset"}
+                },
+                "width": {"scale": "x", "band": 1, "offset": -1},
+                "y": {"scale": "y", "field": "d0"},
+                "height": {"scale": "y", "band": 1, "offset": -1},
+                "cornerRadius": {"value": 2},
+                "tooltip": [
+                  {
+                    "test": "datum.avg_temp == null",
+                    "signal": "{'Date': timeFormat(datum.date, '%a %b %d, %Y'), 'Temperature': 'No Data'}"
+                  },
+                  {
+                    "test": "datum.avg_temp != null",
+                    "signal": "{'Date': timeFormat(datum.date, '%a %b %d, %Y'), 'Average (°C)': datum.avg_temp,'Low (°C)': datum.low_temp, 'High (°C)': datum.high_temp}"
+                  },
+                  {"value": ""}
+                ],
+                "fill": [
+                  {
+                    "test": "datum.avg_temp != null",
+                    "scale": "color",
+                    "field": "avg_temp"
+                  },
+                  {"value": "#ccc"}
+                ]
+              }
+            }
+          }
+        ]
+      }
     ]
-}
+  }

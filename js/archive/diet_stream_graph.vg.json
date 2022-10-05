@@ -1,8 +1,8 @@
 {
     "$schema": "https://vega.github.io/schema/vega/v5.json",
     "description": "Krill abundance as a stacked area chart",
-    "width": 800,
-    "height": 550,
+    "width": 1200,
+    "height": 700,
     "padding": 5,
     "data": [
       {
@@ -10,18 +10,7 @@
         "url": "data/adelie_krill_abundance.csv",
         "format": {
           "type": "csv",
-          "parse": {
-            "16-20mm": "number",
-            "21-25mm": "number",
-            "26-30mm": "number",
-            "31-35mm": "number",
-            "36-40mm": "number",
-            "41-45mm": "number",
-            "46-50mm": "number",
-            "51-55mm": "number",
-            "56-60mm": "number",
-            "61-65mm": "number"
-          },
+          "parse": "auto",
           "delimiter": ","
         },
         "transform": [
@@ -114,7 +103,7 @@
       {
         "name": "color",
         "type": "ordinal",
-        "range": {"scheme": "set3"},
+        "range": {"scheme": "lighttealblue"},
         "domain": {"data": "krill", "field": "size"}
       }
     ],
