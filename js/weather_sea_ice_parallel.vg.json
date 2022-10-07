@@ -3,10 +3,9 @@
   "description": "A small multiples view of penguin attributes by island",
   "width": 600,
   "height": 600,
-
   "signals": [
     {
-      "name": "year", 
+      "name": "year",
       "value": 2015,
       "bind": {
         "name": "Year",
@@ -17,7 +16,6 @@
       }
     }
   ],
-
   "data": [
     {
       "name": "ice",
@@ -63,17 +61,42 @@
       "type": "point",
       "domain": ["9", "8", "7", "6", "5", "4", "3", "2", "1", "0", "/"],
       "range": "height"
+    },
+    {
+      "name": "xlabels",
+      "type": "ordinal",
+      "range": [
+        "Ice Formation Id",
+        "Ice Age Id",
+        "Land Ice Type Id",
+        "Ice Edge Id",
+        "Ice Condition Trend"
+      ],
+      "domain": [
+        "ice_formation_id",
+        "ice_age_id",
+        "land_ice_type_id",
+        "ice_edge_id",
+        "ice_cond_trnd"
+      ]
     }
   ],
   "axes": [
-    {"orient": "bottom", "scale": "xscale", "domain": false},
-    {"orient": "left", "scale": "yscale", "offset": 50}
+    {
+      "orient": "bottom",
+      "scale": "xscale",
+      "domain": false,
+      "ticks": false,
+      "offset": 25,
+      "encode": {"labels": {"update": {"text": {"scale": "xlabels", "signal": "datum.label"}}}}
+    },
+    {"orient": "left", "scale": "yscale", "offset": 30}
   ],
   "marks": [
     {
       "type": "group",
       "from": {"facet": {"name": "ices", "data": "ice", "groupby": "date"}},
-
+      "encode": {"enter": {"tooltip": {"field": "date"}}},
       "marks": [
         {
           "type": "line",
@@ -81,7 +104,11 @@
           "encode": {
             "update": {
               "x": {"scale": "xscale", "field": "ice_id"},
-              "y": {"scale": "yscale", "field": "value"}
+              "y": {"scale": "yscale", "field": "value"},
+              "interpolate": {"value": "cardinal"},
+              "tension": {"value": 0.2},
+              "strokeWidth": {"value": 1.01},
+              "strokeOpacity": {"value": 0.3}
             }
           }
         }

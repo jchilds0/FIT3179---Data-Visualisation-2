@@ -52,7 +52,7 @@
             <div id="sea_ice"></div>
           </div>
         </div>
-        
+
       </div>
       <div class="p-5">
         <p class="text-xl">Daily Average Temperature</p>
@@ -119,6 +119,7 @@
             <img src="images/krill/other.png" id="diet_image">
           </div>
           <div id="diet_other_dotmap"></div>
+          <div id="diet_dotmap_legend"></div>
         </div>
       </div>
 
@@ -232,6 +233,14 @@
 
     var spec2 = "js/diet_other_dotmap.vg.json";
     vegaEmbed('#diet_other_dotmap', spec2, { "actions": true }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+  </script>
+
+  <script type="text/javascript">
+
+    var spec2 = "js/diet_dotmap_legend.vg.json";
+    vegaEmbed('#diet_dotmap_legend', spec2, { "actions": true }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
