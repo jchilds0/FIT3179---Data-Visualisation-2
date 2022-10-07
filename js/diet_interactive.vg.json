@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "description": "Krill abundance as a stacked area chart",
+  "description": "Krill abundance as a stacked area chart/sorted stream graph",
   "width": 1200,
   "height": 700,
   "padding": 5,
@@ -11,10 +11,7 @@
       "bind": {
         "input": "select",
         "name": "Chart Type: ",
-        "options": [
-          "stack",
-          "sort"
-        ]
+        "options": ["stack", "sort"]
       }
     }
   ],
@@ -58,31 +55,31 @@
           ],
           "groupby": ["year"],
           "as": [
-            "16-20mm",
-            "21-25mm",
-            "26-30mm",
-            "31-35mm",
-            "36-40mm",
-            "41-45mm",
-            "46-50mm",
-            "51-55mm",
-            "56-60mm",
-            "61-65mm"
+            "16-20 mm",
+            "21-25 mm",
+            "26-30 mm",
+            "31-35 mm",
+            "36-40 mm",
+            "41-45 mm",
+            "46-50 mm",
+            "51-55 mm",
+            "56-60 mm",
+            "61-65 mm"
           ]
         },
         {
           "type": "fold",
           "fields": [
-            "16-20mm",
-            "21-25mm",
-            "26-30mm",
-            "31-35mm",
-            "36-40mm",
-            "41-45mm",
-            "46-50mm",
-            "51-55mm",
-            "56-60mm",
-            "61-65mm"
+            "16-20 mm",
+            "21-25 mm",
+            "26-30 mm",
+            "31-35 mm",
+            "36-40 mm",
+            "41-45 mm",
+            "46-50 mm",
+            "51-55 mm",
+            "56-60 mm",
+            "61-65 mm"
           ],
           "as": ["size", "count"]
         },
@@ -96,7 +93,7 @@
         },
         {
           "type": "formula",
-          "expr": "6*log(datum.count + 1)",
+          "expr": "7.5*log(datum.count + 1)",
           "as": "count_norm"
         },
         {
@@ -128,7 +125,7 @@
     {
       "name": "color",
       "type": "ordinal",
-      "range": {"scheme": "lighttealblue"},
+      "range": {"scheme": "orangered"},
       "domain": {"data": "krill", "field": "size"}
     },
     {
@@ -136,16 +133,16 @@
       "type": "ordinal",
       "domain": [9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
       "range": [
-        "41-45mm",
-        "46-50mm",
-        "51-55mm",
-        "36-40mm",
-        "56-60mm",
-        "31-35mm",
-        "26-30mm",
-        "21-25mm",
-        "61-65mm",
-        "16-20mm"
+        "41-45 mm",
+        "46-50 mm",
+        "51-55 mm",
+        "36-40 mm",
+        "56-60 mm",
+        "31-35 mm",
+        "26-30 mm",
+        "21-25 mm",
+        "61-65 mm",
+        "16-20 mm"
       ]
     }
   ],
@@ -155,6 +152,13 @@
       "scale": "x",
       "values": [1992, 1997, 2002, 2007, 2012, 2017],
       "offset": 30
+    }
+  ],
+  "legends": [
+    {
+      "type": "symbol",
+      "fill": "color",
+      "encode": {"symbols": {"enter": {"size": {"value": 150}}}}
     }
   ],
   "marks": [
@@ -178,15 +182,13 @@
           "offset": 10,
           "domain": false,
           "labelFontSize": 10,
+          "title": "Krill Abundance",
           "encode": {
             "labels": {
               "update": {
                 "text": {"scale": "y_labels", "field": "value"},
                 "opacity": [
-                  {
-                    "test": "idiom == 'sort'",
-                    "value": 1
-                  },
+                  {"test": "idiom == 'sort'", "value": 1},
                   {"value": 0}
                 ]
               }
@@ -194,16 +196,13 @@
           }
         },
         {
-          "orient": "left", 
+          "orient": "left",
           "scale": "y",
           "encode": {
             "labels": {
               "update": {
                 "opacity": [
-                  {
-                    "test": "idiom == 'stack'",
-                    "value": 1
-                  },
+                  {"test": "idiom == 'stack'", "value": 1},
                   {"value": 0}
                 ]
               }
@@ -230,7 +229,7 @@
                   "height": {"field": "count_norm"},
                   "fill": {"scale": "color", "field": "size"},
                   "tooltip": {
-                    "signal": "'Krill ' + datum.size + ': ' + datum.count"
+                    "signal": "{'Size': datum.size, 'Count': datum.count, 'Year': datum.year}"
                   },
                   "fillOpacity": {"value": 1}
                 },
@@ -257,7 +256,7 @@
                   "defined": [{"signal": "idiom == 'stack'"}],
                   "fill": {"scale": "color", "field": "size"},
                   "tooltip": {
-                    "signal": "'Krill ' + datum.size + ': ' + datum.count"
+                    "signal": "{'Size': datum.size, 'Count': datum.count, 'Year': datum.year}"
                   },
                   "fillOpacity": {"value": 1}
                 },

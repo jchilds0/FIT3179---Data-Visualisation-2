@@ -3,6 +3,19 @@ body {
     justify-content: center;
 }
 
+.heading {
+    font-family: 'Yeseva One', cursive;
+    padding: 12px;
+    font-size: 1.875rem; /* 30px */
+    line-height: 2.25rem; /* 36px */
+}
+
+.subheading {
+    font-family: 'Yeseva One', cursive;
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.75rem; /* 28px */
+}
+
 .slideshow {
     width: 1600px;
     background: #0093C4;

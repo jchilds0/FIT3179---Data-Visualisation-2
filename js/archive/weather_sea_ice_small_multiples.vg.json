@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "description": "A small multiples view of penguin attributes by island",
+  "description": "Sea Ice small multiples view",
   "width": 700,
   "signals": [
     {"name": "offset", "value": 0},

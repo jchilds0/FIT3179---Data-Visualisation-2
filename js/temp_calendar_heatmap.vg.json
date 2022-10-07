@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega/v5.json",
-    "description": "A calendar visualization of daily changes to the S&P 500 since 2000.",
+    "description": "A calendar visualization of daily temperature at palmer station",
     "padding": 5,
     "signals": [
       {"name": "step", "value": 12},

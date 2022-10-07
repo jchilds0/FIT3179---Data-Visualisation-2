@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "description": "A calendar visualization of daily changes to the S&P 500 since 2000.",
+  "description": "Calendar heatmap legend",
   "padding": 5,
   "signals": [{"name": "scheme", "value": "redblue"}],
   "scales": [

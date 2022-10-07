@@ -1,171 +1,168 @@
 {
-    "$schema": "https://vega.github.io/schema/vega/v5.json",
-    "description": "A small multiples view of penguin attributes by island",
-    "width": 400,
-    "signals": [
-      {"name": "offset", "value": 0},
-      {"name": "cellHeight", "value": 125},
-      {"name": "height", "update": "6 * (offset + cellHeight)"}
-    ],
-    "data": [
-      {
-        "name": "penguin_attr",
-        "url": "data/adelie/penguin_attr.csv",
-        "format": {
-          "type": "csv",
-          "parse": {
-            "culmenLength": "number",
-            "culmenDepth": "number",
-            "flipperLength": "number",
-            "bodyMass": "number"
-          },
-          "delimiter": ","
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "A small multiples view of penguin attributes by island",
+  "width": 400,
+  "signals": [
+    {"name": "offset", "value": 0},
+    {"name": "cellHeight", "value": 125},
+    {"name": "height", "update": "6 * (offset + cellHeight)"}
+  ],
+  "data": [
+    {
+      "name": "penguin_attr",
+      "url": "data/adelie/penguin_attr.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "culmenLength": "number",
+          "culmenDepth": "number",
+          "flipperLength": "number",
+          "bodyMass": "number"
         },
-        "transform": [
-          {
-            "type": "aggregate",
-            "ops": ["mean", "mean", "mean", "mean"],
-            "fields": [
-              "culmenLength",
-              "culmenDepth",
-              "flipperLength",
-              "bodyMass"
-            ],
-            "groupby": ["species", "island"],
-            "as": ["Culmen Length", "Culmen Depth", "Flipper Length", "Body Mass"]
-          },
-          {
-            "type": "fold",
-            "fields": [
-              "Culmen Length",
-              "Culmen Depth",
-              "Flipper Length",
-              "Body Mass"
-            ],
-            "as": ["attr", "value"]
-          },
-          {
-            "type": "formula",
-            "expr": "datum.attr == 'Body Mass' ? 'g' : 'mm' ",
-            "as": "units"
-          }
-        ]
-      }
-    ],
-    "scales": [
-      {
-        "name": "gscale",
-        "type": "band",
-        "range": [0, {"signal": "height"}],
-        "round": true,
-        "domain": {"data": "penguin_attr", "field": "attr"}
+        "delimiter": ","
       },
-      {
-        "name": "cscale",
-        "type": "ordinal",
-        "range": ["#1b9e77", "#d95f02", "#7570b3"],
-        "domain": {"data": "penguin_attr", "field": "species"}
-      }
-    ],
-    "legends": [
-      {
-        "stroke": "cscale",
-        "title": "Penguin Species",
-        "orient": "top-left",
-        "padding": 4,
-        "encode": {
-          "symbols": {
-            "enter": {"strokeWidth": {"value": 2}, "size": {"value": 50}}
-          }
+      "transform": [
+        {
+          "type": "aggregate",
+          "ops": ["mean", "mean", "mean", "mean"],
+          "fields": [
+            "culmenLength",
+            "culmenDepth",
+            "flipperLength",
+            "bodyMass"
+          ],
+          "groupby": ["species", "island"],
+          "as": ["Culmen Length", "Culmen Depth", "Flipper Length", "Body Mass"]
+        },
+        {
+          "type": "fold",
+          "fields": [
+            "Culmen Length",
+            "Culmen Depth",
+            "Flipper Length",
+            "Body Mass"
+          ],
+          "as": ["attr", "value"]
+        },
+        {
+          "type": "formula",
+          "expr": "datum.attr == 'Body Mass' ? 'g' : 'mm' ",
+          "as": "units"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "gscale",
+      "type": "band",
+      "range": [0, {"signal": "height"}],
+      "round": true,
+      "domain": {"data": "penguin_attr", "field": "attr"}
+    },
+    {
+      "name": "cscale",
+      "type": "ordinal",
+      "range": ["#1b9e77", "#d95f02", "#7570b3"],
+      "domain": {"data": "penguin_attr", "field": "species"}
+    }
+  ],
+  "legends": [
+    {
+      "stroke": "cscale",
+      "title": "Penguin Species",
+      "orient": "top-left",
+      "padding": 4,
+      "encode": {
+        "symbols": {
+          "enter": {"strokeWidth": {"value": 2}, "size": {"value": 50}}
         }
       }
-    ],
-    "marks": [
-      {
-        "name": "attr",
-        "type": "group",
-        "from": {
-          "facet": {"name": "attrs", "data": "penguin_attr", "groupby": "attr"}
-        },
-        "encode": {
-          "enter": {
-            "y": {
-              "scale": "gscale",
-              "field": "attr",
-              "offset": {"signal": "offset"}
-            },
-            "height": {"signal": "cellHeight"},
-            "width": {"signal": "width"},
-            "stroke": {"value": "#ccc"}
-          }
-        },
-        "scales": [
-          {
-            "name": "yscale",
-            "type": "point",
-            "range": [0, {"signal": "cellHeight"}],
-            "padding": 1,
-            "round": true,
-            "domain": {"data": "penguin_attr", "field": "island"}
+    }
+  ],
+  "marks": [
+    {
+      "name": "attr",
+      "type": "group",
+      "from": {
+        "facet": {"name": "attrs", "data": "penguin_attr", "groupby": "attr"}
+      },
+      "encode": {
+        "enter": {
+          "y": {
+            "scale": "gscale",
+            "field": "attr",
+            "offset": {"signal": "offset"}
           },
-          {
-            "name": "xscale",
-            "type": "linear",
-            "nice": true,
-            "range": "width",
-            "round": true,
-            "domain": {"data": "penguin_attr", "field": {"signal": "parent.attr"}}
-          }
-        ],
-        "axes": [
-          {
-            "orient": "left",
-            "scale": "yscale",
-            "tickSize": 0,
-            "domain": false,
-            "grid": true,
-            "encode": {"grid": {"enter": {"strokeDash": {"value": [3, 3]}}}}
-          },
-          {"orient": "right", "scale": "yscale", "tickSize": 0, "domain": false},
-          {
-            "orient": "bottom",
-            "scale": "xscale",
-            "offset": 10,
-            "zindex": 1
-          }
-        ],
-        "marks": [
-          {
-            "type": "symbol",
-            "from": {"data": "attrs"},
-            "encode": {
-              "enter": {
-                "x": {"scale": "xscale", "field": "value"},
-                "y": {"scale": "yscale", "field": "island"},
-                "stroke": {"scale": "cscale", "field": "species"},
-                "strokeWidth": {"value": 2},
-                "size": {"value": 100},
-                "fill": {"value": "white"}
-              }
+          "height": {"signal": "cellHeight"},
+          "width": {"signal": "width"},
+          "stroke": {"value": "#ccc"}
+        }
+      },
+      "scales": [
+        {
+          "name": "yscale",
+          "type": "point",
+          "range": [0, {"signal": "cellHeight"}],
+          "padding": 1,
+          "round": true,
+          "domain": {"data": "penguin_attr", "field": "island"}
+        },
+        {
+          "name": "xscale",
+          "type": "linear",
+          "nice": true,
+          "range": "width",
+          "round": true,
+          "domain": {"data": "penguin_attr", "field": {"signal": "parent.attr"}}
+        }
+      ],
+      "axes": [
+        {
+          "orient": "left",
+          "scale": "yscale",
+          "tickSize": 0,
+          "domain": false,
+          "grid": true,
+          "encode": {"grid": {"enter": {"strokeDash": {"value": [3, 3]}}}}
+        },
+        {"orient": "right", "scale": "yscale", "tickSize": 0, "domain": false},
+        {"orient": "bottom", "scale": "xscale", "offset": 10, "zindex": 1}
+      ],
+      "marks": [
+        {
+          "type": "symbol",
+          "from": {"data": "attrs"},
+          "encode": {
+            "enter": {
+              "x": {"scale": "xscale", "field": "value"},
+              "y": {"scale": "yscale", "field": "island"},
+              "stroke": {"scale": "cscale", "field": "species"},
+              "strokeWidth": {"value": 2},
+              "size": {"value": 100},
+              "fill": {"value": "white"}
             }
           }
-        ]
-      },
-      {
-        "type": "text",
-        "from": {"data": "attr"},
-        "encode": {
-          "enter": {
-            "x": {"field": "width", "mult": 0.5},
-            "y": {"field": "y"},
-            "fontSize": {"value": 11},
-            "fontWeight": {"value": "bold"},
-            "text": {"field": "datum.attr"},
-            "align": {"value": "center"},
-            "baseline": {"value": "bottom"},
-            "fill": {"value": "#000"}
-          }
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "from": {"data": "attr"},
+      "encode": {
+        "enter": {
+          "x": {"field": "width", "mult": 0.5},
+          "y": {"signal": "datum.y - 5"},
+          "fontSize": {"value": 11},
+          "fontWeight": {"value": "bold"},
+          "text": {
+            "signal": "datum.datum.attr + ' (' + if(datum.datum.attr == 'Body Mass', 'g','mm') + ')'"
+          },
+          "align": {"value": "center"},
+          "baseline": {"value": "bottom"},
+          "fill": {"value": "#000"}
         }
       }
-    ]
-  }
+    }
+  ]
+}

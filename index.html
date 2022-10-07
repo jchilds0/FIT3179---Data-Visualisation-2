@@ -18,6 +18,12 @@
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Yeseva One font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -25,25 +31,25 @@
 
     <!-- Title Slide -->
     <div id="title" class="center slide">
-      <p class="text-6xl font-serif">Adelie Penguins</p>
+      <p class="text-7xl heading">Adelie Penguins</p>
     </div>
 
     <!-- Palmer Station Slide -->
     <div id="palmer_slide" class="slide">
-      <p class="text-3xl font-serif p-3">Palmer Station Weather</p>
+      <p class="heading">Palmer Station Weather</p>
       <div class="p-5">
         <div class="pure-g">
           <div class="pure-u-1-2">
             <p>Lorem Ipsum</p>
           </div>
           <div class="pure-u-1-2">
-            <p class="text-xl font-serif">Wind Speed and Direction</p>
+            <p class="subheading">Wind Speed and Direction</p>
             <div id="wind_radial"></div>
           </div>
         </div>
       </div>
       <div class="p-5">
-        <p>Sea Ice Extent</p>
+        <p class="subheading">Sea Ice Extent</p>
         <div class="pure-g">
           <div class="pure-u-1-2">
 
@@ -55,7 +61,7 @@
 
       </div>
       <div class="p-5">
-        <p class="text-xl">Daily Average Temperature</p>
+        <p class="subheading">Daily Average Temperature</p>
         <div class="pure-g">
           <div class="pure-u-1-2">
             <div id="temp">
@@ -75,9 +81,7 @@
 
     <!-- Penguin Location Slide -->
     <div id="location_slide" class="slide">
-      <div class="text-3xl font-serif p-3">
-        <p>Penguin Location Heatmap</p>
-      </div>
+      <p class="heading">Penguin Location Heatmap</p>
 
       <div id="map">
         <div id="heatmap_main" class="font-sans flex">
@@ -102,10 +106,9 @@
     <div id="diet_slide" class="slide">
       <!-- Diet Slide 1 -->
       <div id="diet1">
-        <div class="p-3">
-          <p class="text-3xl font-serif">Adelie Penguin Diet</p>
-          <p class="text-xl font-serif">Diet Composition</p>
-        </div>
+        <p class="heading">Adelie Penguin Diet</p>
+        <p class="subheading">Diet Composition</p>
+
         <div class="flex">
           <div style="width:300px">
             <p>Lorem Ipsum</p>
@@ -115,9 +118,6 @@
         </div>
 
         <div class="flex">
-          <div class="center">
-            <img src="images/krill/other.png" id="diet_image">
-          </div>
           <div id="diet_other_dotmap"></div>
           <div id="diet_dotmap_legend"></div>
         </div>
@@ -126,10 +126,9 @@
 
       <!-- Diet Slide 2 -->
       <div id="diet2">
-        <div class="p-3">
-          <p class="text-3xl font-serif">Adelie Penguin Diet</p>
-          <p class="text-xl font-serif">Krill Abundance</p>
-        </div>
+        <p class="heading">Adelie Penguin Diet</p>
+        <p class="subheading">Krill Abundance</p>
+
         <div class="pure-g">
           <div id="diet_streamgraph_interactive" class="pure-u-2-3"></div>
           <div class="pure-u-1-3"></div>
@@ -139,7 +138,7 @@
 
     <!-- Attributes Slide -->
     <div id="attr_slide" class="slide">
-      <p class="text-3xl font-serif p-3">Adelie Penguin Measurements and Colonies</p>
+      <p class="heading">Adelie Penguin Measurements and Colonies</p>
       <div class="pure-g">
         <div class="pure-u-1-3">
           <div id="dotmap"></div>
@@ -151,7 +150,7 @@
 
     <!-- Population Slide -->
     <div id="pop_slide" class="slide">
-      <p class="text-3xl font-serif p-3">Adelie Penguin Population</p>
+      <p class="heading">Adelie Penguin Population</p>
       <div class="pure-g">
         <div id="pop_line" class="pure-u-1-3"></div>
         <div class="pure-u-1-3"></div>
@@ -171,7 +170,7 @@
   <script type="text/javascript">
 
     var spec2 = "js/weather_sea_ice_parallel.vg.json";
-    vegaEmbed('#sea_ice', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#sea_ice', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
@@ -179,7 +178,7 @@
   <script type="text/javascript">
 
     var spec2 = "js/wind_radial_interactive.vg.json";
-    vegaEmbed('#wind_radial', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#wind_radial', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
@@ -187,7 +186,7 @@
   <script type="text/javascript">
 
     var spec2 = "js/temp_calendar_heatmap.vg.json";
-    vegaEmbed('#temp_heatmap', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#temp_heatmap', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
@@ -195,7 +194,7 @@
   <script type="text/javascript">
 
     var spec2 = "js/temp_calendar_legend.vg.json";
-    vegaEmbed('#temp_legend', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#temp_legend', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
@@ -206,7 +205,7 @@
   <script type="text/javascript">
 
     var spec2 = "js/heatmap_zoom.vg.json";
-    vegaEmbed('#heatmap_zoom', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#heatmap_zoom', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
@@ -214,7 +213,7 @@
   <script type="text/javascript">
 
     var spec2 = "js/heatmap_legend.vg.json";
-    vegaEmbed('#heatmap_legend', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#heatmap_legend', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
@@ -224,7 +223,7 @@
   <script type="text/javascript">
 
     var spec2 = "js/diet_all_dotmap.vg.json";
-    vegaEmbed('#diet_all_dotmap', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#diet_all_dotmap', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
@@ -232,7 +231,7 @@
   <script type="text/javascript">
 
     var spec2 = "js/diet_other_dotmap.vg.json";
-    vegaEmbed('#diet_other_dotmap', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#diet_other_dotmap', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
@@ -240,7 +239,7 @@
   <script type="text/javascript">
 
     var spec2 = "js/diet_dotmap_legend.vg.json";
-    vegaEmbed('#diet_dotmap_legend', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#diet_dotmap_legend', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
@@ -250,7 +249,7 @@
   <script type="text/javascript">
 
     var spec2 = "js/diet_interactive.vg.json";
-    vegaEmbed('#diet_streamgraph_interactive', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#diet_streamgraph_interactive', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
@@ -260,7 +259,7 @@
   <script type="text/javascript">
 
     var spec2 = "js/dotmap_islands.vg.json";
-    vegaEmbed('#dotmap', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#dotmap', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
@@ -268,7 +267,7 @@
   <script type="text/javascript">
 
     var spec2 = "js/attributes_connected_dot.vg.json";
-    vegaEmbed('#attr_connecteddot', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#attr_connecteddot', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
@@ -279,7 +278,7 @@
   <script type="text/javascript">
 
     var spec2 = "js/population_line.vg.json";
-    vegaEmbed('#pop_line', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#pop_line', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
@@ -287,7 +286,7 @@
   <script type="text/javascript">
 
     var spec2 = "js/population_sparkline.vg.json";
-    vegaEmbed('#pop_spark', spec2, { "actions": true }).then(function (result) {
+    vegaEmbed('#pop_spark', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>

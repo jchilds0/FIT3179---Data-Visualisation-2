@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "description": "A small multiples view of penguin attributes by island",
+  "description": "Sea ice parallel coordinates chart",
   "width": 600,
   "height": 600,
   "signals": [
@@ -90,7 +90,7 @@
       "offset": 25,
       "encode": {"labels": {"update": {"text": {"scale": "xlabels", "signal": "datum.label"}}}}
     },
-    {"orient": "left", "scale": "yscale", "offset": 30}
+    {"orient": "left", "scale": "yscale", "offset": 30, "title": "WMO Meterological Code"}
   ],
   "marks": [
     {

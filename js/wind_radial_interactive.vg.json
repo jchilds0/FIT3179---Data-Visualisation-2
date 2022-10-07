@@ -1,396 +1,472 @@
 {
-    "$schema": "https://vega.github.io/schema/vega/v5.json",
-    "description": "Dot plot of Adelie Penguin diet",
-    "width": 700,
-    "height": 800,
-    "signals": [
-      {"name": "overviewHeight", "value": 200},
-      {"name": "overviewWidth", "update": "width"},
-      {"name": "radialHeight", "value": 600},
-      {"name": "radialWidth", "update": "width"},
-      {"name": "detailDomain", "update": "invert('x', [0, overviewWidth])"},
-      {"name": "scale", "value": 1},
-      {"name": "size", "value": 4},
-      {"name": "offset", "value": 100},
-      {"name": "windspeed_start", "value": 0},
-      {"name": "windspeed_stop", "value": 45},
-      {"name": "windspeed_step", "value": 5},
-      {"name": "direction_start", "value": 0},
-      {"name": "direction_stop", "value": 360},
-      {"name": "direction_step", "value": 10}
-    ],
-    "data": [
-      {
-        "name": "wind",
-        "url": "data/palmer/palmer_station_weather_wind.csv",
-        "format": {"type": "csv", "parse": "auto", "delimiter": ","},
-        "transform": [
-          {
-            "type": "formula",
-            "expr": "if(datum.wind_dir_1 == 'NaN', if(datum.wind_dir_2 == 'NaN', if(datum.wind_dir_3 == 'NaN', datum.wind_dir_4, datum.wind_dir_3), datum.wind_dir_2), datum.wind_dir_1)",
-            "as": "wind_dir"
-          },
-          {
-            "type": "filter",
-            "expr": "datum.avg_windspeed != 'NaN' && datum.wind_dir != 'NaN'"
-          },
-          {
-            "type": "formula",
-            "expr": "toNumber(datum.wind_dir)",
-            "as": "wind_dir"
-          },
-          {
-            "type": "formula",
-            "expr": "utcParse(datum.time, '%d/%m/%Y')",
-            "as": "date"
-          }
-        ]
-      },
-      {
-        "name": "angles",
-        "transform": [
-          {
-            "type": "sequence", 
-            "start": {"signal": "direction_start"}, 
-            "stop": {"signal": "direction_stop"}, 
-            "step": {"signal": "direction_step"}
-          },
-          {"type": "pie"}
-        ]
-      },
-      {
-        "name": "stack",
-        "source": "wind",
-        "transform": [
-          {
-            "type": "filter",
-            "expr": "datum.date > detailDomain[0] && datum.date < detailDomain[1]"
-          },
-          {
-            "type": "bin",
-            "field": "wind_dir",
-            "extent": [{"signal": "direction_start"}, {"signal": "direction_stop"}],
-            "step": {"signal": "direction_step"},
-            "as": ["bin_wind_dir_1", "bin_wind_dir_2"]
-          },
-          {
-            "type": "bin",
-            "field": "avg_windspeed",
-            "extent": [{"signal": "windspeed_start"}, {"signal": "windspeed_stop"}],
-            "step": {"signal": "windspeed_step"},
-            "as": ["bin_avg_wind_1", "bin_avg_wind_2"]
-          },
-          {
-            "type": "aggregate",
-            "ops": ["count"],
-            "groupby": [
-              "bin_avg_wind_1",
-              "bin_avg_wind_2",
-              "bin_wind_dir_1",
-              "bin_wind_dir_2"
-            ],
-            "as": ["count"]
-          },
-          {
-            "type": "formula",
-            "expr": "datum.bin_avg_wind_1 * size + offset",
-            "as": "avg_wind_1"
-          },
-          {
-            "type": "formula",
-            "expr": "datum.bin_avg_wind_2 * size + offset",
-            "as": "avg_wind_2"
-          },
-          {
-            "type": "formula",
-            "expr": "datum.bin_avg_wind_1 + '-' + datum.bin_avg_wind_2 + ' m/s'",
-            "as": "speed_label"
-          },
-          {
-            "type": "formula",
-            "expr": "datum.bin_wind_dir_1 + '-' + datum.bin_wind_dir_2 + '°'",
-            "as": "dir_label"
-          },
-          {
-            "type": "lookup",
-            "from": "angles",
-            "key": "data",
-            "fields": ["bin_wind_dir_1"],
-            "as": ["obj"]
-          },
-          {"type": "formula", "expr": "datum.obj.startAngle", "as": "startAngle"},
-          {"type": "formula", "expr": "datum.obj.endAngle", "as": "endAngle"}
-        ]
-      },
-      {
-        "name": "radial_fill",
-        "transform": [
-          {
-            "type": "sequence",
-            "start": {"signal": "windspeed_start"},
-            "stop": {"signal": "windspeed_stop"},
-            "step": {"signal": "windspeed_step"},
-            "as": "bin_avg_wind_1"
-          },
-          {
-            "type": "formula",
-            "expr": "datum.bin_avg_wind_1 + 5",
-            "as": "bin_avg_wind_2"
-          },
-          {"type": "formula", "expr": "sequence(direction_start, direction_stop, direction_step)", "as": "wind_dir_1"},
-          {"type": "flatten", "fields": ["wind_dir_1"]},
-          {
-            "type": "formula",
-            "expr": "datum.wind_dir_1 + 10",
-            "as": "wind_dir_2"
-          },
-          {
-            "type": "formula",
-            "expr": "datum.bin_avg_wind_1 * size + offset",
-            "as": "avg_wind_1"
-          },
-          {
-            "type": "formula",
-            "expr": "datum.bin_avg_wind_2 * size + offset",
-            "as": "avg_wind_2"
-          },
-          {
-            "type": "formula",
-            "expr": "datum.bin_avg_wind_1 + '-' + datum.bin_avg_wind_2 + ' m/s'",
-            "as": "speed_label"
-          },
-          {
-            "type": "formula",
-            "expr": "datum.wind_dir_1 + '-' + datum.wind_dir_2 + '°'",
-            "as": "dir_label"
-          },
-          {"type": "formula", "expr": "0", "as": "count"},
-          {
-            "type": "lookup",
-            "from": "angles",
-            "key": "data",
-            "fields": ["wind_dir_1"],
-            "as": ["obj"]
-          },
-          {"type": "formula", "expr": "datum.obj.startAngle", "as": "startAngle"},
-          {"type": "formula", "expr": "datum.obj.endAngle", "as": "endAngle"}
-        ]
-      }
-    ],
-    "scales": [
-      {
-        "name": "x",
-        "type": "time",
-        "domain": {"data": "wind", "field": "date"},
-        "range": "width"
-      }
-    ],
-    "marks": [
-      {
-        "type": "group",
-        "name": "radial",
-        "encode": {
-          "enter": {
-            "height": {"signal": "radialHeight"}, 
-            "width": {"signal": "radialWidth"}
-            }
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Dot plot of Adelie Penguin diet",
+  "width": 700,
+  "height": 800,
+  "signals": [
+    {"name": "overviewHeight", "value": 200},
+    {"name": "overviewWidth", "update": "width"},
+    {"name": "radialHeight", "value": 600},
+    {"name": "radialWidth", "update": "width"},
+    {"name": "detailDomain", "update": "invert('x', [0, overviewWidth])"},
+    {"name": "scale", "value": 1},
+    {"name": "size", "value": 4},
+    {"name": "offset", "value": 100},
+    {"name": "windspeed_start", "value": 0},
+    {"name": "windspeed_stop", "value": 45},
+    {"name": "windspeed_step", "value": 5},
+    {"name": "direction_start", "value": 0},
+    {"name": "direction_stop", "value": 360},
+    {"name": "direction_step", "value": 10}
+  ],
+  "data": [
+    {
+      "name": "wind",
+      "url": "data/palmer/palmer_station_weather_wind.csv",
+      "format": {"type": "csv", "parse": "auto", "delimiter": ","},
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "if(datum.wind_dir_1 == 'NaN', if(datum.wind_dir_2 == 'NaN', if(datum.wind_dir_3 == 'NaN', datum.wind_dir_4, datum.wind_dir_3), datum.wind_dir_2), datum.wind_dir_1)",
+          "as": "wind_dir"
         },
-        "scales": [
-          {
-            "name": "color",
-            "type": "linear",
-            "zero": true,
-            "domain": {"data": "stack", "field": "count"},
-            "range": {"scheme": "lighttealblue"}
-          },
-          {"name": "x", "type": "linear", "domain": [0, 1], "range": "width"},
-          {
-            "name": "y",
-            "type": "linear",
-            "domain": [0, 1],
-            "range": [{"signal": "radialHeight"}, 0]
-          }
-        ],
-        "legends": [
-          {
-            "type": "gradient",
-            "title": "Num. of Days",
-            "fill": "color",
-            "orient": "top-left",
-            "offset": 3
-          }
-        ],
-        "marks": [
-          {
-            "type": "arc",
-            "from": {"data": "radial_fill"},
-            "encode": {
-              "update": {
-                "fill": {"scale": "color", "field": "count"},
-                "x": {"scale": "x", "value": 0.5},
-                "y": {"scale": "y", "value": 0.5},
-                "startAngle": {"data": "stack", "field": "startAngle"},
-                "endAngle": {"data": "stack", "field": "endAngle"},
-                "innerRadius": {"field": "avg_wind_1"},
-                "outerRadius": {"field": "avg_wind_2"},
-                "stroke": {"value": "#ccc"},
-                "strokeWidth": {"value": 0.2},
-                "zindex": {"value": 1},
-                "tooltip": {
-                  "signal": "{'Wind Speed': datum.speed_label, 'Direction': datum.dir_label, 'Count': datum.count}"
-                }
-              }
-            }
-          },
-          {
-            "type": "arc",
-            "from": {"data": "stack"},
-            "encode": {
-              "update": {
-                "fill": {"scale": "color", "field": "count"},
-                "x": {"scale": "x", "value": 0.5},
-                "y": {"scale": "y", "value": 0.5},
-                "startAngle": {"data": "stack", "field": "startAngle"},
-                "endAngle": {"data": "stack", "field": "endAngle"},
-                "innerRadius": {"field": "avg_wind_1"},
-                "outerRadius": {"field": "avg_wind_2"},
-                "stroke": {"value": "#ccc"},
-                "strokeWidth": {"value": 0.2},
-                "zindex": {"value": 1},
-                "tooltip": {
-                  "signal": "{'Wind Speed': datum.speed_label, 'Direction': datum.dir_label, 'Count': datum.count}"
-                }
-              }
-            }
-          }
-        ]
+        {
+          "type": "filter",
+          "expr": "datum.avg_windspeed != 'NaN' && datum.wind_dir != 'NaN'"
+        },
+        {
+          "type": "formula",
+          "expr": "toNumber(datum.wind_dir)",
+          "as": "wind_dir"
+        },
+        {
+          "type": "formula",
+          "expr": "utcParse(datum.time, '%d/%m/%Y')",
+          "as": "date"
+        }
+      ]
+    },
+    {
+      "name": "angles",
+      "transform": [
+        {
+          "type": "sequence",
+          "start": {"signal": "direction_start"},
+          "stop": {"signal": "direction_stop"},
+          "step": {"signal": "direction_step"}
+        },
+        {"type": "pie"},
+        {
+          "type": "formula",
+          "expr": "datum.data + '°'",
+          "as": "label"
+        }
+      ]
+    },
+    {
+      "name": "angle_labels",
+      "transform": [
+        {
+          "type": "sequence",
+          "start": {"signal": "direction_start"},
+          "stop": {"signal": "direction_stop"},
+          "step": {"signal": "direction_step * 3"}
+        },
+        {"type": "pie"},
+        {
+          "type": "formula",
+          "expr": "datum.data + '°'",
+          "as": "label"
+        }
+      ]
+    },
+    {
+      "name": "speed",
+      "transform": [
+        {
+          "type": "sequence",
+          "start": {"signal": "windspeed_start"},
+          "stop": {"signal": "windspeed_stop"},
+          "step": {"signal": "windspeed_step"}
+        },
+        {
+          "type": "formula",
+          "expr": "radialHeight / 2 - datum.data * size - 100",
+          "as": "yval"
+        }
+      ]
+    },
+    {
+      "name": "stack",
+      "source": "wind",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.date > detailDomain[0] && datum.date < detailDomain[1]"
+        },
+        {
+          "type": "bin",
+          "field": "wind_dir",
+          "extent": [
+            {"signal": "direction_start"},
+            {"signal": "direction_stop"}
+          ],
+          "step": {"signal": "direction_step"},
+          "as": ["bin_wind_dir_1", "bin_wind_dir_2"]
+        },
+        {
+          "type": "bin",
+          "field": "avg_windspeed",
+          "extent": [
+            {"signal": "windspeed_start"},
+            {"signal": "windspeed_stop"}
+          ],
+          "step": {"signal": "windspeed_step"},
+          "as": ["bin_avg_wind_1", "bin_avg_wind_2"]
+        },
+        {
+          "type": "aggregate",
+          "ops": ["count"],
+          "groupby": [
+            "bin_avg_wind_1",
+            "bin_avg_wind_2",
+            "bin_wind_dir_1",
+            "bin_wind_dir_2"
+          ],
+          "as": ["count"]
+        },
+        {
+          "type": "formula",
+          "expr": "datum.bin_avg_wind_1 * size + offset",
+          "as": "avg_wind_1"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.bin_avg_wind_2 * size + offset",
+          "as": "avg_wind_2"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.bin_avg_wind_1 + '-' + datum.bin_avg_wind_2 + ' m/s'",
+          "as": "speed_label"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.bin_wind_dir_1 + '-' + datum.bin_wind_dir_2 + '°'",
+          "as": "dir_label"
+        },
+        {
+          "type": "lookup",
+          "from": "angles",
+          "key": "data",
+          "fields": ["bin_wind_dir_1"],
+          "as": ["obj"]
+        },
+        {"type": "formula", "expr": "datum.obj.startAngle", "as": "startAngle"},
+        {"type": "formula", "expr": "datum.obj.endAngle", "as": "endAngle"}
+      ]
+    },
+    {
+      "name": "radial_fill",
+      "transform": [
+        {
+          "type": "sequence",
+          "start": {"signal": "windspeed_start"},
+          "stop": {"signal": "windspeed_stop"},
+          "step": {"signal": "windspeed_step"},
+          "as": "bin_avg_wind_1"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.bin_avg_wind_1 + 5",
+          "as": "bin_avg_wind_2"
+        },
+        {
+          "type": "formula",
+          "expr": "sequence(direction_start, direction_stop, direction_step)",
+          "as": "wind_dir_1"
+        },
+        {"type": "flatten", "fields": ["wind_dir_1"]},
+        {
+          "type": "formula",
+          "expr": "datum.wind_dir_1 + 10",
+          "as": "wind_dir_2"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.bin_avg_wind_1 * size + offset",
+          "as": "avg_wind_1"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.bin_avg_wind_2 * size + offset",
+          "as": "avg_wind_2"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.bin_avg_wind_1 + '-' + datum.bin_avg_wind_2 + ' m/s'",
+          "as": "speed_label"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.wind_dir_1 + '-' + datum.wind_dir_2 + '°'",
+          "as": "dir_label"
+        },
+        {"type": "formula", "expr": "0", "as": "count"},
+        {
+          "type": "lookup",
+          "from": "angles",
+          "key": "data",
+          "fields": ["wind_dir_1"],
+          "as": ["obj"]
+        },
+        {"type": "formula", "expr": "datum.obj.startAngle", "as": "startAngle"},
+        {"type": "formula", "expr": "datum.obj.endAngle", "as": "endAngle"}
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "x",
+      "type": "time",
+      "domain": {"data": "wind", "field": "date"},
+      "range": "width"
+    }
+  ],
+  "marks": [
+    {
+      "type": "group",
+      "name": "radial",
+      "encode": {
+        "enter": {
+          "height": {"signal": "radialHeight"},
+          "width": {"signal": "radialWidth"}
+        }
       },
-      {
-        "type": "group",
-        "name": "overview",
-        "encode": {
-          "enter": {
-            "x": {"value": 0},
-            "y": {"signal": "radialHeight + 25"},
-            "height": {"signal": "overviewHeight"},
-            "width": {"signal": "overviewWidth"},
-            "fill": {"value": "transparent"}
+      "scales": [
+        {
+          "name": "color",
+          "type": "linear",
+          "zero": true,
+          "domain": {"data": "stack", "field": "count"},
+          "range": {"scheme": "lighttealblue"}
+        },
+        {"name": "x", "type": "linear", "domain": [0, 1], "range": "width"},
+        {
+          "name": "y",
+          "type": "linear",
+          "domain": [0, 1],
+          "range": [{"signal": "radialHeight"}, 0]
+        }
+      ],
+      "legends": [
+        {
+          "type": "gradient",
+          "title": "Num. of Days",
+          "fill": "color",
+          "orient": "top-left",
+          "offset": 3
+        }
+      ],
+      "marks": [
+        {
+          "type": "arc",
+          "from": {"data": "radial_fill"},
+          "encode": {
+            "update": {
+              "fill": {"scale": "color", "field": "count"},
+              "x": {"scale": "x", "value": 0.5},
+              "y": {"scale": "y", "value": 0.5},
+              "startAngle": {"data": "stack", "field": "startAngle"},
+              "endAngle": {"data": "stack", "field": "endAngle"},
+              "innerRadius": {"field": "avg_wind_1"},
+              "outerRadius": {"field": "avg_wind_2"},
+              "stroke": {"value": "#ccc"},
+              "strokeWidth": {"value": 0.2},
+              "zindex": {"value": 1},
+              "tooltip": {
+                "signal": "{'Wind Speed': datum.speed_label, 'Direction': datum.dir_label, 'Count': datum.count}"
+              }
+            }
           }
         },
-        "signals": [
-          {
-            "name": "scale",
-            "push": "outer",
-            "on": [
-              {
-                "events": {
-                  "type": "wheel",
-                  "markname": "overview",
-                  "consume": true
-                },
-                "update": "clamp(scale * pow(1.002, -event.deltaY * pow(16, event.deltaMode)), 1, 10000)"
+        {
+          "type": "arc",
+          "from": {"data": "stack"},
+          "encode": {
+            "update": {
+              "fill": {"scale": "color", "field": "count"},
+              "x": {"scale": "x", "value": 0.5},
+              "y": {"scale": "y", "value": 0.5},
+              "startAngle": {"data": "stack", "field": "startAngle"},
+              "endAngle": {"data": "stack", "field": "endAngle"},
+              "innerRadius": {"field": "avg_wind_1"},
+              "outerRadius": {"field": "avg_wind_2"},
+              "stroke": {"value": "#ccc"},
+              "strokeWidth": {"value": 0.2},
+              "zindex": {"value": 1},
+              "tooltip": {
+                "signal": "{'Wind Speed': datum.speed_label, 'Direction': datum.dir_label, 'Count': datum.count}"
               }
-            ]
-          },
-          {
-            "name": "x_pos",
-            "value": 1,
-            "on": [
-              {
-                "events": "[@overview:mousedown, window:mouseup] > window:mousemove!",
-                "update": "x()"
-              }
-            ]
-          },
-          {
-            "name": "x_anchor",
-            "on": [{"events": "@overview:mousedown", "update": "x()"}]
-          },
-          {
-            "name": "delta",
-            "value": 0,
-            "on": [{"events": {"signal": "x_pos"}, "update": "x_pos - x_anchor"}]
-          },
-          {
-            "name": "center",
-            "update": "overviewWidth / 2",
-            "on": [
-              {
-                "events": {"signal": "brush_anchor"},
-                "update": "(brush_anchor[1] + brush_anchor[0]) / 2"
-              }
-            ]
-          },
-          {
-            "name": "brush",
-            "update": "brush_anchor",
-            "on": [
-              {
-                "events": [{"signal": "scale"}],
-                "update": "[center - overviewWidth / (2 * scale), center + overviewWidth / (2 * scale)]"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "name": "overview",
+      "encode": {
+        "enter": {
+          "x": {"value": 0},
+          "y": {"signal": "radialHeight + 25"},
+          "height": {"signal": "overviewHeight"},
+          "width": {"signal": "overviewWidth"},
+          "fill": {"value": "transparent"}
+        }
+      },
+      "signals": [
+        {
+          "name": "scale",
+          "push": "outer",
+          "on": [
+            {
+              "events": {
+                "type": "wheel",
+                "markname": "overview",
+                "consume": true
               },
-              {
-                "events": [{"signal": "delta"}],
-                "update": "[clamp(brush_anchor[0] - delta / scale, -overviewWidth / 2, overviewWidth), clamp(brush_anchor[1] - delta / scale, 0, 3 * overviewWidth / 2)]"
-              }
-            ]
-          },
-          {
-            "name": "brush_anchor",
-            "update": "[0, overviewWidth]",
-            "on": [
-              {
-                "events": [
-                  {"type": "mousedown", "markname": "overview"},
-                  {"type": "mouseup"}
-                ],
-                "update": "brush"
-              }
-            ]
-          },
-          {
-            "name": "detailDomain",
-            "push": "outer",
-            "on": [
-              {"events": {"signal": "brush"}, "update": "invert('x', brush)"}
-            ]
-          }
-        ],
-        "scales": [
-          {
-            "name": "xdetail",
-            "type": "time",
-            "domain": {"data": "wind", "field": "date"},
-            "range": "width",
-            "domainRaw": {"signal": "detailDomain"}
-          },
-          {
-            "name": "y2",
-            "domain": {"data": "wind", "field": "avg_windspeed"},
-            "zero": true,
-            "range": [{"signal": "overviewHeight"}, 0]
-          }
-        ],
-        "axes": [
-          {"orient": "bottom", "scale": "xdetail"},
-          {"orient": "left", "scale": "y2"}
-        ],
-        "marks": [
-          {
-            "type": "line",
-            "from": {"data": "wind"},
-            "interactive": false,
-            "encode": {
-              "update": {
-                "x": {"scale": "xdetail", "field": "date"},
-                "y": {"scale": "y2", "field": "avg_windspeed"},
-                "defined": {
-                  "signal": "datum.date > detailDomain[0] && datum.date < detailDomain[1]"
-                }
-              }
+              "update": "clamp(scale * pow(1.002, -event.deltaY * pow(16, event.deltaMode)), 1, 10000)"
+            }
+          ]
+        },
+        {
+          "name": "x_pos",
+          "value": 1,
+          "on": [
+            {
+              "events": "[@overview:mousedown, window:mouseup] > window:mousemove!",
+              "update": "x()"
+            }
+          ]
+        },
+        {
+          "name": "x_anchor",
+          "on": [{"events": "@overview:mousedown", "update": "x()"}]
+        },
+        {
+          "name": "delta",
+          "value": 0,
+          "on": [{"events": {"signal": "x_pos"}, "update": "x_pos - x_anchor"}]
+        },
+        {
+          "name": "center",
+          "update": "overviewWidth / 2",
+          "on": [
+            {
+              "events": {"signal": "brush_anchor"},
+              "update": "(brush_anchor[1] + brush_anchor[0]) / 2"
+            }
+          ]
+        },
+        {
+          "name": "brush",
+          "update": "brush_anchor",
+          "on": [
+            {
+              "events": [{"signal": "scale"}],
+              "update": "[center - overviewWidth / (2 * scale), center + overviewWidth / (2 * scale)]"
+            },
+            {
+              "events": [{"signal": "delta"}],
+              "update": "[clamp(brush_anchor[0] - delta / scale, -overviewWidth / 2, overviewWidth), clamp(brush_anchor[1] - delta / scale, 0, 3 * overviewWidth / 2)]"
+            }
+          ]
+        },
+        {
+          "name": "brush_anchor",
+          "update": "[0, overviewWidth]",
+          "on": [
+            {
+              "events": [
+                {"type": "mousedown", "markname": "overview"},
+                {"type": "mouseup"}
+              ],
+              "update": "brush"
+            }
+          ]
+        },
+        {
+          "name": "detailDomain",
+          "push": "outer",
+          "on": [
+            {"events": {"signal": "brush"}, "update": "invert('x', brush)"}
+          ]
+        }
+      ],
+      "scales": [
+        {
+          "name": "xdetail",
+          "type": "time",
+          "domain": {"data": "wind", "field": "date"},
+          "range": "width",
+          "domainRaw": {"signal": "detailDomain"}
+        },
+        {
+          "name": "y2",
+          "domain": {"data": "wind", "field": "avg_windspeed"},
+          "zero": true,
+          "range": [{"signal": "overviewHeight"}, 0]
+        }
+      ],
+      "axes": [
+        {"orient": "bottom", "scale": "xdetail"},
+        {"orient": "left", "scale": "y2", "title": "Average Windspeed (m/s)"}
+      ],
+      "marks": [
+        {
+          "type": "line",
+          "from": {"data": "wind"},
+          "interactive": false,
+          "encode": {
+            "update": {
+              "x": {"scale": "xdetail", "field": "date"},
+              "y": {"scale": "y2", "field": "avg_windspeed"},
+              "defined": {
+                "signal": "datum.date > detailDomain[0] && datum.date < detailDomain[1]"
+              },
+              "strokeWidth": {"value": 0.5},
+              "opacity": {"value": 0.75}
             }
           }
-        ]
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "from": {"data": "angle_labels"},
+
+      "encode": {
+        "enter": {
+          "text": {"field": "label"},
+          "x": {"signal": "87.5 * cos(datum.startAngle - PI / 2) + radialWidth / 2 - 7.5"},
+          "y": {"signal": "87.5 * sin(datum.startAngle - PI / 2) + radialHeight / 2 + 5"},
+          "fontSize": {"value": 10}
+        }
       }
-    ]
-  }
+    },
+    {
+      "type": "text",
+      "from": {"data": "speed"},
+
+      "encode": {
+        "enter": {
+          "text": {"field": "data"},
+          "x": {"signal": "radialWidth / 2"},
+          "y": {"field": "yval"},
+          "fontSize": {"value": 10}
+        }
+      }
+    }
+  ]
+}

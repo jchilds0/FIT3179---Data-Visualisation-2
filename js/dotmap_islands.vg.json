@@ -1,162 +1,163 @@
 {
-    "$schema": "https://vega.github.io/schema/vega/v5.json",
-    "description": "An interactive world map supporting pan and zoom.",
-    "width": 500,
-    "height": 700,
-    "autosize": "none",
-    "title": "Adelie Penguins",
-    "scales": [
-      {
-        "name": "color",
-        "type": "ordinal",
-        "domain": {"data": "label", "field": "islands"},
-        "range": {"scheme": "set3"}
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Dotmap of penguin islands",
+  "width": 500,
+  "height": 700,
+  "autosize": "none",
+  "title": "Adelie Penguins",
+  "scales": [
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": {"data": "label", "field": "islands"},
+      "range": ["#4C78A8", "#F58518", "#54A24B", "#EECA3B", "#B279A2", "#FF9DA6", "#72B7B2"]
+    }
+  ],
+  "data": [
+    {
+      "name": "ice",
+      "url": "maps_prep/islands/ne_10m_ice.json",
+      "format": {
+        "type": "topojson",
+        "feature": "ne_10m_antarctic_ice_shelves_polys"
       }
-    ],
-    "data": [
-      {
-        "name": "ice",
-        "url": "maps_prep/islands/ne_10m_ice.json",
-        "format": {"type": "topojson", "feature": "ne_10m_antarctic_ice_shelves_polys"}
-      },
-      {
-        "name": "glaciated",
-        "url": "maps_prep/islands/ne_10m_glaciated.json",
-        "format": {"type": "topojson", "feature": "ne_10m_glaciated_areas"}
-      },
-      {
-        "name": "levels_200",
-        "url": "maps_prep/islands/ne_10m_bathymetry_200.json",
-        "format": {"type": "topojson", "feature": "ne_10m_bathymetry_K_200"}
-      },
-      {
-        "name": "levels_1000",
-        "url": "maps_prep/islands/ne_10m_bathymetry_1000.json",
-        "format": {"type": "topojson", "feature": "ne_10m_bathymetry_J_1000"}
-      },
-      {
-        "name": "levels_2000",
-        "url": "maps_prep/islands/ne_10m_bathymetry_2000.json",
-        "format": {"type": "topojson", "feature": "ne_10m_bathymetry_I_2000"}
-      },
-      {
-        "name": "levels_3000",
-        "url": "maps_prep/islands/ne_10m_bathymetry_3000.json",
-        "format": {"type": "topojson", "feature": "ne_10m_bathymetry_H_3000"}
-      },
-      {
-        "name": "label",
-        "url": "maps_prep/islands/islands_location.csv",
-        "format": {"type": "csv", "parse": "auto", "delimiter": ","},
-        "transform": [
-          {
-            "type": "geopoint",
-            "projection": "projection",
-            "fields": ["x", "y"],
-            "as": ["label_x", "label_y"]
-          },
-          {"type": "formula", "as": "dx", "expr": "toNumber(datum.delta_x)"},
-          {"type": "formula", "as": "dy", "expr": "toNumber(datum.delta_y)"},
-          {"type": "filter", "expr": "datum.islands != 'Charcot Island'"}
-        ]
-      }
-    ],
-  
-    "legends": [
-      {
-          "type": "symbol",
-          "fill": "color",
-          "orient": "bottom-right",
-          "title": "Islands",
-          "titleFontSize": 12,
-          "titlePadding": 5,
-          "symbolSize": 150,
-          "labelFontSize": 10
+    },
+    {
+      "name": "glaciated",
+      "url": "maps_prep/islands/ne_10m_glaciated.json",
+      "format": {"type": "topojson", "feature": "ne_10m_glaciated_areas"}
+    },
+    {
+      "name": "levels_200",
+      "url": "maps_prep/islands/ne_10m_bathymetry_200.json",
+      "format": {"type": "topojson", "feature": "ne_10m_bathymetry_K_200"}
+    },
+    {
+      "name": "levels_1000",
+      "url": "maps_prep/islands/ne_10m_bathymetry_1000.json",
+      "format": {"type": "topojson", "feature": "ne_10m_bathymetry_J_1000"}
+    },
+    {
+      "name": "levels_2000",
+      "url": "maps_prep/islands/ne_10m_bathymetry_2000.json",
+      "format": {"type": "topojson", "feature": "ne_10m_bathymetry_I_2000"}
+    },
+    {
+      "name": "levels_3000",
+      "url": "maps_prep/islands/ne_10m_bathymetry_3000.json",
+      "format": {"type": "topojson", "feature": "ne_10m_bathymetry_H_3000"}
+    },
+    {
+      "name": "label",
+      "url": "maps_prep/islands/islands_location.csv",
+      "format": {"type": "csv", "parse": "auto", "delimiter": ","},
+      "transform": [
+        {
+          "type": "geopoint",
+          "projection": "projection",
+          "fields": ["x", "y"],
+          "as": ["label_x", "label_y"]
+        },
+        {"type": "formula", "as": "dx", "expr": "toNumber(datum.delta_x)"},
+        {"type": "formula", "as": "dy", "expr": "toNumber(datum.delta_y)"},
+        {"type": "filter", "expr": "datum.islands != 'Charcot Island'"}
+      ]
+    }
+  ],
+  "legends": [
+    {
+      "type": "symbol",
+      "fill": "color",
+      "orient": "bottom-right",
+      "title": "Islands",
+      "titleFontSize": 12,
+      "titlePadding": 5,
+      "symbolSize": 150,
+      "labelFontSize": 10
+    }
+  ],
+  "projections": [
+    {
+      "name": "projection",
+      "type": "albers",
+      "scale": 15000,
+      "rotate": [50, 90, 0],
+      "center": [-4.5, 24.2],
+      "translate": [850, 400],
+      "extent": [[-70, -70], [-40, -60]]
+    }
+  ],
+  "marks": [
+    {
+      "type": "shape",
+      "from": {"data": "levels_200"},
+      "encode": {
+        "update": {
+          "fill": {"value": "#C8EAFD"},
+          "stroke": {"value": "#ccc"},
+          "strokeWidth": {"value": 1}
         }
-    ],
-    
-    "projections": [
-      {
-        "name": "projection",
-        "type": "albers",
-        "scale": 15000,
-        "rotate": [50, 90, 0],
-        "center": [-4.5, 24.2],
-        "translate": [850, 400],
-        "extent": [[-70, -70], [-40, -60]]
-      }
-    ],
-    "marks": [
-      {
-        "type": "shape",
-        "from": {"data": "levels_200"},
-        "encode": {
-          "update": {
-            "fill": {"value": "#C8EAFD"},
-            "stroke": {"value": "#ccc"},
-            "strokeWidth": {"value": 1}
-          }
-        },
-        "transform": [{"type": "geoshape", "projection": "projection"}]
       },
-      {
-        "type": "shape",
-        "from": {"data": "levels_1000"},
-        "encode": {
-          "update": {
-            "fill": {"value": "#88D9F6"},
-            "stroke": {"value": "#ccc"},
-            "strokeWidth": {"value": 1}
-          }
-        },
-        "transform": [{"type": "geoshape", "projection": "projection"}]
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "levels_1000"},
+      "encode": {
+        "update": {
+          "fill": {"value": "#88D9F6"},
+          "stroke": {"value": "#ccc"},
+          "strokeWidth": {"value": 1}
+        }
       },
-      {
-        "type": "shape",
-        "from": {"data": "levels_2000"},
-        "encode": {
-          "update": {
-            "fill": {"value": "#54B6E4"},
-            "stroke": {"value": "#ccc"},
-            "strokeWidth": {"value": 1}
-          }
-        },
-        "transform": [{"type": "geoshape", "projection": "projection"}]
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "levels_2000"},
+      "encode": {
+        "update": {
+          "fill": {"value": "#54B6E4"},
+          "stroke": {"value": "#ccc"},
+          "strokeWidth": {"value": 1}
+        }
       },
-      {
-        "type": "shape",
-        "from": {"data": "levels_3000"},
-        "encode": {
-          "update": {
-            "fill": {"value": "#0492D0"},
-            "stroke": {"value": "#ccc"},
-            "strokeWidth": {"value": 1}
-          }
-        },
-        "transform": [{"type": "geoshape", "projection": "projection"}]
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "levels_3000"},
+      "encode": {
+        "update": {
+          "fill": {"value": "#0492D0"},
+          "stroke": {"value": "#ccc"},
+          "strokeWidth": {"value": 1}
+        }
       },
-      {
-        "type": "shape",
-        "from": {"data": "ice"},
-        "encode": {"update": {"fill": {"value": "white"}}},
-        "transform": [{"type": "geoshape", "projection": "projection"}]
-      },
-      {
-        "type": "shape",
-        "from": {"data": "glaciated"},
-        "encode": {"update": {"fill": {"value": "lightgray"}}},
-        "transform": [{"type": "geoshape", "projection": "projection"}]
-      },
-      {
-        "type": "symbol",
-        "from": {"data": "label"},
-        "encode": {
-          "update": {
-            "x": {"field": "label_x"},
-            "y": {"field": "label_y"},
-            "fill": {"scale": "color", "field": "islands"}
-          }
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "ice"},
+      "encode": {"update": {"fill": {"value": "white"}}},
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "glaciated"},
+      "encode": {"update": {"fill": {"value": "lightgray"}}},
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "type": "symbol",
+      "from": {"data": "label"},
+      "encode": {
+        "update": {
+          "x": {"field": "label_x"},
+          "y": {"field": "label_y"},
+          "fill": {"scale": "color", "field": "islands"}
         }
       }
-    ]
-  }
+    }
+  ]
+}
