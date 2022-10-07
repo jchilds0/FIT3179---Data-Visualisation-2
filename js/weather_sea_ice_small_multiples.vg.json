@@ -1,0 +1,118 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "A small multiples view of penguin attributes by island",
+  "width": 700,
+  "signals": [
+    {"name": "offset", "value": 0},
+    {"name": "cellHeight", "value": 400},
+    {"name": "height", "update": "3 * (offset + cellHeight)"}
+  ],
+  "layout": {"columns": 2},
+  "data": [
+    {
+      "name": "labels",
+      "url": "data/palmer/palmer_weather_ice_codes.csv",
+      "format": {"type": "csv", "parse": "auto"}
+    },
+    {
+      "name": "ice",
+      "url": "data/palmer/palmer_station_weather_ice.csv",
+      "format": {"type": "csv", "time": "date", "delimiter": ","},
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "timeParse(datum.time, '%d/%m/%Y')",
+          "as": "time"
+        },
+        {
+          "type": "fold",
+          "fields": [
+            "ice_formation_id",
+            "ice_age_id",
+            "land_ice_type_id",
+            "ice_edge_id",
+            "ice_cond_trnd"
+          ],
+          "as": ["ice_id", "value"]
+        },
+        {"type": "filter", "expr": "datum.value != ''"},
+        {"type": "filter", "expr": "year(datum.time) > 1990"}
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "gscale",
+      "type": "band",
+      "range": [0, {"signal": "height"}],
+      "round": true,
+      "domain": {"data": "ice", "field": "ice_id"}
+    }
+  ],
+  "marks": [
+    {
+      "type": "group",
+      "from": {"facet": {"name": "ices", "data": "ice", "groupby": "ice_id"}},
+      "encode": {
+        "enter": {
+          "y": {"scale": "gscale", "field": "ice_id"},
+          "height": {"signal": "cellHeight"},
+          "width": {"signal": "width"},
+          "stroke": {"value": "#ccc"}
+        }
+      },
+
+      "signals": [
+        {"name": "ice_id", "update": "parent.ice_id"}
+      ],
+
+      "scales": [
+        {
+          "name": "x",
+          "type": "time",
+          "domain": {"data": "ices", "field": "time"},
+          "range": "width"
+        },
+        {
+          "name": "y",
+          "type": "point",
+          "domain": ["9", "8", "7", "6", "5", "4", "3", "2", "1", "0", "/"],
+          "range": [0, {"signal": "cellHeight"}]
+        },
+        {
+          "name": "ylabels",
+          "type": "ordinal",
+          "domain": {"data": "labels", "field": "value"},
+          "range": {"data": "labels", "field": {"signal": "ice_id"}}
+        }
+      ],
+
+      "axes": [
+        {"orient": "bottom", "scale": "x"},
+        {
+          "orient": "left", 
+          "scale": "y",
+          "encode": {
+            "labels": {
+              "update": {
+                "text": {"scale": "ylabels", "signal": "datum.value"}
+              }
+            }
+          }
+        }
+      ],
+      "marks": [
+        {
+          "type": "line",
+          "from": {"data": "ices"},
+          "encode": {
+            "enter": {
+              "x": {"scale": "x", "field": "time"},
+              "y": {"scale": "y", "field": "value"}
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

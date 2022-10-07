@@ -7,7 +7,7 @@
   "data": [
     {
       "name": "wind",
-      "url": "data/palmer_station_weather_wind.csv",
+      "url": "data/palmer/palmer_station_weather_wind.csv",
       "format": {"type": "csv", "parse": "auto", "delimiter": ","},
       "transform": [
         {

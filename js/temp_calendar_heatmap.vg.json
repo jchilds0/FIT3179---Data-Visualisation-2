@@ -13,7 +13,7 @@
     "data": [
       {
         "name": "weather",
-        "url": "data/palmer_station_weather_temp.csv",
+        "url": "data/palmer/palmer_station_weather_temp.csv",
         "format": {
           "type": "csv",
           "parse": {
@@ -34,7 +34,7 @@
       },
       {
         "name": "weather_closure",
-        "url": "data/palmer_date_blank.csv",
+        "url": "data/palmer/palmer_date_blank.csv",
         "format": {"type": "csv", "delimiter": ","},
         "transform": [
           {

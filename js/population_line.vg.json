@@ -10,7 +10,7 @@
     "data": [
       {
         "name": "pop",
-        "url": "data/annual_penguin_census.csv",
+        "url": "data/adelie/annual_penguin_census.csv",
         "format": {"type": "csv", "parse": "auto"},
         "transform": [
           {"type": "fold", "fields": ["adelie", "gentoo", "chinstrap"]},

@@ -10,7 +10,7 @@
     "data": [
       {
         "name": "penguin_attr",
-        "url": "data/penguin_attr.csv",
+        "url": "data/adelie/penguin_attr.csv",
         "format": {
           "type": "csv",
           "parse": {

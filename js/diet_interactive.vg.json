@@ -21,7 +21,7 @@
   "data": [
     {
       "name": "krill",
-      "url": "data/adelie_krill_abundance.csv",
+      "url": "data/adelie/adelie_krill_abundance.csv",
       "format": {"type": "csv", "parse": "auto", "delimiter": ","},
       "transform": [
         {

@@ -13,7 +13,7 @@
   "data": [
     {
       "name": "fish",
-      "url": "data/adelie_diet.csv",
+      "url": "data/adelie/adelie_diet.csv",
       "format": {"type": "csv", "parse": "auto", "delimiter": ","},
       "transform": [
         {

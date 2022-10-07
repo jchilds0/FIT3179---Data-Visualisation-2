@@ -161,7 +161,7 @@
     },
     {
       "name": "penguins",
-      "url": "data/adelie_penguin_telemetry.csv",
+      "url": "data/adelie/adelie_penguin_telemetry.csv",
       "format": {"type": "csv", "delimiter": ","},
       "transform": [
         {
@@ -210,7 +210,7 @@
     },
     {
       "name": "label",
-      "url": "data/labels_map.csv",
+      "url": "data/adelie/labels_map.csv",
       "format": {"type": "csv", "delimiter": ","},
       "transform": [
         {

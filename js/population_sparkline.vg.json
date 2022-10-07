@@ -10,7 +10,7 @@
   "data": [
     {
       "name": "chicks",
-      "url": "data/adelie_penguin_chicks.csv",
+      "url": "data/adelie/adelie_penguin_chicks.csv",
       "format": {"type": "csv", "parse": "auto", "delimiter": ","},
       "transform": [
         {

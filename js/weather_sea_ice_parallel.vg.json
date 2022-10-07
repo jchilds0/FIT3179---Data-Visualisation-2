@@ -1,0 +1,91 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "A small multiples view of penguin attributes by island",
+  "width": 600,
+  "height": 600,
+
+  "signals": [
+    {
+      "name": "year", 
+      "value": 2015,
+      "bind": {
+        "name": "Year",
+        "input": "range",
+        "min": 1992,
+        "max": 2019,
+        "step": 1
+      }
+    }
+  ],
+
+  "data": [
+    {
+      "name": "ice",
+      "url": "data/palmer/palmer_station_weather_ice.csv",
+      "format": {"type": "csv", "time": "date", "delimiter": ","},
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "utcParse(datum.time, '%d/%m/%Y')",
+          "as": "date"
+        },
+        {
+          "type": "fold",
+          "fields": [
+            "ice_formation_id",
+            "ice_age_id",
+            "land_ice_type_id",
+            "ice_edge_id",
+            "ice_cond_trnd"
+          ],
+          "as": ["ice_id", "value"]
+        },
+        {"type": "filter", "expr": "datum.sea_ice != ''"},
+        {"type": "filter", "expr": "year(datum.date) == year"}
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "xscale",
+      "type": "point",
+      "domain": [
+        "ice_formation_id",
+        "ice_age_id",
+        "land_ice_type_id",
+        "ice_edge_id",
+        "ice_cond_trnd"
+      ],
+      "range": "width"
+    },
+    {
+      "name": "yscale",
+      "type": "point",
+      "domain": ["9", "8", "7", "6", "5", "4", "3", "2", "1", "0", "/"],
+      "range": "height"
+    }
+  ],
+  "axes": [
+    {"orient": "bottom", "scale": "xscale", "domain": false},
+    {"orient": "left", "scale": "yscale", "offset": 50}
+  ],
+  "marks": [
+    {
+      "type": "group",
+      "from": {"facet": {"name": "ices", "data": "ice", "groupby": "date"}},
+
+      "marks": [
+        {
+          "type": "line",
+          "from": {"data": "ices"},
+          "encode": {
+            "update": {
+              "x": {"scale": "xscale", "field": "ice_id"},
+              "y": {"scale": "yscale", "field": "value"}
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
