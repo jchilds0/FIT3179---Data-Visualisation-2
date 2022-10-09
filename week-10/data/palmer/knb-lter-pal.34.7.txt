@@ -1,0 +1,375 @@
+
+  
+    
+      uid=PAL,o=lter,dc=ecoinformatics,dc=org
+      all
+    
+    
+      public
+      read
+    
+  
+  
+    doi:10.6073/pasta/1ea463bba7db978190c114f2a7866866Average monthly sea ice coverage for the PAL LTER region West of the Antarctic Peninsula derived from passive microwave, 1978 - July 2021
+    
+      Palmer Station Antarctica LTER
+      			Rutgers Marine & Coastal Sciences
+			71 Dudley Road
+			New Brunswick, NJ 08901  USA
+      pallter@marine.rutgers.edu
+      https://pallter.marine.rutgers.edu
+    
+    
+      Sharon Stammerjohn
+      INSTAAR, University of Colorado Boulder
+      sharon.stammerjohn@colorado.edu
+      0000-0002-1697-8244
+    
+    
+      Palmer Station Antarctica LTER
+      PAL LTER Information Manager
+      			Rutgers Marine & Coastal Sciences
+			71 Dudley Road
+			New Brunswick, NJ 08901  USA
+      pallter@marine.rutgers.edu
+      https://pallter.marine.rutgers.edu
+    
+    2022-03-23Monthly sea ice coverage derived from passive microwave satellite measurements. Ice extent is defined as the area bounded by the 15% ice concentration contour which is determined by summing up all the pixel areas (nominally 25km by 25km) which have concentrations greater than 15%. Sea-ice extent refers to the total surface area inside the ice-edge. This area inside the ice-edge is not necessarily covered by 100%.
+    
+      habitats
+      marine
+      ecology
+      disturbance
+      remote sensing
+      ice
+      ice
+      LTER Controlled Vocabulary
+    
+    
+      Disturbance Patterns
+      Signature
+      LTER Core Areas
+    
+    This information is released under the Creative Commons license - Attribution - CC BY (https://creativecommons.org/licenses/by/4.0/). The consumer of these data ("Data User" herein) is required to cite it appropriately in any publication that results from its use. The Data User should realize that these data may be actively used by others for ongoing research and that coordination may be necessary to prevent duplicate publication. The Data User is urged to contact the authors of these data if any questions about methodology or results occur. Where appropriate, the Data User is encouraged to consider collaboration or co-authorship with the authors. The Data User should realize that misinterpretation of data may occur if used out of context of the original study. While substantial efforts are made to ensure the accuracy of data and associated documentation, complete accuracy of data sets cannot be guaranteed. All data are made available "as is." The Data User should be aware, however, that data are updated periodically and it is the responsibility of the Data User to check for new versions of the data. The data authors and the repository where these data were obtained shall not be liable for damages resulting from any use or misinterpretation of the data. Thank you.      The data available here are intended for scholarly use by the research community, with the express understanding that data users will properly acknowledge the originating investigator. Use or reproduction of any material herein for any commercial purpose is prohibited without prior written permission from the responsible party.
+
+    https://doi.org/10.6073/pasta/1ea463bba7db978190c114f2a7866866
+      
+        Western Antarctic Peninsula
+        
+          -79.65
+          -62.878
+          -63.738
+          -70.041
+        
+      
+      
+        
+          
+            1978-11-01
+          
+          
+            2021-07-31
+          
+        
+      
+    
+    
+      Data is updated annually following the completion of the yearly research cruise and station field season, after samples have been analyzed and data processed.
+      annually
+    
+    
+      Palmer Station Antarctica LTER
+      PAL LTER Information Manager
+      			Rutgers Marine & Coastal Sciences
+			71 Dudley Road
+			New Brunswick, NJ 08901  USA
+      pallter@marine.rutgers.edu
+      https://pallter.marine.rutgers.edu
+    
+    Environmental Data Initiativeinfo@environmentaldatainitiative.orghttps://environmentaldatainitiative.org0330j0z60Environmental Data Initiative
+      
+        Ice concentration grids on cdrom provided by National Snow and Ice Data Center (NSIDC), Boulder, CO ice extent is derived from the NASA Team algorithm applied to the passive microwave remotely sensed brightness temperature and is defined as the area bounded by the 15% ice concentration contour which is determined by summing up all the pixel areas (nominally 25km by 25km) which have concentrations greater than 15%. Note: data were originally from the GSFC Bootstrap SMMR-SSMI time-series, i.e.the intercalibrated, corrected data. PAL LTER sea ice data were recently updated using Version 2 of the Bootstrap sea ice concentrations from Nimbus-7 SMMR and DMSP SSM/I that are now referenced to daily tiepoints consistent with the AMSR-E Bootstrap algorithm. Since Version 2 is inter-calibrated with AMSR-E, it is NO longer compatible with the original version (Version 1) of the Bootstrap SMMR-SSM/I time series, as previously used by the PAL LTER. Sea-ice extent refers to the total surface area inside the ice-edge. This area inside the ice-edge is not necessarily covered by 100% sea-ice, because sea-ice concentrations inside the ice-edge can be anywhere from 15-100%. Satellite sensors can usually detect the ice-edge with fairly good accuracy because the physical properties of open water versus sea-ice are very different (the most obvious is that one is a liquid, the other is a solid, but also sea water is both warmer and saltier than sea-ice). The satellite senses these different physical properties so that large areas of open water can be distinguished easily from large areas of sea-ice. One satellite sensor detects microwave signals from the surface, and with the use of some mathematical formulae, we can interpret those microwave signals in terms of percent ice cover. From field experiments we have determined that when the satellite senses 15% sea-ice cover, it is detecting the ice-edge. So we map where the ice-edge is, then we determine the area inside that ice-edge and call that sea-ice extent. Again, note that the area inside the ice-edge could be covered with sea-ice in concentrations anywhere from 15-100%. In this case the information about the percent sea-ice cover is used and only the area inside the ice-edge that is actually covered by sea-ice is used. EXAMPLE: Let's say that the LTER study region is a rectangle where the length is 900 km and the width is 200 km. Then the surface area would be 900 kmx 200 km which equals 180,000 km2. (Notice however that in using the satellite data we actually use a surface area of 194,319.8 km2.) If the ice-edge was north of the LTER study region, then we would say that sea-ice extent is 180,000 km2 (ie., the total area of the LTER region because it all lies within the ice-edge). But let's say the half of the LTER study region is covered by 50% sea-ice and the other half is covered by 90% sea-ice, then sea-ice area would be: Half of the LTER study region = 180,000 km2 / 2 = 90,000 km2 sea-ice area = (90,000 km2 * 0.50) + (90,000 km2 * 0.90) = 45,000 km2 + 81,000 km2 = 126,000 km2 EXAMPLE: When to use sea-ice extent and when to use sea-ice area? Because satellites can easily detect the difference between large areas of open water and large areas of sea-ice covered waters, the satellite estimates of sea-ice extent are fairly consistent - even between different kinds of sensors (for example, sensors that detect visible versus infrard versus microwave signals). So the measure of sea-ice extent is fairly robust and can be consistently observed over time and space. Sea-ice area is in general a less accurate estimate, and its accuracy is strongly dependent on the sensor being used. Each sensor, and the mathematical formulae that convert the signals into sea-ice concentrations, all have caveats. However, if one is aware of these caveats, then the estimate of sea-ice area can be used to interpret general changes in sea-ice cover over time and space. There is no doubt that we need more validation studies to fully understand the errors involved in the estimate of sea-ice area, and in general this is an area of active research.
+      
+    
+    
+      Palmer Antarctica LTER
+      
+        Oscar Schofield
+        Rutgers University
+        oscar@marine.rutgers.edu
+        0000-0003-2359-4131
+        PI
+      
+      
+        Deborah Steinberg
+        Virginia Institute of Marine Science
+        debbies@vims.edu
+        0000-0001-9884-4655
+        Co-PI
+      
+      
+        Megan Cimino
+        University of California at Santa Cruz/NOAA
+        mecimino@ucsc.edu
+        0000-0002-1715-2903
+        Co-PI
+      
+      
+        Carlos Moffat
+        University of Delaware
+        cmoffat@udel.edu
+        0000-0002-7768-8275
+        Co-PI
+      
+      
+        Benjamin Van Mooy
+        Woods Hole Oceanographic Institute
+        bvanmooy@whoi.edu
+        0000-0002-2804-6508
+        Co-PI
+      
+      
+        Ari Friedlaender
+        University of California at Santa Cruz
+        ari.friedlaender@ucsc.edu
+        0000-0002-2822-233X
+        Co-PI
+      
+      
+        Scott Doney
+        University of Virginia
+        sdoney@virginia.edu
+        0000-0002-3683-2437
+        Co-PI
+      
+      
+        Sharon Stammerjohn
+        INSTAAR, University of Colorado Boulder
+        sharon.stammerjohn@colorado.edu
+        0000-0002-1697-8244
+        Co-PI
+      
+      
+        Janice McDonnell
+        Rutgers University
+        mcdonnel@marine.rutgers.edu
+        0000-0001-7305-1720
+        Co-PI
+      
+      The Palmer, Antarctica, Long-Term Ecological Research (LTER) project is a member site of the Long-Term Ecological Research program, a network of sites investigating diverse biomes. The Palmer LTER sire has been in operation since 1990. The team of researchers seeks to understand the structure and function of the Western Antarctic Peninsula's marine and terrestrial ecosystems in the context of seasonal-to-interannual atmospheric and sea ice dynamics, and how the marine ecosystem west of the Antarctica peninsula is responding to a climate that is changing as rapidly as any place on the Earth. The PAL measurement system (or grid) is designed to study marine and terrestrial food webs consisting principally of diatom primary producers, the dominant herbivore Antarctic krill, and the apex predator Adelie penguin. The importance of the attenuated microbial food web and the roles of whales as a major predatyor in the seasonal sea ice zone ecosystem are also key focuses of the PAL-LTER. PAL studies these ecosystems annually over a regional scale grid of oceanographic stations and seasonally at Palmer Station. Cutting edge technologies such as autonomous underwater (and possibly airborne) vehicles, seafloor moorings, and numerical modeling, coupled with annual oceanographic cruises, and weekly environmental sampling, enables the Palmer Antarctica LTER to expand and bridge the time and space scales needed to assess climatic impacts. Palmer Station is located on Anvers Island west of the Antarctic Peninsula. The peninsula runs perpendicular to a strong climatic gradient between the cold, dry continental regime to the south, characteristic of the Antarctic interior, and the warm, moist, maritime regime to the north. North-south shifts in the gradient give rise to large environmental variability to climate change. Sea ice extent and variability affects ecosystem changes at all trophic levels. In addition to the long-term field and research activities, information management, graduate student training, education and outreach are an integral part of the program.
+      
+        National Science Foundation, Office of Polar Programs
+        2023425 (and previous awards)
+        LTER Palmer, Antarctica (PAL): Land-Shelf-Ocean Connectivity, Ecosystem Resilience and Transformation in a Sea-Ice Influenced Pelagic Ecosystem
+      
+    
+    
+      Monthly Open Water Area (km^2) for new PAL sampling area (-200 to 600 lines)
+      Monthly Open Water Area (km^2) for new PAL sampling area (-200 to 600 lines)
+Dataset: GSFC Bootstrap time series data Version 3.0 for 11/1978 to 12/2020, supplemented
+        by preliminary Near-Real-Time-Sea-Ice (NRTSI) data for Jan-Jul 2021
+Nodata: -999.00
+OW:     open water area inside the ice edge (i.e., extent - area)
+Caution: The 2021 monthly data are preliminary and will be updated when available
+         NOTE: in Version 3.1, monthly data for 12/1987 and 1/1988 are not available (-999.)
+
+      
+        34_grid_monow_1178_0721.txt
+        7255
+        0d61f3977d0c40406c1fd110a5b42032
+        
+          
+            txt
+          
+        
+        
+          
+            https://pasta.lternet.edu/package/data/eml/knb-lter-pal/34/7/52e1b775f5eb087ac6561530d9bf97bc
+          
+        
+      
+      txt
+    
+    
+      Monthly Sea Ice Extent (km^2) for new PAL sampling area (-200 to 600 lines)
+      Monthly Sea Ice Extent (km^2) for new PAL sampling area (-200 to 600 lines)
+Dataset: GSFC Bootstrap time series data Version 3.0 for 11/1978 to 12/2020, supplemented
+        by preliminary Near-Real-Time-Sea-Ice (NRTSI) data for Jan-Jul 2021 
+Nodata: -999.00
+Ext: total area enclosed by the outer ice edge (so includes ocean areas covered by
+     sea ice concentrations ranging from 15% to 100%)
+Caution: The 2021 monthly data are preliminary and will be updated when available
+         NOTE: in Version 3.1, monthly data for 12/1987 and 1/1988 are not available (-999.)
+
+      
+        34_grid_monext_1178_0721.txt
+        7326
+        aa5c1525d5b952abcfa53059ebb7744d
+        
+          
+            txt
+          
+        
+        
+          
+            https://pasta.lternet.edu/package/data/eml/knb-lter-pal/34/7/97614b9be62a451ece6496589e94ae63
+          
+        
+      
+      txt
+    
+    
+      Monthly Sea Ice Area (km^2) for new PAL sampling area (-200 to 600 lines)
+      Monthly Sea Ice Area (km^2) for new PAL sampling area (-200 to 600 lines)
+Dataset: GSFC Bootstrap time series data Version 3.0 for 11/1978 to 12/2020, supplemented
+        by preliminary Near-Real-Time-Sea-Ice (NRTSI) data for Jan-Jul 2021
+Nodata: -999.00
+Area:   actual area covered by sea ice inside the outer ice edge (so takes into account
+        the range in sea ice concentration)
+Caution: The 2021 monthly data are preliminary and will be updated when available
+         NOTE: in Version 3.1, monthly data for 12/1987 and 1/1988 are not available (-999.)
+
+      
+        34_grid_monarea_1178_0721.txt
+        7319
+        afd913f1dd590423a483788f40bcaf3f
+        
+          
+            txt
+          
+        
+        
+          
+            https://pasta.lternet.edu/package/data/eml/knb-lter-pal/34/7/0fccb4e99aaa0c0cc85c23284288ec81
+          
+        
+      
+      txt
+    
+    
+      Monthly Sea Ice Concentration for the Penguin Foraging Area (~200km) near Anvers Island
+      Monthly Sea Ice Concentration for the Penguin Foraging Area (~200km) near Anvers Island
+Dataset: GSFC Bootstrap time series data Version 3.1 for 11/1978 to 12/2020, supplemented
+        by preliminary Near-Real-Time-Sea-Ice (NRTSI) data for Jan-Jul 2021
+Nodata: -999.00
+Caution: The 2021 monthly data are preliminary and will be updated when available (be particularly
+         cautious of the near-zero values in summer; some will likely get upgraded to low SIC)
+         NOTE: in Version 3.1, monthly data for 12/1987 and 1/1988 are not available (-999.)
+
+      
+        34_anvers_monsic_1178_0721.txt
+        7312
+        37a2c7cfbe81ec34d0ae86d12f364ea5
+        
+          
+            txt
+          
+        
+        
+          
+            https://pasta.lternet.edu/package/data/eml/knb-lter-pal/34/7/cf28ce93a1638df81b4ea72c93ca5f88
+          
+        
+      
+      txt
+    
+    
+      Monthly Sea Ice Concentration for the Penguin Foraging Area (~200km) near Avian/Adelaide Island
+      Monthly Sea Ice Concentration for the Penguin Foraging Area (~200km) near Avian/Adelaide Island
+Dataset: GSFC Bootstrap time series data Version 3.1 for 11/1978 to 12/2020, supplemented
+        by preliminary Near-Real-Time-Sea-Ice (NRTSI) data for Jan-Jul 2021
+Nodata: -999.00
+Caution: The 2021 monthly data are preliminary and will be updated when available (be particularly
+         cautious of the near-zero values in summer; some will likely get upgraded to low SIC)
+         NOTE: in Version 3.1, monthly data for 12/1987 and 1/1988 are not available (-999.)
+
+      
+        34_avian_monsic_1178_0721.txt
+        7320
+        0cc91f0a027b428abd030c33a4fb7737
+        
+          
+            txt
+          
+        
+        
+          
+            https://pasta.lternet.edu/package/data/eml/knb-lter-pal/34/7/d1294c553a3bfd27e8b156a6a4fe2466
+          
+        
+      
+      txt
+    
+    
+      Monthly Sea Ice Concentration for the Penguin Foraging Area (~200km) near Charcot Island
+      Monthly Sea Ice Concentration for the Penguin Foraging Area (~200km) near Charcot Island
+Dataset: GSFC Bootstrap time series data Version 3.1 for 11/1978 to 12/2020, supplemented
+        by preliminary Near-Real-Time-Sea-Ice (NRTSI) data for Jan-Jul 2021
+Nodata: -999.00
+Caution: The 2021 monthly data are preliminary and will be updated when available (be particularly
+         cautious of the near-zero values in summer; some will likely get upgraded to low SIC)
+         NOTE: in Version 3.1, monthly data for 12/1987 and 1/1988 are not available (-999.)
+
+      
+        34_charcot_monsic_1178_0721.txt
+        7313
+        e10712969d22f4c89544a18a87c97eca
+        
+          
+            txt
+          
+        
+        
+          
+            https://pasta.lternet.edu/package/data/eml/knb-lter-pal/34/7/0bc939d93cda07272d268608729a3cef
+          
+        
+      
+      txt
+    
+    
+      Monthly Sea Ice Concentration for the Marguerite Bay area
+      Monthly Sea Ice Concentration for the Marguerite Bay area
+Dataset: GSFC Bootstrap time series data Version 3.1 for 11/1978 to 12/2020, supplemented
+        by preliminary Near-Real-Time-Sea-Ice (NRTSI) data for Jan-Jul 2021
+Nodata: -999.00
+Caution: The 2021 monthly data are preliminary and will be updated when available (be particularly
+         cautious of the near-zero values in summer; some will likely get upgraded to low SIC)
+         NOTE: in Version 3.1, monthly data for 12/1987 and 1/1988 are not available (-999.)
+
+      
+        34_mbay_monsic_1178_0721.txt
+        7282
+        a2e272ffde90295c882d5ed4460278c6
+        
+          
+            txt
+          
+        
+        
+          
+            https://pasta.lternet.edu/package/data/eml/knb-lter-pal/34/7/2d8adfc59860a2f35cc348cffb09a6d6
+          
+        
+      
+      txt
+    
+  
+  
+    
+      
+      
+    
+  
+  
+    
+      
+      
+    
+  
+  
+    
+      
+      
+    
+  

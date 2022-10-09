@@ -1,0 +1,94 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.slideshow {
+    width: 1600px;
+    background: #0093C4;
+}
+
+.slide {
+    margin: 30px;
+    padding: 10px;
+    background: white;
+}
+
+#title {
+    height: 200px;
+}
+
+#location_slide {
+    height: 960px;
+}
+
+#diet1 {
+    height: 920px;
+    background: rgb(243, 243, 243);
+    margin-bottom: 10px;
+}
+
+#diet2 {
+    height: 920px;
+    background: rgb(243, 243, 243);
+}
+
+#attr_slide {
+    height: 800px;
+}
+
+#pop_slide {
+    height: 750px;
+}
+
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#temp {
+    position: relative;
+    z-index: 0;
+}
+
+#temp_overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+
+#south_pole_clip {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+}
+
+#heatmap {
+    position: relative;
+    width: 1200px;
+    height: 835px;
+    z-index: 0;
+}
+
+.vega-bindings {
+    columns: 3;
+    padding: 10px;
+  }
+
+#diet_image {
+    width: 110px;
+    height: 550px;
+}
+
+#diet_dotmap {
+    width: 1266px;
+    height: 937px;
+}
+
+#dotmap {
+    background: white;
+}

@@ -22,11 +22,11 @@ The fundamental long-term objective of the seabird component of the Palmer LTER 
 
 ## Palmer Weather Station
 
-Palmer Station is located at 64°46' S, 64°03' W, on a protected harbor on the southwestern coast of Anvers Island off the Antarctica Peninsula [1]. The annual average temperature is a cold -3°C with the warmer summer months from December to February averaging 2°C and the colder winter months from July to August averaging -10°C. The Palmer Weather Station was constructed in 1968 and consists of two major buildings, three smaller buildings, two large fuel tanks, a helicopter pad and a dock [1]. The location of the station was choosen for its proximity to birds, seals and other components of the marine ecosystem, including Adelie Penguins. In 1990 it was designated by the National Science Foundation as a long term ecological research (LTER) site [1]. From the about section of PAL LTER's website 'The PALmer (PAL) LTER seeks to build on three decades of long-term research along the western side of the Antarctic Peninsula (WAP) to gain new mechanistic and predictive understanding of ecosystem changes in response to disturbances spanning long-term, decadal, and higher-frequency “pulse” changes driven by a range of processes, including natural climate variability, long-term climate warming, resiliency/recovery in the face of press versus pulse forcing, transformed spatial landscapes, and food-web alterations.' [2]. 
+Palmer Station is located at 64°46' S, 64°03' W, on a protected harbor on the southwestern coast of Anvers Island off the Antarctica Peninsula. The annual average temperature is a cold -3°C with the warmer summer months from December to February averaging 2°C and the colder winter months from July to August averaging -10°C. The Palmer Weather Station was constructed in 1968 and consists of two major buildings, three smaller buildings, two large fuel tanks, a helicopter pad and a dock. The location of the station was choosen for its proximity to birds, seals and other components of the marine ecosystem, including Adelie Penguins. In 1990 it was designated by the National Science Foundation as a long term ecological research (LTER) site. From the about section of PAL LTER's website 'The PALmer (PAL) LTER seeks to build on three decades of long-term research along the western side of the Antarctic Peninsula (WAP) to gain new mechanistic and predictive understanding of ecosystem changes in response to disturbances spanning long-term, decadal, and higher-frequency “pulse” changes driven by a range of processes, including natural climate variability, long-term climate warming, resiliency/recovery in the face of press versus pulse forcing, transformed spatial landscapes, and food-web alterations.'. 
 
 ## Sea Ice Extent
 
-The fundamental long-term objective of the seabird component of the Palmer LTER has been to identify and understand the processes that influence the average population growth rate of various penguin populations. Two proposed mechanisms are changes in the regional krill biomass, and the long term changes in sea ice extent as it affects the balance of species due to the affitinty to sea ice that different species have developed over time [4]. Later we will investigate krill abundance.
+The fundamental long-term objective of the seabird component of the Palmer LTER has been to identify and understand the processes that influence the average population growth rate of various penguin populations. Two proposed mechanisms are changes in the regional krill biomass, and the long term changes in sea ice extent as it affects the balance of species due to the affitinty to sea ice that different species have developed over time. Later we will investigate krill abundance. The different ice attributes, formation, age, land type, edge, and condition trend, are classified by the World Meteorological Organization (WMO). A full list is available here (https://artefacts.ceda.ac.uk/badc_datadocs/surface/code.html). In 2015, the ice age observed was mostly young and predominantly new ice corresponding to an id of 2 and 3. The land ice type was predominantly a large number of icebergs with growlers and bergy bits, corresponding to an id of 7, 8, 9. There was a range of different ice conditions observed, from easily penetrable ice with conditions improving to difficult to penetrate ice with conditions not changing.
 
 ### Ice Formation Id
 0	No sea ice in sight
@@ -42,59 +42,60 @@ The fundamental long-term objective of the seabird component of the Palmer LTER 
 /	Unable to report, because of darkness, lack of visibility, or because ship is more than 0.5 nautical mile away from ice edge
 
 ### Ice Age ID
-0	No sea ice in sight	New ice only (frazil ice, grease ice, slush, shuga)
-1	 Ship in open lead more than 1.0 nautical mile wide, or ship in fast ice with boundary beyond limit of visibility	Nilas or ice rind, less than 10 cm thick
-2	 Sea ice present in concentrations less than 3/10 (3/8), open water or very open pack ice - Sea ice concentration is uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Young ice (grey ice, grey-white ice), 10-30 cm thick
-3	4/10 to 6/10 (3/8 to less than 6/8), open pack ice - Sea ice concentration is uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly new and/or young ice with some first-year ice
-4	7/10 to 8/10 (6/8 to less than 7/8), close pack ice - Sea ice concentration is uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly thin first-year ice with some new and/or young ice
-5	9/10 or more, but not 10/10 (7/8 to less than 8/8), very close pack ice - Sea ice concentration is uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	All thin first-year ice (30 - 70 cm thick)
-6	Strips and patches of pack ice with open water between - Sea ice concentration is not uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly medium first-year ice (70 - 120 cm thick) and thick first-year ice (>120 cm thick) with some thinner (younger) first-year ice
-7	Strips and patches of close or very close pack ice with areas of lesser concentration between - Sea ice concentration is not uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	All medium and thick first-year ice
-8	Fast ice with open water, very open or open pack ice to seaward of the ice boundary - Sea ice concentration is not uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly medium and thick first-year ice with some old ice (usually more than 2 metres thick)
-9	Fast ice with close or very close pack ice to seaward of the ice boundary - Sea ice concentration is not uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly old ice
-/	Unable to report, because of darkness, lack of visibility, or because ship is more than 0.5 nautical mile away from ice edge	Unable to report, because of darkness, lack of visibility or because only ice of land origin is visible or because ship is more than 0.5 nautical mile away 
+0   New ice only (frazil ice, grease ice, slush, shuga)
+1   Nilas or ice rind, less than 10 cm thick
+2   Young ice (grey ice, grey-white ice), 10-30 cm thick
+3   Predominantly new and/or young ice with some first-year ice
+4   Predominantly thin first-year ice with some new and/or young ice
+5   All thin first-year ice (30 - 70 cm thick)
+6   Predominantly medium first-year ice (70 - 120 cm thick) and thick first-year ice (>120 cm thick) with some thinner (younger) first-year ice
+7   All medium and thick first-year ice
+8   Predominantly medium and thick first-year ice with some old ice (usually more than 2 metres thick)
+9   Predominantly old ice
+/   Unable to report, because of darkness, lack of visibility or because only ice of land origin is visible or because ship is more than 0.5 nautical mile away 
 
 ### Land Ice Type ID
 
-0	No sea ice in sight	New ice only (frazil ice, grease ice, slush, shuga)	No ice of land origin
-1	 Ship in open lead more than 1.0 nautical mile wide, or ship in fast ice with boundary beyond limit of visibility	Nilas or ice rind, less than 10 cm thick	1-5 icebergs, no growlers or bergy bits
-2	 Sea ice present in concentrations less than 3/10 (3/8), open water or very open pack ice - Sea ice concentration is uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Young ice (grey ice, grey-white ice), 10-30 cm thick	6-10 icebergs, no growlers or bergy bits
-3	4/10 to 6/10 (3/8 to less than 6/8), open pack ice - Sea ice concentration is uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly new and/or young ice with some first-year ice	11-20 icebergs, no growlers or bergy bits
-4	7/10 to 8/10 (6/8 to less than 7/8), close pack ice - Sea ice concentration is uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly thin first-year ice with some new and/or young ice	Up to and including 10 growlers and bergy bits - no icebergs
-5	9/10 or more, but not 10/10 (7/8 to less than 8/8), very close pack ice - Sea ice concentration is uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	All thin first-year ice (30 - 70 cm thick)	More than 10 growlers and bergy bits - no icebergs
-6	Strips and patches of pack ice with open water between - Sea ice concentration is not uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly medium first-year ice (70 - 120 cm thick) and thick first-year ice (>120 cm thick) with some thinner (younger) first-year ice	1-5 icebergs, with growlers and bergy bits
-7	Strips and patches of close or very close pack ice with areas of lesser concentration between - Sea ice concentration is not uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	All medium and thick first-year ice	6-10 icebergs, with growlers and bergy bits
-8	Fast ice with open water, very open or open pack ice to seaward of the ice boundary - Sea ice concentration is not uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly medium and thick first-year ice with some old ice (usually more than 2 metres thick)	11-20 icebergs, with growlers and bergy bits
-9	Fast ice with close or very close pack ice to seaward of the ice boundary - Sea ice concentration is not uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly old ice	More than 20 icebergs, with growlers and bergy bits - a major hazard to navigation
-/	Unable to report, because of darkness, lack of visibility, or because ship is more than 0.5 nautical mile away from ice edge	Unable to report, because of darkness, lack of visibility or because only ice of land origin is visible or because ship is more than 0.5 nautical mile away 	Unable to report, because of darkness, lack of visibility or because only sea ice is visible
+0   No ice of land origin
+1   1-5 icebergs, no growlers or bergy bits
+2   6-10 icebergs, no growlers or bergy bits
+3   11-20 icebergs, no growlers or bergy bits
+4   Up to and including 10 growlers and bergy bits - no icebergs
+5   More than 10 growlers and bergy bits - no icebergs
+6   1-5 icebergs, with growlers and bergy bits
+7   6-10 icebergs, with growlers and bergy bits
+8   11-20 icebergs, with growlers and bergy bits
+9   More than 20 icebergs, with growlers and bergy bits - a major hazard to navigation
+/   Unable to report, because of darkness, lack of visibility or because only sea ice is visible
 
 ### Ice Edge ID
 
-0	No sea ice in sight	New ice only (frazil ice, grease ice, slush, shuga)	No ice of land origin	Ship in shore or flaw lead
-1	 Ship in open lead more than 1.0 nautical mile wide, or ship in fast ice with boundary beyond limit of visibility	Nilas or ice rind, less than 10 cm thick	1-5 icebergs, no growlers or bergy bits	Principal ice edge towards NE
-2	 Sea ice present in concentrations less than 3/10 (3/8), open water or very open pack ice - Sea ice concentration is uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Young ice (grey ice, grey-white ice), 10-30 cm thick	6-10 icebergs, no growlers or bergy bits	Principal ice edge towards E
-3	4/10 to 6/10 (3/8 to less than 6/8), open pack ice - Sea ice concentration is uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly new and/or young ice with some first-year ice	11-20 icebergs, no growlers or bergy bits	Principal ice edge towards SE
-4	7/10 to 8/10 (6/8 to less than 7/8), close pack ice - Sea ice concentration is uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly thin first-year ice with some new and/or young ice	Up to and including 10 growlers and bergy bits - no icebergs	Principal ice edge towards S
-5	9/10 or more, but not 10/10 (7/8 to less than 8/8), very close pack ice - Sea ice concentration is uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	All thin first-year ice (30 - 70 cm thick)	More than 10 growlers and bergy bits - no icebergs	Principal ice edge towards SW
-6	Strips and patches of pack ice with open water between - Sea ice concentration is not uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly medium first-year ice (70 - 120 cm thick) and thick first-year ice (>120 cm thick) with some thinner (younger) first-year ice	1-5 icebergs, with growlers and bergy bits	Principal ice edge towards W
-7	Strips and patches of close or very close pack ice with areas of lesser concentration between - Sea ice concentration is not uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	All medium and thick first-year ice	6-10 icebergs, with growlers and bergy bits	Principal ice edge towards NW
-8	Fast ice with open water, very open or open pack ice to seaward of the ice boundary - Sea ice concentration is not uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly medium and thick first-year ice with some old ice (usually more than 2 metres thick)	11-20 icebergs, with growlers and bergy bits	Principal ice edge towards N
-9	Fast ice with close or very close pack ice to seaward of the ice boundary - Sea ice concentration is not uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly old ice	More than 20 icebergs, with growlers and bergy bits - a major hazard to navigation	Not determined (ship in ice)
-/	Unable to report, because of darkness, lack of visibility, or because ship is more than 0.5 nautical mile away from ice edge	Unable to report, because of darkness, lack of visibility or because only ice of land origin is visible or because ship is more than 0.5 nautical mile away 	Unable to report, because of darkness, lack of visibility or because only sea ice is visible	Unable to report, because of darkness, lack of visibility or because only ice of land origin is visible
+0   Ship in shore or flaw lead
+1   Principal ice edge towards NE
+2   Principal ice edge towards E
+3   Principal ice edge towards SE
+4   Principal ice edge towards S
+5   Principal ice edge towards SW
+6   Principal ice edge towards W
+7   Principal ice edge towards NW
+8   Principal ice edge towards N
+9   Not determined (ship in ice)
+/   Unable to report, because of darkness, lack of visibility or because only ice of land origin is visible
 
 ### Ice Condition Trend
 
-0	No sea ice in sight	New ice only (frazil ice, grease ice, slush, shuga)	No ice of land origin	Ship in shore or flaw lead	Ship in open water with floating ice in sight
-1	 Ship in open lead more than 1.0 nautical mile wide, or ship in fast ice with boundary beyond limit of visibility	Nilas or ice rind, less than 10 cm thick	1-5 icebergs, no growlers or bergy bits	Principal ice edge towards NE	Ship in easily penetrable ice; conditions improving - Ship in ice
-2	 Sea ice present in concentrations less than 3/10 (3/8), open water or very open pack ice - Sea ice concentration is uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Young ice (grey ice, grey-white ice), 10-30 cm thick	6-10 icebergs, no growlers or bergy bits	Principal ice edge towards E	Ship in easily penetrable ice; conditions not changing - Ship in ice
-3	4/10 to 6/10 (3/8 to less than 6/8), open pack ice - Sea ice concentration is uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly new and/or young ice with some first-year ice	11-20 icebergs, no growlers or bergy bits	Principal ice edge towards SE	Ship in easily penetrable ice; conditions worsening - Ship in ice
-4	7/10 to 8/10 (6/8 to less than 7/8), close pack ice - Sea ice concentration is uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly thin first-year ice with some new and/or young ice	Up to and including 10 growlers and bergy bits - no icebergs	Principal ice edge towards S	Ship in ice difficult to penetrate; conditions improving - Ship in ice
-5	9/10 or more, but not 10/10 (7/8 to less than 8/8), very close pack ice - Sea ice concentration is uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	All thin first-year ice (30 - 70 cm thick)	More than 10 growlers and bergy bits - no icebergs	Principal ice edge towards SW	Ship in ice difficult to penetrate; conditions not changing - Ship in ice
-6	Strips and patches of pack ice with open water between - Sea ice concentration is not uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly medium first-year ice (70 - 120 cm thick) and thick first-year ice (>120 cm thick) with some thinner (younger) first-year ice	1-5 icebergs, with growlers and bergy bits	Principal ice edge towards W	Ice forming and floes freezing together - Ship in ice difficult to penetrate and conditions worsening - Ship in ice
-7	Strips and patches of close or very close pack ice with areas of lesser concentration between - Sea ice concentration is not uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	All medium and thick first-year ice	6-10 icebergs, with growlers and bergy bits	Principal ice edge towards NW	Ice under slight pressure - Ship in ice difficult to penetrate and conditions worsening - Ship in ice
-8	Fast ice with open water, very open or open pack ice to seaward of the ice boundary - Sea ice concentration is not uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly medium and thick first-year ice with some old ice (usually more than 2 metres thick)	11-20 icebergs, with growlers and bergy bits	Principal ice edge towards N	Ice under moderate or severe pressure - Ship in ice difficult to penetrate and conditions worsening - Ship in ice
-9	Fast ice with close or very close pack ice to seaward of the ice boundary - Sea ice concentration is not uniform in the observation area - Ship in ice or within 0.5 nautical mile of ice edge	Predominantly old ice	More than 20 icebergs, with growlers and bergy bits - a major hazard to navigation	Not determined (ship in ice)	Ship beset - Ship in ice difficult to penetrate and conditions worsening - Ship in ice
-/	Unable to report, because of darkness, lack of visibility, or because ship is more than 0.5 nautical mile away from ice edge	Unable to report, because of darkness, lack of visibility or because only ice of land origin is visible or because ship is more than 0.5 nautical mile away 	Unable to report, because of darkness, lack of visibility or because only sea ice is visible	Unable to report, because of darkness, lack of visibility or because only ice of land origin is visible	Unable to report, because of darkness or lack of visibility
+0   Ship in open water with floating ice in sight
+1   Ship in easily penetrable ice; conditions improving - Ship in ice
+2   Ship in easily penetrable ice; conditions not changing - Ship in ice
+3   Ship in easily penetrable ice; conditions worsening - Ship in ice
+4   Ship in ice difficult to penetrate; conditions improving - Ship in ice
+5   Ship in ice difficult to penetrate; conditions not changing - Ship in ice
+6   Ice forming and floes freezing together - Ship in ice difficult to penetrate and conditions worsening - Ship in ice
+7   Ice under slight pressure - Ship in ice difficult to penetrate and conditions worsening - Ship in ice
+8   Ice under moderate or severe pressure - Ship in ice difficult to penetrate and conditions worsening - Ship in ice
+9   Ship beset - Ship in ice difficult to penetrate and conditions worsening - Ship in ice
+/   Unable to report, because of darkness or lack of visibility
+
 
 # Penguin Diet - Diet Composition
 
@@ -112,7 +113,7 @@ Three species of krill occur in Adelie penguin diet samples, Antarctic krill (Eu
 
 ## Diet Composition
 
-The fundamental long-term objective of the seabird component of the Palmer LTER has been to identify and understand the processes that influence the average population growth rate of various penguin populations. Two proposed mechanisms are changes in the regional krill biomass, and the long term changes in sea ice extent as it affects the balance of species due to the affitinty to sea ice that different species have developed over time [5]. Previously we saw the changes in sea ice extent over time, now we investigate krill abundance. Adelie Penguins have a varied diet, consisting of primary prey, including krill and fish, and secondary prey, including octopus, squid amphipods, mysid shrip, limpets and small clams. Krill makes up the bulk of the diet for each of the three penguin species, Adelie, Gentoo and Chinstrap, during the summer months. The process for collecting samples is outlined on the PAL LTER website 'Adelie penguin diet samples obtained in the field are initially drained and weighed and returned to laboratories for further processing. This includes resuspension of the samples in fresh water to release fish otoliths, squid beaks and other prey hard parts, and then draining to a consistency that facilitates separating the diet samples into componenets. Each prey component is weighed (total weight) and, if possible, sorted according to species for further analyses.' [6].
+The fundamental long-term objective of the seabird component of the Palmer LTER has been to identify and understand the processes that influence the average population growth rate of various penguin populations. Two proposed mechanisms are changes in the regional krill biomass, and the long term changes in sea ice extent as it affects the balance of species due to the affitinty to sea ice that different species have developed over time. Previously we saw the changes in sea ice extent over time, now we investigate krill abundance. Adelie Penguins have a varied diet, consisting of primary prey, including krill and fish, and secondary prey, including octopus, squid amphipods, mysid shrip, limpets and small clams. Krill makes up the bulk of the diet for each of the three penguin species, Adelie, Gentoo and Chinstrap, during the summer months. The process for collecting samples is outlined on the PAL LTER website 'Adelie penguin diet samples obtained in the field are initially drained and weighed and returned to laboratories for further processing. This includes resuspension of the samples in fresh water to release fish otoliths, squid beaks and other prey hard parts, and then draining to a consistency that facilitates separating the diet samples into componenets. Each prey component is weighed (total weight) and, if possible, sorted according to species for further analyses.'.
 
 ## Krill Abundance
 
@@ -130,7 +131,7 @@ Sexual segregation in vertebrate foraging niche is often associated with sexual 
 
 ## Penguin Measurements
 
-The culmen is the upper ridge of a penguins beak. The depth measures the vertical height of the beak, while the length is the horizontal length. The dot plot to the right shows the average for each species and island from 2007 to 2009. 
+
 
 # Penguin Population
 
@@ -140,4 +141,3 @@ Data were collected from two penguin monitoring sites in the Antarctic peninsula
 
 ## Penguin Populations
 
-The chart to the left shows the annual penguin population. The data was collected by the Southwest Fisheries Science Center from the Anvers Region of Antarctica. Previously we saw the krill abundance has remained relatively high, in contrast the Adelie penguin population has steadily declined over the past 30 years. This is contrary to the hypothesis that krill abundance has an effect on penguin population health. The chart to the right show the number of adelie penguin chicks for a number of different islands in the Anvers region. We can the number of chicks has been declining since 1998 with a sharp decrease in 2002, which reflects the overall population decline.
