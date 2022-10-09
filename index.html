@@ -19,10 +19,15 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Yeseva One font -->
+  <!-- Yeseva One Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap" rel="stylesheet">
+
+  <!-- Ubuntu Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
 
 </head>
 
@@ -31,58 +36,101 @@
 
     <!-- Title Slide -->
     <div id="title" class="center slide">
-      <p class="text-7xl heading">Adelie Penguins</p>
+      <p class="text-8xl">Adelie Penguins</p>
     </div>
 
     <!-- Palmer Station Slide -->
+    <div class="heading">
+      <p>Palmer Station</p>
+    </div>
+
     <div id="palmer_slide" class="slide">
-      <p class="heading">Palmer Station Weather</p>
       <div class="p-5">
         <div class="pure-g">
           <div class="pure-u-1-2">
-            <p>Lorem Ipsum</p>
-          </div>
-          <div class="pure-u-1-2">
-            <p class="subheading">Wind Speed and Direction</p>
-            <div id="wind_radial"></div>
-          </div>
-        </div>
-      </div>
-      <div class="p-5">
-        <p class="subheading">Sea Ice Extent</p>
-        <div class="pure-g">
-          <div class="pure-u-1-2">
+            <div class="w-3/4">
+              <p class="subheading">Location and Research</p>
 
-          </div>
-          <div class="pure-u-1-2">
-            <div id="sea_ice"></div>
-          </div>
-        </div>
+              <p class="text">
+                Palmer Station is located at 64°46' S, 64°03' W, on a protected harbor on the southwestern coast of
+                Anvers
+                Island off the Antarctica Peninsula. The annual average temperature is a cold -3°C with the warmer
+                summer
+                months from December to February averaging 2°C and the colder winter months from July to August
+                averaging
+                -10°C. The Palmer Weather Station was constructed in 1968 and consists of two major buildings, three
+                smaller buildings, two large fuel tanks, a helicopter pad and a dock. The location of the station was
+                choosen for its proximity to birds, seals and other components of the marine ecosystem, including Adelie
+                Penguins.
+              </p>
 
-      </div>
-      <div class="p-5">
-        <p class="subheading">Daily Average Temperature</p>
-        <div class="pure-g">
-          <div class="pure-u-1-2">
-            <div id="temp">
-              <div id="temp_overlay" class="pr-5">
-                <div id="temp_legend"></div>
+              <p class="text">
+                In 1990 it was designated by the National Science Foundation as a long term ecological research (LTER)
+                site. From the about section of PAL LTER's website 'The PALmer (PAL) LTER seeks to build on three
+                decades
+                of long-term research along the western side of the Antarctic Peninsula (WAP) to gain new mechanistic
+                and
+                predictive understanding of ecosystem changes in response to disturbances spanning long-term, decadal,
+                and
+                higher-frequency “pulse” changes driven by a range of processes, including natural climate variability,
+                long-term climate warming, resiliency/recovery in the face of press versus pulse forcing, transformed
+                spatial landscapes, and food-web alterations.'.
+              </p>
+            </div>
+
+            <div class="pt-10 pb-10">
+              <div id="temp">
+                <div id="temp_overlay" class="pr-5">
+                  <p class="subheading">Daily Average Temperature</p>
+                  <div id="temp_legend"></div>
+                </div>
+                <div id="temp_heatmap"></div>
               </div>
-              <div id="temp_heatmap"></div>
+            </div>
+
+            <div class="w-3/4">
+              <p class="subheading">Sea Ice Extent</p>
+              <p class="text">
+                The fundamental long-term objective of the seabird component of the Palmer LTER has been to identify and
+                understand the processes that influence the average population growth rate of various penguin
+                populations.
+                Twoproposed mechanisms are changes in the regional krill biomass, and the long term changes in sea ice
+                extent as it affects the balance of species due to the affitinty to sea ice that different species have
+                developed over time. Later we will investigate krill abundance. The different ice attributes, formation,
+                age, land type, edge, and condition trend, are classified by the World Meteorological Organization
+                (WMO).
+                A full list is available here (https://artefacts.ceda.ac.uk/badc_datadocs/surface/code.html). In 2015,
+                the
+                ice age observed was mostly young and predominantly new ice corresponding to an id of 2 and 3. The land
+                ice type was predominantly a large number of icebergs with growlers and bergy bits, corresponding to an
+                id
+                of 7, 8, 9. There was a range of different ice conditions observed, from easily penetrable ice with
+                conditions improving to difficult to penetrate ice withconditions not changing.
+              </p>
             </div>
           </div>
 
           <div class="pure-u-1-2">
-            <p>Lorem Ipsum</p>
+            <p class="subheading">Wind Speed and Direction</p>
+            <div id="wind_radial"></div>
+
+            <div class="w-3/4">
+              <p class="subheading">Daily Average Temperature</p>
+              <p class="text">Lorem Ipsum</p>
+            </div>
+
+            <div id="sea_ice"></div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Penguin Location Slide -->
-    <div id="location_slide" class="slide">
-      <p class="heading">Penguin Location Heatmap</p>
+    <div class="heading">
+      <p>Penguin Location Heatmap</p>
+    </div>
 
+    <div id="location_slide" class="slide">
       <div id="map">
         <div id="heatmap_main" class="font-sans flex">
           <div id="heatmap">
@@ -94,7 +142,7 @@
           </div>
 
           <div>
-            <p>Lorem Ipsum</p>
+            <p class="text">Lorem Ipsum</p>
             <div id="heatmap_legend"></div>
           </div>
         </div>
@@ -102,31 +150,48 @@
     </div>
 
     <!-- Diet Slides -->
+    <div class="heading">
+      <p>Adelie Penguin Diet</p>
+    </div>
 
     <div id="diet_slide" class="slide">
       <!-- Diet Slide 1 -->
       <div id="diet1">
-        <p class="heading">Adelie Penguin Diet</p>
         <p class="subheading">Diet Composition</p>
-
-        <div class="flex">
-          <div style="width:300px">
-            <p>Lorem Ipsum</p>
+        <div class="pure-g">
+          <div class="pure-u-1-3">
+            <p class="text">
+              The fundamental long-term objective of the seabird component of the Palmer LTER has been to
+              identify and understand the processes that influence the average population growth rate of various penguin
+              populations. Two proposed mechanisms are changes in the regional krill biomass, and the long term changes
+              in sea ice extent as it affects the balance of species due to the affitinty to sea ice that different
+              species have developed over time. Previously we saw the changes in sea ice extent over time, now we
+              investigate krill abundance. Adelie Penguins have a varied diet, consisting of primary prey, including
+              krill and fish, and secondary prey, including octopus, squid amphipods, mysid shrip, limpets and small
+              clams. Krill makes up the bulk of the diet for each of the three penguin species, Adelie, Gentoo and
+              Chinstrap, during the summer months. The process for collecting samples is outlined on the PAL LTER
+              website 'Adelie penguin diet samples obtained in the field are initially drained and weighed and returned
+              to laboratories for further processing. This includes resuspension of the samples in fresh water to
+              release fish otoliths, squid beaks and other prey hard parts, and then draining to a consistency that
+              facilitates separating the diet samples into componenets. Each prey component is weighed (total weight)
+              and, if possible, sorted according to species for further analyses.'.
+            </p>
           </div>
 
-          <div id="diet_all_dotmap"></div>
-        </div>
-
-        <div class="flex">
-          <div id="diet_other_dotmap"></div>
-          <div id="diet_dotmap_legend"></div>
+          <div class="pure-u-2-3">
+            <div id="diet_all_dotmap"></div>
+            <div id="diet_dotmap">
+              <div id="diet_other_dotmap"></div>
+              <div id="diet_dotmap_legend"></div>
+            </div>
+          </div>
         </div>
       </div>
 
 
+
       <!-- Diet Slide 2 -->
       <div id="diet2">
-        <p class="heading">Adelie Penguin Diet</p>
         <p class="subheading">Krill Abundance</p>
 
         <div class="pure-g">
@@ -137,23 +202,33 @@
     </div>
 
     <!-- Attributes Slide -->
+    <div class="heading">
+      <p>Adelie Penguin Measurements and Colonies</p>
+    </div>
+
     <div id="attr_slide" class="slide">
-      <p class="heading">Adelie Penguin Measurements and Colonies</p>
       <div class="pure-g">
         <div class="pure-u-1-3">
           <div id="dotmap"></div>
         </div>
-        <div class="pure-u-1-3"></div>
+        <div class="pure-u-1-3">
+          <p class="text">Lorem Ipsum</p>
+        </div>
         <div id="attr_connecteddot" class="pure-u-1-3"></div>
       </div>
     </div>
 
     <!-- Population Slide -->
+    <div class="heading">
+      <p>Adelie Penguin Population</p>
+    </div>
+
     <div id="pop_slide" class="slide">
-      <p class="heading">Adelie Penguin Population</p>
       <div class="pure-g">
         <div id="pop_line" class="pure-u-1-3"></div>
-        <div class="pure-u-1-3"></div>
+        <div class="pure-u-1-3">
+          <p class="text">Lorem Ipsum</p>
+        </div>
         <div id="pop_spark" class="pure-u-1-3"></div>
       </div>
     </div>

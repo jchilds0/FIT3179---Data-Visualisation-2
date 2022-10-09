@@ -6,14 +6,20 @@ body {
 .heading {
     font-family: 'Yeseva One', cursive;
     padding: 12px;
-    font-size: 1.875rem; /* 30px */
-    line-height: 2.25rem; /* 36px */
+    font-size: 3rem; /* 48px */
+    line-height: 1;
+    background: #ccc;
+    margin-left: 30px;
+    margin-top: 30px;
+    margin-right: 30px;
+    margin-bottom: 10px;
+    border-radius: 0.75rem; /* 12px */
 }
 
 .subheading {
     font-family: 'Yeseva One', cursive;
-    font-size: 1.25rem; /* 20px */
-    line-height: 1.75rem; /* 28px */
+    font-size: 1.875rem; /* 30px */
+    line-height: 2.25rem; /* 36px */
 }
 
 .slideshow {
@@ -22,13 +28,24 @@ body {
 }
 
 .slide {
-    margin: 30px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+    margin-right: 30px;
     padding: 10px;
     background: rgb(133, 133, 133);
+    border-radius: 0.75rem; /* 12px */
 }
 
 #title {
     height: 500px;
+    font-family: 'Yeseva One', cursive;
+}
+
+.text {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
 }
 
 #location_slide {
@@ -87,23 +104,33 @@ body {
     z-index: 0;
 }
 
-.vega-bindings {
+#heatmap .vega-bindings {
     columns: 3;
     padding: 10px;
-  }
+}
+
+#sea_ice .vega-bindings {
+    padding: 10px;
+}
+
+#diet_streamgraph_interactive .vega-bindings {
+    padding: 10px;
+}
 
 #diet_all_dotmap {
     height: 256px;
 }
 
-#diet_image {
-    width: 110px;
-    height: 550px;
+#diet_dotmap {
+    position: relative;
+    width: 800px;
+    height: 600px;
 }
 
-#diet_dotmap {
-    width: 1266px;
-    height: 937px;
+#diet_dotmap_legend {
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
 #dotmap {
