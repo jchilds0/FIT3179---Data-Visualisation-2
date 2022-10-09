@@ -130,7 +130,7 @@ Sexual segregation in vertebrate foraging niche is often associated with sexual 
 
 ## Penguin Measurements
 
-
+The culmen is the upper ridge of a penguins beak. The depth measures the vertical height of the beak, while the length is the horizontal length. The dot plot to the right shows the average for each species and island from 2007 to 2009. 
 
 # Penguin Population
 
@@ -140,3 +140,4 @@ Data were collected from two penguin monitoring sites in the Antarctic peninsula
 
 ## Penguin Populations
 
+The chart to the left shows the annual penguin population. The data was collected by the Southwest Fisheries Science Center from the Anvers Region of Antarctica. Previously we saw the krill abundance has remained relatively high, in contrast the Adelie penguin population has steadily declined over the past 30 years. This is contrary to the hypothesis that krill abundance has an effect on penguin population health. The chart to the right show the number of adelie penguin chicks for a number of different islands in the Anvers region. We can the number of chicks has been declining since 1998 with a sharp decrease in 2002, which reflects the overall population decline.
