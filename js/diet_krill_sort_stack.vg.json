@@ -7,7 +7,7 @@
   "signals": [
     {
       "name": "idiom",
-      "value": "stack",
+      "value": "sort",
       "bind": {
         "input": "select",
         "name": "Chart Type: ",

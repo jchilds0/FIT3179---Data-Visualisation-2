@@ -6,7 +6,6 @@ body {
 #bg {
     position: relative;
     width: 3000px;
-    overflow: hidden;
 }
 
 .heading {
@@ -110,12 +109,8 @@ body {
     z-index: 0;
 }
 
-#heatmap .vega-bindings {
+.buttons .vega-bindings {
     columns: 3;
-    padding: 10px;
-}
-
-#sea_ice .vega-bindings {
     padding: 10px;
 }
 
