@@ -62,10 +62,10 @@
     {
       "orient": "left", 
       "scale": "gscale",
-      "offset": 100,
+      "offset": 120,
       "labels": false,
       "title": "Other Species",
-      "titleFontSize": 16,
+      "titleFontSize": 18,
       "encode": {
         "ticks": {
           "update": {
@@ -150,9 +150,9 @@
           "domain": false,
           "grid": false,
           "labelAlign": "left",
-          "offset": 75,
+          "offset": 85,
           "labelOffset": -10,
-          "labelFontSize": 14
+          "labelFontSize": 16
         }
       ],
       "marks": [

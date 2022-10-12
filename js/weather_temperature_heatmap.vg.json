@@ -164,8 +164,8 @@
             "titleAlign": "right",
             "titleX": -8,
             "titleY": -2,
-            "titleFontSize": 9,
-            "labelFontSize": {"value": 8}
+            "titleFontSize": 14,
+            "labelFontSize": {"value": 11}
           },
           {
             "orient": "top",
@@ -185,7 +185,7 @@
                     "offset": {"signal": "month(datum.value) * offset"}
                   },
                   "opacity": {"signal": "date(datum.value) < 8 ? 1 : 0"},
-                  "fontSize": {"value": 8}
+                  "fontSize": {"value": 11}
                 }
               }
             }

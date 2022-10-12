@@ -62,6 +62,7 @@ body {
     font-size: 16px;
     font-weight: 400;
     letter-spacing: 0.05em;
+    padding-top: 10px;
 }
 
 #location_slide {
@@ -73,9 +74,8 @@ body {
 }
 
 #pop_slide {
-    height: 750px;
+    height: 775px;
 }
-
 
 .center {
     display: flex;
@@ -93,6 +93,21 @@ body {
     top: 0;
     right: 0;
     z-index: 1;
+    padding-right: 20px;
+}
+
+#wind {
+    position: relative;
+    z-index: 0;
+}
+
+#wind_overlay {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    padding-right: 20px;
+    padding-bottom: 220px;
 }
 
 #south_pole_clip {
@@ -140,5 +155,5 @@ body {
 }
 
 #dotmap {
-    background: white;
+    background: #C8EAFD;
 }

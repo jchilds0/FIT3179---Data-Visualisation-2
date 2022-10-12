@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "Dotmap of penguin islands",
   "width": 500,
-  "height": 700,
+  "height": 650,
   "autosize": "none",
   "title": "Adelie Penguins",
   "scales": [
@@ -70,10 +70,10 @@
       "fill": "color",
       "orient": "bottom-right",
       "title": "Islands",
-      "titleFontSize": 12,
+      "titleFontSize": 16,
       "titlePadding": 5,
       "symbolSize": 150,
-      "labelFontSize": 10
+      "labelFontSize": 12
     }
   ],
   "projections": [
@@ -93,9 +93,7 @@
       "from": {"data": "levels_200"},
       "encode": {
         "update": {
-          "fill": {"value": "#C8EAFD"},
-          "stroke": {"value": "#ccc"},
-          "strokeWidth": {"value": 1}
+          "fill": {"value": "#C8EAFD"}
         }
       },
       "transform": [{"type": "geoshape", "projection": "projection"}]

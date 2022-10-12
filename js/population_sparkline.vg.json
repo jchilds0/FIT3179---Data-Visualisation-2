@@ -33,7 +33,8 @@
     {
       "orient": "bottom",
       "scale": "x",
-      "values": [1992, 1997, 2002, 2007, 2012, 2017]
+      "values": [1992, 1997, 2002, 2007, 2012, 2017],
+      "labelFontSize": 12
     },
     {
       "orient": "left", 
@@ -42,7 +43,9 @@
       "domain": false,
       "ticks": false,
       "labels": false,
-      "offset": 35
+      "offset": 35,
+      "labelFontSize": 12,
+      "titleFontSize": 16
     }
   ],
   "scales": [
@@ -125,7 +128,8 @@
           "domain": false,
           "grid": true,
           "tickMinStep": 100,
-          "tickCount": 5
+          "tickCount": 5,
+          "labelFontSize": 12
         }
       ],
       "marks": [

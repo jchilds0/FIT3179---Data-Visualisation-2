@@ -249,9 +249,7 @@
       "from": {"data": "levels_200"},
       "encode": {
         "update": {
-          "fill": {"value": "#C8EAFD"}, 
-          "stroke": {"value": "#ccc"}, 
-          "strokeWidth": {"value": 1}
+          "fill": {"value": "#C8EAFD"}
         }
       },
       "transform": [{"type": "geoshape", "projection": "projection"}]

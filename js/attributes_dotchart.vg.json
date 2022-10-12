@@ -72,10 +72,15 @@
       "stroke": "cscale",
       "title": "Penguin Species",
       "orient": "top-left",
-      "padding": 4,
+      "padding": 1,
+      "labelFontSize": 12,
+      "titleFontSize": 14,
       "encode": {
         "symbols": {
-          "enter": {"strokeWidth": {"value": 2}, "size": {"value": 50}}
+          "enter": {
+            "strokeWidth": {"value": 2}, 
+            "size": {"value": 50}
+          }
         }
       }
     }
@@ -124,10 +129,29 @@
           "tickSize": 0,
           "domain": false,
           "grid": true,
-          "encode": {"grid": {"enter": {"strokeDash": {"value": [3, 3]}}}}
+          "labelFontSize": 12,
+          "encode": {
+            "grid": {
+              "enter": {
+                "strokeDash": {"value": [3, 3]}
+              }
+            }
+          }
         },
-        {"orient": "right", "scale": "yscale", "tickSize": 0, "domain": false},
-        {"orient": "bottom", "scale": "xscale", "offset": 10, "zindex": 1}
+        {
+          "orient": "right", 
+          "scale": "yscale", 
+          "tickSize": 0, 
+          "domain": false,
+          "labelFontSize": 12
+        },
+        {
+          "orient": "bottom", 
+          "scale": "xscale", 
+          "offset": 10, 
+          "zindex": 1,
+          "labelFontSize": 12
+        }
       ],
       "marks": [
         {
@@ -153,7 +177,7 @@
         "enter": {
           "x": {"field": "width", "mult": 0.5},
           "y": {"signal": "datum.y - 5"},
-          "fontSize": {"value": 11},
+          "fontSize": {"value": 14},
           "fontWeight": {"value": "bold"},
           "text": {
             "signal": "datum.datum.attr + ' (' + if(datum.datum.attr == 'Body Mass', 'g','mm') + ')'"

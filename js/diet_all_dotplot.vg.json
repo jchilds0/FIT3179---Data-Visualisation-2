@@ -121,9 +121,9 @@
           "domain": false,
           "grid": false,
           "labelAlign": "left",
-          "offset": 75,
+          "offset": 100,
           "labelOffset": -10,
-          "labelFontSize": 14
+          "labelFontSize": 16
         }
       ],
       "marks": [

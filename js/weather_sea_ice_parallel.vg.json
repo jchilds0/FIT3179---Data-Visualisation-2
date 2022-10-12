@@ -88,9 +88,23 @@
       "domain": false,
       "ticks": false,
       "offset": 25,
-      "encode": {"labels": {"update": {"text": {"scale": "xlabels", "signal": "datum.label"}}}}
+      "labelFontSize": 12,
+      "encode": {
+        "labels": {
+          "update": {
+            "text": {"scale": "xlabels", "signal": "datum.label"}
+          }
+        }
+      }
     },
-    {"orient": "left", "scale": "yscale", "offset": 30, "title": "WMO Meterological Code"}
+    {
+      "orient": "left", 
+      "scale": "yscale", 
+      "offset": 30, 
+      "title": "WMO Meterological Code",
+      "titleFontSize": 16,
+      "labelFontSize": 12
+    }
   ],
   "marks": [
     {
