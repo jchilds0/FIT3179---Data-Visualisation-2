@@ -476,6 +476,29 @@
           "fontSize": {"value": 12}
         }
       }
+    },
+    {
+      "type": "symbol",
+      "encode": {
+        "enter": {
+          "x": {"value": 455},
+          "y": {"value": 15},
+          "shape": {"value": "arrow"},
+          "angle": {"value": 20},
+          "size": {"value": 700}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 470},
+          "y": {"value": 15},
+          "text": {"value": "Prevailing Wind 20°"},
+          "fontSize": {"value": 14}
+        }
+      }
     }
   ]
 }

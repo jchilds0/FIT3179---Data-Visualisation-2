@@ -124,6 +124,10 @@ body {
     z-index: 0;
 }
 
+#heatmap_zoom canvas {
+    background: #C8EAFD;
+}
+
 .buttons .vega-bindings {
     columns: 3;
     padding: 10px;
