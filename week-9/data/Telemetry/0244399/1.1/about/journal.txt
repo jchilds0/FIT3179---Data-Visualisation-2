@@ -1,0 +1,42 @@
+*****************************************************************
+Journal for accession number:  0244399
+Created on:                    2021-12-20 15:31:58 UTC
+By:                            National Centers for Environmental Information
+
+Source: Jefferson Hinke, US DOC; NOAA; National Marine Fisheries Service
+(NMFS), submitted data and metadata to NCEI in submission package 04JWMU via
+Send2NCEI (S2N) and by email.
+
+Actions: An automated procedure copied the files from the submission package
+into this accession. A metadata record in ISO 19115-2 XML format was also
+generated from the information provided by the submitter and was copied into
+this accession. Data provided by email by the submitter was downloaded and copied
+into this accession.
+
+Files:
+
+about/ 
+This directory contains files created by NCEI staff and processing, including
+'negotiable' information between NCEI staff and the data provider.
+
+0244399_lonlat.txt - 
+  Contains sample locations for these data.  Each row contains the geographical
+  position where these data were collected (longitude in the left column and
+  latitude in the right column, both in degrees).  
+  
+0244399_map.jpg - 
+  Sample location map for these data.
+
+04JWMU-confirmation_email.txt -
+  Email from the Send2NCEI web application to Jefferson Hinke, US DOC; NOAA;
+  National Marine Fisheries Service (NMFS), confirming that NCEI has
+  received the submission information package.
+
+0-email.txt - 
+  Clarifying comments from the data provider regarding the start and end date
+  of the study and date format.  The provider also sent a document via email
+  for the purpose of defining the header labels in the spreadsheet.
+
+data/0-data/
+This directory contains files in their original format as downloaded to NCEI.
+

@@ -51,7 +51,6 @@
         <div class="pure-u-1-2">
           <div class="pr-16">
             <p class="subheading">Location</p>
-
             <p class="text columns-2" style="margin-bottom: 2em;">
               Palmer Station is located at 64°46' S, 64°03' W, on a protected harbor on the southwestern coast of
               Anvers
@@ -62,9 +61,13 @@
               choosen for its proximity to birds, seals and other components of the marine ecosystem, including Adelie
               Penguins.
             </p>
+          </div>
 
-            <img src="images/palmer_station.jpg">
+          <div class="center">
+            <img src="images/palmer_station.jpg" style="width: 650px;">
+          </div>
 
+          <div class="pr-16">
             <p class="subheading" style="margin-top: 1em;">Research</p>
             <p class="text columns-2">
               In 1990 it was designated by the National Science Foundation as a long term ecological research (LTER)
@@ -83,7 +86,7 @@
 
         <div class="pure-u-1-2">
           <p class="subheading">Wind Speed and Direction</p>
-          <div id="wind" class="pt-5">
+          <div id="wind" class="pt-5 center">
             <div id="wind_radial"></div>
             <div id="wind_overlay" class="flex">
               <img src="images/magnifying_glass.png" style="width: 20px; height: 20px">
@@ -96,12 +99,14 @@
 
       <div class="pure-g pt-10">
         <div class="pure-u-1-2">
-          <p class="subheading">Daily Average Temperature</p>
-          <p class="text columns-2">
-            The annual average temperature is a cold -3°C with the warmer summer months from December to February
-            averaging 2°C and the colder winter months from July to August averaging -10°C. There is a general trend of
-            winter starting and ending later each year.
-          </p>
+          <div class="pr-16">
+            <p class="subheading">Daily Average Temperature</p>
+            <p class="text columns-2">
+              The annual average temperature is a cold -3°C with the warmer summer months from December to February
+              averaging 2°C and the colder winter months from July to August averaging -10°C. There is a general trend
+              of winter starting and ending later each year.
+            </p>
+          </div>
           <div class="pt-5">
             <div id="temp">
               <div id="temp_overlay">
@@ -133,17 +138,9 @@
               conditions improving to difficult to penetrate ice withconditions not changing.
             </p>
           </div>
-          <div id="sea_ice" class="buttons pt-5"></div>
-        </div>
-      </div>
-
-      <div class="pure-g">
-        <div class="pure-u-1-2">
-
-        </div>
-
-        <div class="pure-u-1-2">
-
+          <div class="center">
+            <div id="sea_ice" class="buttons pt-5"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -204,10 +201,14 @@
                 investigate krill abundance.
               </p>
               <p class="text">
-                Adelie Penguins have a varied diet, consisting of primary prey, including
-                krill and fish, and secondary prey, including octopus, squid amphipods, mysid shrip, limpets and small
+                Adelie Penguins have a varied diet, consisting of primary prey, including krill and fish, and secondary
+                prey, including octopus, squid amphipods, mysid shrip, limpets and small
                 clams. Krill makes up the bulk of the diet for each of the three penguin species, Adelie, Gentoo and
-                Chinstrap, during the summer months. The process for collecting samples is outlined on the PAL LTER
+                Chinstrap, during the summer months. There are 3 main types of krill in the penguin diet, Antarctic
+                krill
+                (Euphausia superba), crystal krill (E. crystallorophias) and Thysanoessa macrura (no common name).
+              </p>
+              <p class="text">The process for collecting samples is outlined on the PAL LTER
                 website 'Adelie penguin diet samples obtained in the field are initially drained and weighed and
                 returned
                 to laboratories for further processing. This includes resuspension of the samples in fresh water to
@@ -219,7 +220,7 @@
           </div>
 
           <div class="pure-u-2-3">
-            <div id="diet_all_dotmap" class="pl-14"></div>
+            <div id="diet_all_dotmap"></div>
             <div id="diet_dotmap" class="pl-4">
               <div id="diet_other_dotmap"></div>
               <div id="dotmap_legend" class="center">

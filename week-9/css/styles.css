@@ -1,0 +1,18 @@
+#south_pole_clip {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+}
+
+#heatmap {
+    position: relative;
+    width: 1700px;
+    height: 800px;
+    z-index: 0;
+}
+
+.vega-bindings {
+    columns: 3;
+    padding: 10px;
+  }

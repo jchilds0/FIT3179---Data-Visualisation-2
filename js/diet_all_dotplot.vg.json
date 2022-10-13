@@ -1,8 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "Dot plot of Adelie Penguin diet overview",
-  "width": 830,
-  "height": 300,
+  "width": 930,
   "signals": [
     {"name": "columns", "value": 30, "update": "floor(width / (length + pad))"},
     {"name": "length", "value": 15},
@@ -121,7 +120,7 @@
           "domain": false,
           "grid": false,
           "labelAlign": "left",
-          "offset": 100,
+          "offset": 110,
           "labelOffset": -10,
           "labelFontSize": 16
         }

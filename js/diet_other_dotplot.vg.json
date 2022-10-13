@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "Dot plot of Adelie Penguin diet other detail",
-  "width": 830,
-  "height": 616,
+  "width": 870,
+  "height": 625,
   "signals": [
     {"name": "columns", "value": 30, "update": "floor(width / (length + pad))"},
     {"name": "length", "value": 10},
@@ -48,35 +48,38 @@
       ]
     }
   ],
-
   "scales": [
-    {
-      "name": "gscale",
-      "type": "point",
-      "domain": [0, 1],
-      "range": "height"
-    }
+    {"name": "gscale", "type": "point", "domain": [0, 1], "range": "height"}
   ],
-
   "axes": [
     {
-      "orient": "left", 
+      "orient": "left",
       "scale": "gscale",
-      "offset": 120,
+      "titlePadding": 30,
+      "offset": 100,
       "labels": false,
-      "title": "Other Species",
+      "title": "",
+      "titleFontSize": 18,
+      "encode": {"ticks": {"update": {"x": {"value": 10}, "x2": {"value": 0}}}}
+    },
+    {
+      "orient": "left",
+      "scale": "gscale",
+      "titlePadding": 5,
+      "offset": 100,
+      "labels": false,
+      "title": "",
       "titleFontSize": 18,
       "encode": {
         "ticks": {
           "update": {
-            "x": {"value": 10},
+            "x": {"value": 10}, 
             "x2": {"value": 0}
           }
         }
       }
     }
   ],
-
   "marks": [
     {
       "type": "group",
@@ -221,10 +224,33 @@
       "type": "rule",
       "encode": {
         "enter": {
-          "x": {"value": 195},
-          "x2": {"value": 155},
-          "y": {"value": 305},
-          "y2": {"value": 280}
+          "x": {"value": 150},
+          "x2": {"value": 195},
+          "y": {"value": 285},
+          "y2": {"value": 305}
+          
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "encode": {
+        "enter": {
+          "x": {"value": -150},
+          "x2": {"value": -100},
+          "y": {"signal": "height / 2"},
+          "y2": {"signal": "height / 2"}
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "encode": {
+        "enter": {
+          "x": {"value": -150},
+          "x2": {"value": -150},
+          "y": {"signal": "height / 2"},
+          "y2": {"value": 0}
         }
       }
     }

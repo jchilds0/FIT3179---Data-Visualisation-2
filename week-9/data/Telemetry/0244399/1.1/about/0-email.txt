@@ -1,0 +1,57 @@
+from:	Jefferson Hinke - NOAA Federal <jefferson.hinke@noaa.gov>
+to:	Errol Ronje - NOAA Federal <errol.ronje@noaa.gov>
+date:	Dec 20, 2021, 6:13 PM
+subject:	Re: NCEI Accession Number 0244399
+
+Hi Errol - thank you much for this feedback. Edits to the title are OK and I'm happy with your suggested deletions, if that is necessary, of the date format and timezone information in the Abstract. But see below.
+
+On the dates, I  reviewed the data set and I can confirm the dates are correct as included in my original submission, spanning 29 October 1996 to 19 February 2013. I have reattached the data here for your confirmation. Note the date field in the data file is formatted as DD/MM/YYYY (hence its mention in the Abstract). This format can be easily misinterpreted by some programs!. The following R code confirms the date range:
+
+adpe<-read.csv("copa_adpe_ncei.csv")
+ttt<-as.POSIXct(strptime(adpe$DateGMT, format="%d/%m/%Y", tz="GMT"))
+summary(ttt)
+
+                 Min.               1st Qu.                Median                  Mean               3rd Qu. 
+"1996-10-29 00:00:00" "2003-01-22 00:00:00" "2005-01-02 00:00:00" "2005-07-09 18:55:58" "2010-10-27 00:00:00" 
+                 Max. 
+"2013-02-19 00:00:00" 
+
+Also, I have attached a .txt. file which contains a brief description of the data headers, including the Argos quality codes. That note also includes 2 suggested references for further details on Argos quality codes. 
+
+Please let me know if this is sufficient. Also, in my submission I had indicated I would like a DOI assigned to this. Is that still possible?
+
+Many thanks,
+Jefferson
+
+Attachments: 
+Data header definitions.txt
+copa_adpe_ncei.csv
+
+
+-----------------------------------------------------
+from: Errol Ronje - NOAA Federal <errol.ronje@noaa.gov>
+to: Jefferson.Hinke@noaa.gov
+date: Dec 20, 2021, 4:12 PM
+subject: NCEI Accession Number 0244399
+
+Hi Jefferson,
+
+I am reviewing your recent data submission for archival at NCEI. I'll add a link to your published manuscript on the accession landing page, but after reviewing your dataset and your manuscript, I still have some questions and suggested changes to the metadata. Please respond and let me know if you have any questions, thank you:
+
+Dates:
+The date range that you submitted doesn't appear to be consistent with the dates in the spreadsheet. The dates I see in the spreadsheet range from 1/11/1996 to 12/31/2012. Please confirm the dates for the data are correct, and/or provide a corrected dataset. If the dates in the spreadsheet are correct, please let me know so I can edit your title and abstract with correct dates.
+
+ArgosQuality:
+Please, define the categorical codes of ArgosQuality, as the ranking order and meaning of the codes are not clear. I suggest doing that in a separate text document or .csv file that is archived with your dataset as a data dictionary. If inclined, please add the information from the abstract to the same document so future researchers accessing the data will have the background information needed to understand the data.
+
+Title:
+NCEI has a preferred title format; please let me know if this edit to your submitted title is OK (note, to avoid confusion with the ARGOS satellites that are no longer in service, I've changed the case to "Argos" that seems to be more widely used for the wildlife telemetry system):
+Adelie penguin (Pygoscelis adeliae) telemetry collected by Argos satellites in the Southern Ocean for the U.S. Antarctic Marine Living Resources project from 1996-10-29 to 2013-02-19
+
+Abstract:
+Please see my edits to your abstract below:
+
+"The dataset contains geographic location estimates of Adelie penguins (Pygoscelis adeliae) tracked via Argos satellite telemetry in the Southern Ocean for the U.S. Antarctic Marine Living Resources project from 1996-10-29 to 2013-02-19. Birds were instrumented with back-mounted Argos satellite transmitters at the Copacabana Colony (62.21S, 58.42W) on King George Island during the austral summer breeding seasons (October - February) from 1996 to 2013. Typical deployments during the breeding season lasted 5 to 8 days, while some winter deployments lasted several months. The data set identifies the sex of the bird tracked (male, female, or unknown) and the age of the bird (adult). The data also identify the breeding stage of the bird during the summer tracking period (incubation, brood/guard, or creche) or is noted as 'winter' if tracked outside the summer breeding season. The data include the date (DD/MM/YYYY) and time (GMT) of the location estimate. Finally, a categorical estimate of uncertainty in the location estimate is provided by Argos quality codes (3, 2, 1, 0, A, B)."
+
+--
+Errol Ronje

@@ -1,13 +1,13 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "Krill abundance as a stacked area chart/sorted stream graph",
-  "width": 1300,
+  "width": 1400,
   "height": 700,
   "padding": 5,
   "signals": [
     {
       "name": "idiom",
-      "value": "sort",
+      "value": "stack",
       "bind": {
         "input": "select",
         "name": "Chart Type: ",
@@ -159,6 +159,7 @@
     {
       "type": "symbol",
       "fill": "color",
+      "labelFontSize": 12,
       "encode": {"symbols": {"enter": {"size": {"value": 150}}}}
     }
   ],
@@ -270,6 +271,122 @@
           ]
         }
       ]
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "text": [
+            {
+              "test": "idiom == 'stack'",
+              "value": "Decreasing sea ice extent"
+            }
+          ],
+          "x": {"value": 700},
+          "y": {"value": 400},
+          "fontSize": {"value": 12}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "text": [
+            {
+              "test": "idiom == 'stack'",
+              "value": "from 2005-2008"
+            }
+          ],
+          "x": {"value": 700},
+          "y": {"value": 420},
+          "fontSize": {"value": 12}
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "encode": {
+        "update": {
+          "x": {"value": 750},
+          "x2": {"value": 750},
+          "y": {"value": 430},
+          "y2": {"value": 620},
+          "opacity": [
+            {
+              "test": "idiom == 'stack'",
+              "value": 1
+            },
+            {"value": 0}
+          ]
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "text": [
+            {
+              "test": "idiom == 'stack'",
+              "value": "Convention on the Conservation of "
+            }
+          ],
+          "x": {"value": 50},
+          "y": {"value": 100},
+          "fontSize": {"value": 12}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "text": [
+            {
+              "test": "idiom == 'stack'",
+              "value": "Antarctic Marine Living Resources"
+            }
+          ],
+          "x": {"value": 50},
+          "y": {"value": 120},
+          "fontSize": {"value": 12}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "text": [
+            {
+              "test": "idiom == 'stack'",
+              "value": "sets catch quotas for krill"
+            }
+          ],
+          "x": {"value": 50},
+          "y": {"value": 140},
+          "fontSize": {"value": 12}
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "encode": {
+        "update": {
+          "x": {"value": 100},
+          "x2": {"value": 100},
+          "y": {"value": 160},
+          "y2": {"value": 300},
+          "opacity": [
+            {
+              "test": "idiom == 'stack'",
+              "value": 1
+            },
+            {"value": 0}
+          ]
+        }
+      }
     }
   ]
 }
