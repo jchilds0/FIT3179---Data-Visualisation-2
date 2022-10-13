@@ -155,14 +155,6 @@
         <div id="heatmap_main" class="font-sans flex">
           <div id="heatmap" class="buttons">
             <div id="heatmap_zoom"></div>
-
-            <div id="south_pole_clip">
-              <div class="flex pb-5 pl-20">
-                <img src="images/magnifying_glass.png" style="width: 20px; height: 20px">
-                <p class="text pl-2 pt-0">Zoom + Pan</p>
-              </div>
-              <img src="images/heatmap/south_pole_clip_shadow.png" style="width:250px;height:250px">
-            </div>
           </div>
 
           <div>
@@ -172,6 +164,10 @@
               The values are then normalised so a squares represents the proportion of the total penguin population
               present in the square that year.
             </p>
+            <div class="center">
+              <img src="images/heatmap/south_pole_clip_shadow.png" style="width:300px;height:300px">
+            </div>
+            
             <div id="heatmap_legend"></div>
           </div>
         </div>
@@ -356,7 +352,7 @@
 
   <script type="text/javascript">
 
-    var spec2 = "js/location_heatmap_zoom.vg.json";
+    var spec2 = "js/location_heatmap_zoom_filter.vg.json";
     vegaEmbed('#heatmap_zoom', spec2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
