@@ -167,7 +167,7 @@
             <div class="center">
               <img src="images/heatmap/south_pole_clip_shadow.png" style="width:300px;height:300px">
             </div>
-            
+
             <div id="heatmap_legend"></div>
           </div>
         </div>
@@ -313,128 +313,93 @@
 
   <!-- --------------------- -->
 
-  <!-- Palmer Station Slide -->
-
   <script type="text/javascript">
 
-    var spec2 = "js/weather_sea_ice_parallel.vg.json";
-    vegaEmbed('#sea_ice', spec2, { "actions": false }).then(function (result) {
+    // Palmer Station Slide
+
+    var sea_ice = "js/weather_sea_ice_parallel.vg.json";
+    var wind_radial = "js/weather_wind_radial.vg.json";
+    var temp_heatmap = "js/weather_temperature_heatmap.vg.json";
+    var temp_legend = "js/weather_temperature_heatmap_legend.vg.json";
+
+    vegaEmbed('#sea_ice', sea_ice, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
-  </script>
 
-  <script type="text/javascript">
-
-    var spec2 = "js/weather_wind_radial.vg.json";
-    vegaEmbed('#wind_radial', spec2, { "actions": false }).then(function (result) {
+    vegaEmbed('#wind_radial', wind_radial, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
-  </script>
 
-  <script type="text/javascript">
-
-    var spec2 = "js/weather_temperature_heatmap.vg.json";
-    vegaEmbed('#temp_heatmap', spec2, { "actions": false }).then(function (result) {
+    vegaEmbed('#temp_heatmap', temp_heatmap, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
-  </script>
 
-  <script type="text/javascript">
-
-    var spec2 = "js/weather_temperature_heatmap_legend.vg.json";
-    vegaEmbed('#temp_legend', spec2, { "actions": false }).then(function (result) {
+    vegaEmbed('#temp_legend', temp_legend, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
-  </script>
 
+    // Heatmap Slide
 
-  <!-- Heatmap Slide -->
+    var heatmap_zoom = "js/location_heatmap_zoom_filter.vg.json";
+    var heatmap_legend = "js/location_heatmap_legend.vg.json";
 
-  <script type="text/javascript">
-
-    var spec2 = "js/location_heatmap_zoom_filter.vg.json";
-    vegaEmbed('#heatmap_zoom', spec2, { "actions": false }).then(function (result) {
+    vegaEmbed('#heatmap_zoom', heatmap_zoom, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
-  </script>
 
-  <script type="text/javascript">
-
-    var spec2 = "js/location_heatmap_legend.vg.json";
-    vegaEmbed('#heatmap_legend', spec2, { "actions": false }).then(function (result) {
+    vegaEmbed('#heatmap_legend', heatmap_legend, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
-  </script>
 
-  <!-- Diet Slide 1 -->
+    // Diet Slide 1
 
-  <script type="text/javascript">
+    var diet_all_dotplot = "js/diet_all_dotplot.vg.json";
+    var diet_other_dotplot = "js/diet_other_dotplot.vg.json";
+    var diet_dotplot_legend = "js/diet_dotplot_legend.vg.json";
 
-    var spec2 = "js/diet_all_dotplot.vg.json";
-    vegaEmbed('#diet_all_dotmap', spec2, { "actions": false }).then(function (result) {
+    vegaEmbed('#diet_all_dotmap', diet_all_dotplot, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
-  </script>
 
-  <script type="text/javascript">
-
-    var spec2 = "js/diet_other_dotplot.vg.json";
-    vegaEmbed('#diet_other_dotmap', spec2, { "actions": false }).then(function (result) {
+    vegaEmbed('#diet_other_dotmap', diet_other_dotplot, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
-  </script>
 
-  <script type="text/javascript">
-
-    var spec2 = "js/diet_dotplot_legend.vg.json";
-    vegaEmbed('#diet_dotmap_legend', spec2, { "actions": false }).then(function (result) {
+    vegaEmbed('#diet_dotmap_legend', diet_dotplot_legend, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
-  </script>
 
-  <!-- Diet Slide 2 -->
+    // Diet Slide 2
 
-  <script type="text/javascript">
-
-    var spec2 = "js/diet_krill_sort_stack.vg.json";
-    vegaEmbed('#diet_streamgraph_interactive', spec2, { "actions": false }).then(function (result) {
+    var diet_streamgraph_interactive = "js/diet_krill_sort_stack.vg.json";
+    
+    vegaEmbed('#diet_streamgraph_interactive', diet_streamgraph_interactive, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
-  </script>
 
-  <!-- Attributes Slide -->
+    // Attributes Slide
 
-  <script type="text/javascript">
+    var dotmap = "js/attributes_islands_dotmap.vg.json";
+    var attr_connecteddot = "js/attributes_dotchart.vg.json";
 
-    var spec2 = "js/attributes_islands_dotmap.vg.json";
-    vegaEmbed('#dotmap', spec2, { "actions": false }).then(function (result) {
+    vegaEmbed('#dotmap', dotmap, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
-  </script>
 
-  <script type="text/javascript">
-
-    var spec2 = "js/attributes_dotchart.vg.json";
-    vegaEmbed('#attr_connecteddot', spec2, { "actions": false }).then(function (result) {
+    vegaEmbed('#attr_connecteddot', attr_connecteddot, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
-  </script>
 
+    // Population Slide
 
-  <!-- Population Slide -->
+    var pop_line = "js/population_line.vg.json";
+    var pop_spark = "js/population_sparkline.vg.json";
 
-  <script type="text/javascript">
-
-    var spec2 = "js/population_line.vg.json";
-    vegaEmbed('#pop_line', spec2, { "actions": false }).then(function (result) {
+    vegaEmbed('#pop_line', pop_line, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
-  </script>
-
-  <script type="text/javascript">
-
-    var spec2 = "js/population_sparkline.vg.json";
-    vegaEmbed('#pop_spark', spec2, { "actions": false }).then(function (result) {
+    
+    vegaEmbed('#pop_spark', pop_spark, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
