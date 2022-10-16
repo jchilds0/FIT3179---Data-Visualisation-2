@@ -141,7 +141,7 @@
         {
           "name": "color",
           "type": "ordinal",
-          "range": {"scheme": "category20b"},
+          "range": ["#D6A5C9", "#9ECAE9", "#F58518", "#FFBF79", "#B79A20", "#F2CF5B", "#439894", "#83BCB6", "#D67195", "#FCBFD2", "#B279A2", "#D6A5C9", "#E45756", "#FF9D98", "#79706E", "#BAB0AC"],
           "domain": {"data": "fish", "field": "species"}
         }
       ],
